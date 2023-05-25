@@ -1,4 +1,4 @@
-import 'package:econ_made_easy_files/Aplication%20Screens/enter_quiz_page.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/enter_quiz_page.dart';
 
 import '../Other stuff/lessons_list.dart';
 import '../Other stuff/movie_player_setup.dart';

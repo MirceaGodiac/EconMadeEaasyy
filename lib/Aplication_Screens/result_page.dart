@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:econ_made_easy_files/Aplication%20Screens/auth_page.dart';
-import 'package:econ_made_easy_files/Aplication%20Screens/loading_screen.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/auth_page.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/loading_screen.dart';
 import 'package:econ_made_easy_files/models/question_model.dart';
 import 'package:flutter/material.dart';
 import '../data/quizzes_list.dart';

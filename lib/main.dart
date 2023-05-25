@@ -10,18 +10,19 @@ Software to assist individuals with learning disorders to learn about economy
 
 // Main menu
 
-import 'package:econ_made_easy_files/Aplication%20Screens/account_page.dart';
-import 'package:econ_made_easy_files/Aplication%20Screens/auth_page.dart';
-import 'package:econ_made_easy_files/Aplication%20Screens/movie_list.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/account_page.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/auth_page.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/movie_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:flutter/material.dart';
 
-import 'Aplication Screens/home_page.dart';
+import 'Aplication_Screens/home_page.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'Aplication_Screens/rebus_page.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -45,10 +46,10 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
     const HomePage(),
     const MovieList(),
     const AccountPage(),
+    RebusPage(),
   ];
 
   final user = FirebaseAuth.instance.currentUser!;
-  var flutterTts = FlutterTts();
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +89,7 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
                         width: 20,
                       ),
                       Text(
-                        'Acasa',
+                        'Acasă',
                         style: TextStyle(
                             fontSize: 20,
                             color: Colors.grey[600],
@@ -117,7 +118,7 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
                         width: 20,
                       ),
                       Text(
-                        'Lectii',
+                        'Lecții',
                         style: TextStyle(
                             fontSize: 20,
                             color: Colors.grey[700],
@@ -146,6 +147,35 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
                       ),
                       Text(
                         'Cont',
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.grey[700],
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 40),
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      _selectedIndex = 3;
+                    });
+                  },
+                  child: Row(
+                    children: [
+                      Icon(Icons.access_time,
+                          size: 30, color: Colors.grey[800]),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        'Rebus',
                         style: TextStyle(
                             fontSize: 20,
                             color: Colors.grey[700],

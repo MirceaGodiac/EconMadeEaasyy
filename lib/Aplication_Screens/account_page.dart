@@ -1,4 +1,4 @@
-import 'package:econ_made_easy_files/Aplication%20Screens/loading_screen.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/loading_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

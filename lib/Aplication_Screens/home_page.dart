@@ -299,9 +299,8 @@ class _HomePageState extends State<HomePage> {
                               100
                           : 0,
                       center: (nrOfCompletedLessons != 0)
-                          ? Text('${(LoadingScreen.userData.credits /
-                                      nrOfCompletedLessons)
-                                  .round()}%')
+                          ? Text(
+                              '${(LoadingScreen.userData.credits / nrOfCompletedLessons).round()}%')
                           : const Text('0%'),
                       progressColor: Colors.green,
                     ),

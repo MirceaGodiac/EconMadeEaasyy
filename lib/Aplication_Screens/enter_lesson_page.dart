@@ -1,4 +1,4 @@
-import 'package:econ_made_easy_files/Aplication%20Screens/video_player.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/video_player.dart';
 import 'package:econ_made_easy_files/Other%20stuff/lessons_list.dart';
 import 'package:econ_made_easy_files/main.dart';
 import 'package:flutter/material.dart';

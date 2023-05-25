@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../Aplication Screens/enter_lesson_page.dart';
-import '../Aplication Screens/loading_screen.dart';
+import '../Aplication_Screens/enter_lesson_page.dart';
+import '../Aplication_Screens/loading_screen.dart';
 import 'lessons_list.dart';
 
 // ignore: must_be_immutable

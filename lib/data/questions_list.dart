@@ -2,7 +2,7 @@ import 'package:econ_made_easy_files/models/question_model.dart';
 
 List quiz1 = [
   QuestionModel(
-    "Ce înseamna 'a cumpăra'?",
+    "Ce înseamnă 'a cumpăra'?",
     {
       "A da bani în schimbul unui obiect sau serviciu": true,
       "A explica ceva cuiva": false,
@@ -11,8 +11,7 @@ List quiz1 = [
     },
   ),
   QuestionModel("Noi avem nevoie de bani în viața de zi cu zi?", {
-    "Da pentru a cumpăra tot ce vedem": false,
-    "Nu, deoarece nu avem nevoie de a cumpăra nimic": false,
+    "Nu, deoarece nu avem nevoie să cumpărăm nimic": false,
     "Nu, banii sunt răi": false,
     "Da, pentru a cumpăra lucruri de care avem nevoie": true,
   }),
@@ -25,7 +24,7 @@ List quiz1 = [
     },
   ),
   QuestionModel(
-    "Putem obține obiecte alfel decăt prin cumpărare?",
+    "Putem obține obiecte alfel decât prin cumpărare?",
     {
       "Da, le putem primi": true,
       "Nu, trebuie să avem bani": false,
@@ -43,7 +42,7 @@ List quiz1 = [
     },
   ),
   QuestionModel(
-    "Putem obține totul daca avem bani?",
+    "Putem obține totul dacă avem bani?",
     {
       "Da, pentru că banii pot cumpăra orice": false,
       "Da, pentru că prietenii mă vor adora pentru ei": false,
@@ -69,7 +68,7 @@ List quiz2 = [
     "Nu mai muncim pentru bani": false,
     "Adunăm bani pentru a cumpăra ceva ce ne dorim, \nsau pentru urgențe": true,
   }),
-  QuestionModel("Care sunt cele trei categorii în care impărțim banii?", {
+  QuestionModel("Care sunt cele trei categorii în care împărțim banii?", {
     "Jocuri, Teme și Timp liber": false,
     "Cheltuieli, Economii și Daruri": true,
     "Antrenament, Testare și Rezultate": false,
@@ -80,13 +79,13 @@ List quiz2 = [
     {
       "Geaca, pentru că altfel o va cumpăra altcineva": false,
       "Medicamentul, pentru că e mai important pentru bunici": true,
-      "Niciuna pentru că voi pierde din bani și trebuie să-i strâng ": false,
+      "Niciuna, pentru că voi pierde din bani și trebuie să-i strâng ": false,
     },
   ),
   QuestionModel(
     "Ce înseamnă să fii responsabil?",
     {
-      "Să găsești soluția cel mai rapid la o problemă, chiar dacă nu e bună":
+      "Să găsesti soluția cel mai rapid la o problemă, chiar dacă nu e bună":
           false,
       "Să poți să alergi foarte repede": false,
       "Să iei decizii bune, care te vor avantaja pe \nviitor în ciuda dorințelor tale din prezent":
@@ -96,20 +95,20 @@ List quiz2 = [
     },
   ),
   QuestionModel(
-    "Ce e o decizie?",
+    "Ce e o decizie financiară?",
     {
-      "O alegere între două lucruri": true,
+      "O alegere între două opțiuni": true,
       "O problemă de matematică": false,
       "Un tip de roman": false,
-      "O informație primită doar de la adulți": false,
+      "O decizie luată doar de către adulți": false,
     },
   ),
   QuestionModel(
-    "Numai adulțîi iau decizii sau o fac și copii?",
+    "Numai adulți iau decizii financiare sau o fac și copii?",
     {
-      "Doar adulțîi iau decizii, pentru că sunt mai maturi": false,
-      "Numai copii iau decizii, de exemplu dacă sunt cuminți sau nu": false,
-      "Și adulți și copii fac multe alegeri în fiecare zi": true,
+      "Doar adulții iau decizii, pentru că sunt mai maturi": false,
+      "Numai copiii iau decizii, de exemplu dacă sunt cuminți": false,
+      "Și adulții și copii fac multe alegeri în fiecare zi": true,
       "Nimeni nu ia decizii, nu putem controla ce facem": false,
     },
   ),
@@ -117,7 +116,7 @@ List quiz2 = [
 
 List quiz3 = [
   QuestionModel(
-    "Ce este înseamnă 'Buget'?",
+    "Ce înseamnă 'Buget'?",
     {
       "Bugetul e un sunet deranjant": false,
       "Este un tip de bicicletă": false,
@@ -127,13 +126,13 @@ List quiz3 = [
   QuestionModel(
       "Care răspuns dintre cele de mai jos e un exemplu de serviciu oferit în schimbul banilor?",
       {
-        "O mășînă nouă foarte rapidă": false,
+        "O mășină nouă foarte rapidă": false,
         "O tură cu trenulețul în parc": true,
         "O carte despre tehnologie": false,
         "Un calculator performant și nou": false,
       }),
   QuestionModel("Când cumpărăm ceva, la ce trebuie să fim atenți?", {
-    "Daca e mai scumpa decât bugetul pe care îl avem": false,
+    "Daca e mai scump decât bugetul pe care îl avem": false,
     "Trebuie să comparăm nevoia noastră față de\n obiect cu bugetul pe care îl avem":
         true,
     "Dacă ne place și avem nevoie de ce cumpărăm": true,
@@ -149,11 +148,11 @@ List quiz3 = [
         "Adevărat": true,
       }),
   QuestionModel(
-      "Ce faci dacă vezi ceva ce iți place și nu ai destui bani pentru a cumpăra obiectul?",
+      "Ce faci dacă vezi ceva ce îți place și nu ai destui bani pentru a cumpăra obiectul?",
       {
         "Înțeleg că nu-mi pot cumpăra acel \nceva și încerc să-mi uit dorința":
             false,
-        "Încep să pun banii deoparte pentru \na putea cumpăra obiectul în viitor":
+        "Încep să pun bani deoparte pentru \na putea cumpăra obiectul în viitor":
             true,
         "Aștept să scadă valoarea obiectului": false,
       }),
@@ -172,23 +171,23 @@ List quiz4 = [
   QuestionModel(
     "Economiile sunt un lucru bun sau rău?",
     {
-      "E bine pentru că banii vor dispărea \nla un moment dat": false,
-      "E rău pentru că banii trebuie foloșiți imediat": false,
-      "E un lucru bun pentru că vom putea \nstrange bani ce ne vor ajuta mai tărziu":
+      "Sunt bune pentru că banii se termină la\nun moment dat": false,
+      "Sunt rele pentru că banii trebuie folosiți imediat": false,
+      "Sunt bune pentru că vom putea\nstrânge bani ce ne vor ajuta mai târziu":
           true,
     },
   ),
-  QuestionModel("economisim când....", {
+  QuestionModel("Economisim când....", {
     "Stingem televizorul/lumina când ieșim din cameră": false,
-    "nu cumpărăm prea multe jucării": false,
-    "nu cumpărăm prea mule dulciuri": false,
-    "toate cele de mai sus": true,
+    "Nu cumpărăm prea multe jucării": false,
+    "Nu cumpărăm prea mule dulciuri": false,
+    "Toate cele de mai sus": true,
   }),
   QuestionModel(
-      "Economiile au că scop nu doar îndeplinirea unor dorințe cât și...", {
-    "Rișipirea banilor": false,
+      "Economiile au ca scop nu doar îndeplinirea unor dorințe cât și...", {
+    "Risipirea banilor": false,
     "Economisim doar pentru că ne dorim ceva anume": false,
-    "Evitarea rișipirii dar și acoperirea unor urgențe": true,
+    "Evitarea risipirii dar și acoperirea unor urgențe": true,
   }),
 ];
 
@@ -203,85 +202,85 @@ List quiz5 = [
     },
   ),
   QuestionModel("Trebuie să dăruim o parte din ce avem celorlalți?", {
-    "Da, întotdeauna": false,
+    "Da, întotdeauna este nevoie": false,
     "Nu trebuie, putem să păstrăm tot ce avem": false,
     "Nu trebuie, dar e frumos": true,
   }),
   QuestionModel(
       "Când dăruim ceva altuia vom fi mereu răsplătiți la rândul nostru?", {
-    "Nu vom fi răsplatiți mereu dar asta nu înseamna\ncă trebuie să nu mai dăruim niciodată":
+    "Nu vom fi răsplatiți mereu dar asta nu înseamnă\ncă trebuie să nu mai dăruim niciodată":
         true,
-    "Da, întotdeauna vom primi ceva înapoi dacă dăruim": true,
+    "Da, întotdeauna vom primi ceva înapoi când dăruim": false,
     "Nu vom primi nimic deci nu dăruim nimic": false,
   }),
   QuestionModel(
-      "Nu trebuie să ajutăm financiar pe nimeni, trebuie să se descurce șinguri că și noi.",
+      "Nu trebuie să ajutăm financiar pe nimeni, trebuie să se descurce singuri ca și noi.",
       {
         "Fals": false,
         "Adevărat": true,
-        "Depinde de șituație": false,
+        "Depinde de situație": false,
       }),
   QuestionModel("Poți mulțumi constant pe toată lumea?", {
     "Nu, pentru că toți suntem foarte diferiți": true,
-    "Da, e poșibil, și dacă nu reușim este doar vina noastră": false,
+    "Da, e posibil, si dacă nu reusim este doar vina noastră": false,
     "Nu, dar merită să încercăm": false,
     "Nu putem ști dacă cineva e mulțumit sau nu": false,
   }),
 ];
 
-// educație financiara cu Ana și Radu
+// educație financiara cu Ana si Radu
 
 List quiz6 = [
   QuestionModel(
     "Cine a fost Eugeniu Carada?",
     {
-      "Un regizor de filme renumit": false,
+      "Un regizor renumit de filme": false,
       "Cel care a înființat Banca Națională a României (BNR)": true,
       "Un poet foarte talentat": false,
       "Un jurnalist popular": false,
     },
   ),
-  QuestionModel("În ce an a fost finanțată Banca Națională?", {
+  QuestionModel("În ce an a fost înființată Banca Națională?", {
     "1891": false,
     "1984": false,
     "2011": false,
     "1880": true,
   }),
   QuestionModel("Ce este inflația?", {
-    "Atunci când banii iși pierd valoarea\ncând se printează prea mulți bani":
+    "Atunci când banii își pierd valoarea\ncând se printează prea mulți bani":
         true,
     "Atunci când banii cresc în valoare": false,
-    "Atunci când se importează prea puține bunuri în țară": false,
+    "Atunci când se exportă mai mult decât se importă": false,
   }),
   QuestionModel("Cu ce se ocupă Banca Națională a României?", {
     "Deține bancomate": false,
-    "Tipărește banii și se așigură că \nbăncile comerciale respectă regulile":
+    "Tipăreste banii si se asigură că \nbăncile comerciale respectă regulile":
         true,
     "Distribuie scrisori": false,
     "Menține cărțile într-o stare foarte bună": false,
   }),
   QuestionModel("Ce scop au băncile comerciale?", {
     "Ne învață lucruri": false,
-    "Acestea se așigură că suntem sănătoși": false,
+    "Acestea se asigură că suntem sănătosi": false,
     "În ele putem depune bani,putem face \nîmprumuturi sau putem scoate bani":
         true,
-    "Întrețîn Banca Națională cu bani": false,
+    "Întrețin Banca Națională cu bani": false,
   }),
   QuestionModel(
       "De ce nu poate BNR-ul să tipărească destui bani pentru toată lumea?", {
     "Pentru că nu este destul plastic pentru a-i tipări": false,
-    "Deoarece, valoarea lor vă scădea și \nprețurile se vor scumpi. Vă avea loc inflația":
+    "Deoarece, valoarea lor vă scădea și \nprețurile se vor scumpi. Va avea loc inflația":
         true,
   }),
-  QuestionModel("Cum știm câți bani trebuie să tipărim?", {
+  QuestionModel("Cum stim câți bani trebuie să tipărim?", {
     "Prin supunere la vot": false,
     "Numărând orele de muncă": false,
-    "Banca Națională studiază dacă e nevoie sau nu de mai mulți bani": true,
+    "Banca Națională studiază dacă e nevoie sau\nnu de mai mulți bani": true,
     "Consultăm legile scrise": false,
   }),
-  QuestionModel("De ce e nevoie să comunicăm cu alte bănci naționale?", {
+  QuestionModel("De ce e nevoie să comunicăm cu alte Bănci Naționale?", {
     "Pentru că limbile străine sunt interesante": false,
-    "Pentru a ști ce se întâmplă în lume \nși pentru a face modificări în țara noastră":
+    "Pentru a ști ce se întâmplă în lume\nși pentru a face modificări în țara noastră":
         true,
     "E bine să cunoaștem ce se întâmplă în jurul nostru în lume": false,
   }),
@@ -291,15 +290,15 @@ List quiz7 = [
   QuestionModel(
     "Sunt banii doar fizici sau există și electronici?",
     {
-      "Există doar în formă fizică": false,
+      "Banii există doar în formă fizică": false,
       "Exista bani atât în forma fizică cât și în formă electronică": true,
-      "Sunt doar în forma electronică": false,
+      "Sunt doar în formă electronică": false,
     },
   ),
   QuestionModel("De ce e nevoie de bani electronici?", {
-    "Pentru că dacă cineva i-a inventat trebuie foloșiți": false,
+    "Pentru că dacă cineva i-a inventat trebuie folosiți": false,
     "Banii electronici nu se murdăresc": false,
-    "Sunt mai ușor de foloșit de către oameni și de Banca \nNațională când apar schimbări prea mari și bruște":
+    "Sunt mai usor de folosit de către oameni si de Banca \nNațională când apar schimbări prea mari si bruște":
         true,
     "Sunt mai ușor de controlat": false,
   }),
@@ -309,15 +308,15 @@ List quiz7 = [
     "Înseamnă 'imposibil'": false,
   }),
   QuestionModel("Ce sunt banii?", {
-    "Un schimb de obiecte între oameni": true,
+    "Un schimb de obiecte între oameni": false,
     "Un lucru pe care numai oamenii mari îl folosesc": false,
     "O convenție, o unitate de măsură pentru valoare": true,
     "Ceva rău, ce nu trebuie avut sau discutat": false,
   }),
   QuestionModel("Dacă există bani electronici, de ce mai există cei fizici?", {
-    "Deoarece sunt prea ușor de falșificat": false,
-    "Banii electronici nu pot fi foloșiți peste tot": true,
-    "Ceva rău, ce nu trebuie avut sau discutat": false,
+    "Deoarece sunt prea ușor de falsificat": false,
+    "Banii electronici nu pot fi folosiți peste tot": true,
+    "Deoarece plasticul este ieftin": false,
   }),
   QuestionModel("Cum se mai numesc banii fizici?", {
     "Troc": false,
@@ -325,7 +324,7 @@ List quiz7 = [
     "Inflație": false,
   }),
   QuestionModel(
-      "În care dintre variante e mai probabil să plătim în numerar?", {
+      "În care dintre variante este mai probabil să plătim în numerar?", {
     "La magazinul din colțul străzii, când cumpărăm lapte": true,
     "Când cumpărăm ceva de pe un magazin online": false,
   }),
@@ -350,27 +349,28 @@ List quiz8 = [
   QuestionModel("Ce sunt veniturile?", {
     "Taxele și impozitele cerute de stat": false,
     "Banii pe care îi dăm săptămânal pe anumite lucruri": false,
-    "Banii pe care îi avem din anumite resurse (serviciu, școală, rude)": true,
+    "Banii pe care îi obținem din anumite surse (serviciu, școală, rude)": true,
     "Banii care îi punem deoparte": false,
   }),
-  QuestionModel("Ce are că scop un buget?", {
-    "Are că scop cheltuirea a câtor mai mulți bani": false,
-    "Definește căți bani suntem dispuși să cheltuim": true,
+  QuestionModel("Ce are ca scop un buget?", {
+    "Are ca scop cheltuirea a câtor mai mulți bani": false,
+    "Definește câți bani suntem dispuși să cheltuim": true,
     "Calcularea taxelor pentru BNR": false,
   }),
-  QuestionModel("Părințîi noștrii au un buget?",
-      {"Da": true, "Nu": false, 'Uneori nu, alteori da': false}),
+  QuestionModel("Părinții noștri au un buget?",
+      {"Da": true, "Nu": false, 'Doar bunicii au buget': false}),
   QuestionModel("Care sunt veniturile copiilor din filmuleț?", {
     "Banii de la lucru": false,
     "Banii de buzunar, bursa de la școală și banii primiți de sărbători": true,
-    "Banii gășiți pe jos": false,
+    "Banii găsiți pe jos": false,
   }),
   QuestionModel(
-      "Cum decid Ana și Radu să facă rost de bani la final, după sfaturile primite de la bunicul lor?",
+      "Cum decid Ana si Radu să facă rost de bani la final, după sfaturile primite de la bunicul lor?",
       {
-        "Economisesc punând bani deoparte și renunțând la unele\ncumpărături ce nu sunt necesare":
+        "Economisesc punând bani deoparte si renunțând la unele\ncumpărături ce nu sunt necesare":
             true,
-        "Merg să ceară mai mulți de la părinți prezentând argumente": false,
+        "Merg să ceară mai mulți bani de la părinți prezentând argumente":
+            false,
         "Înființează un stand unde vând brioșe de casă": false,
         "Se angajează la o farmacie unde aranjează medicamentele pe raft":
             false,
@@ -380,15 +380,15 @@ List quiz9 = [
   QuestionModel(
     "Prețurile obiectelor rămân neschimbate mereu?",
     {
-      "Nu, depinde de perioadă, de cerere și de inflație": true,
-      "Da, se schimbă veniturile noastre, de aceea\nnu putem cumpăra mereu aceleași lucruri":
+      "Nu, depinde de perioadă, de cerere si de inflație": true,
+      "Da, se schimbă veniturile noastre, de aceea\nnu putem cumpăra mereu aceleasi lucruri":
           false,
       "Prețurile se schimbă la nimereală": false,
     },
   ),
   QuestionModel("Ce înseamnă piață din punct de vedere financiar?", {
-    "Locul de unde cumpărăm legume și fructe": false,
-    "Se referă la întâlnirea dintre\nvânzător și cumpărător în orice context":
+    "Locul de unde cumpărăm legume si fructe": false,
+    "Se referă la întâlnirea dintre\nvânzător si cumpărător în orice context":
         true,
   }),
   QuestionModel("În videoclip, de ce măresc vânzătorii prețurile?", {
@@ -397,10 +397,11 @@ List quiz9 = [
     "Băncile comerciale trebuie să controleze\nîn mod obișnuit aceste schimbări":
         false,
   }),
-  QuestionModel("De ce nu intervine Banca națională dacă prețurile cresc?", {
+  QuestionModel("De ce nu intervine Banca Națională dacă prețurile cresc?", {
     "Prețurile sunt mărite din cauza lipsei de marfă": false,
     "Pentru că prețurile pot crește dacă nu depășesc limita rezonabilă": true,
-    "Prețurile sunt mărite pentru că Ana, Radu și bunicul întârzie": false,
+    "Prețurile sunt mărite pentru că Ana, Radu și bunicul întârzie la piață":
+        false,
   }),
   QuestionModel(
       "În filmuleț, de ce nu au putut cumpăra Ana, Radu și Bunicul peștele dorit inițial?",
@@ -419,7 +420,7 @@ List quiz9 = [
   }),
   QuestionModel("De ce este mai avantajos prețul peștelui de sezon?", {
     "Peștele de sezon e crescut în ferme foarte bune": false,
-    "Știuca se prinde mai ușor atunci deci cererea\ncrește și prețul scade":
+    "Știuca se prinde mai ușor atunci deci oferta\ncrește și prețul scade":
         true,
     "E bine să cumpărăm lucruri când nu este frig afară": false,
   }),
@@ -435,43 +436,42 @@ List quiz10 = [
     },
   ),
   QuestionModel("Care dintre variantele de mai jos prezintă doar nevoi?", {
-    "stilouri, penare și caiete": false,
+    "Stilouri, penare și caiete": false,
     "Atenție, un salariu stabil, destulă odihnă": false,
     "Sus, jos, dreapta și stânga": false,
     "Haine, mâncare, apă, o locuință sau întreținerea ei": true,
   }),
   QuestionModel(
-      "Ce regulă aplică copiii pentru a-și da seama dacă au întradevăr nevoie de joc?",
+      "Ce regulă aplică copiii pentru a-și da seama dacă au într-adevăr nevoie de joc?",
       {
         "Așteaptă să scadă prețul": false,
         "Așteaptă 2 zile că să vadă dacă mai vor să-l cumpere": true,
         "Dacă e prea ieftin nu îl cumpără": false,
-        "12 to 14": false,
       }),
   QuestionModel("Ce e o dorință?", {
     "Un lucru pentru care trebuie să muncești mult": false,
-    "Ceva ce poate lipși din viața noastră \ndar ne-ar plăcea să avem": true,
-    "un fel de a coace covrigii ": false,
-    "O iluzie vizuală": false,
+    "Ceva ce poate lipsi din viața noastră \ndar ne-ar plăcea să avem": true,
+    "Un fel de a coace covrigii ": false,
+    "O iluzie": false,
   }),
   QuestionModel(
       "De ce e important să știm dacă ce vrem să cumpărăm rezultă din dorință sau nevoie?",
       {
-        "Așa nu risipim bani pe ceva ce nu vă fi foloșitor în viitor": true,
-        "pentru că așa învățăm repede": false,
+        "Ca să nu risipim bani pe ceva ce nu vă fi folositor în viitor": true,
+        "Pentru că așa învățăm repede": false,
       }),
   QuestionModel(
-      "De ce aparțin restul banilor dacă nevoile și dorințele sunt satisfăcute?",
+      "Unde aparțin restul banilor dacă nevoile și dorințele sunt satisfăcute?",
       {
-        "aceștia aparțîn părinșilor noștri": false,
+        "Aceștia aparțin părinților noștri": false,
         "Restul banilor sunt puși deoparte, economisiți": true,
-        "trebuie donați instituțiilor care au nevoie de ei": false,
-        "Banii rămăși trebuie dați bunicilor": false,
+        "Trebuie donați instituțiilor care au nevoie de ei": false,
+        "Banii rămași trebuie dați bunicilor": false,
       }),
   QuestionModel("Cum e mai ușor să economisim?", {
-    "economisirea poate fi ușurată dacă ne trezim mai devreme": false,
-    "Gășind un scop pentru care strângem bani": true,
-    "Înțelegerea problemelor zilnice ne vă așigura economii mai bune": false,
+    "Economisirea poate fi ușurată dacă ne trezim mai devreme": false,
+    "Găsind un scop pentru care strângem bani": true,
+    "Înțelegerea problemelor zilnice ne va asigura economii mai bune": false,
   }),
 ];
 List quiz11 = [
@@ -496,8 +496,7 @@ List quiz11 = [
     "Dacă citim o carte": false,
     "Vânzătorii ne pot spune câți bani avem pe card": false,
   }),
-  QuestionModel("Care sunt elementele de șiguranță ale unui card?", {
-    "1 to 2": false,
+  QuestionModel("Care sunt elementele de siguranță ale unui card?", {
     "Mărimea, Textura, culoarea": false,
     "Numărul cardului, Numele, Data la care expiră, \ncodul de securitate de pe spate (CVC)":
         true,

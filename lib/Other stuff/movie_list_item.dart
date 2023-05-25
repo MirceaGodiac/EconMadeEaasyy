@@ -1,4 +1,4 @@
-import 'package:econ_made_easy_files/Aplication%20Screens/enter_lesson_page.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/enter_lesson_page.dart';
 import 'package:flutter/material.dart';
 
 import 'lessons_list.dart';

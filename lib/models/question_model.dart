@@ -11,3 +11,10 @@ class FinalResult {
 
   FinalResult(this.score);
 }
+
+class RebusModel {
+  String? word;
+  
+  // Create the constructor
+  RebusModel(this.word);
+}
