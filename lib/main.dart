@@ -46,7 +46,6 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
     const HomePage(),
     const MovieList(),
     const AccountPage(),
-    RebusPage(),
   ];
 
   final user = FirebaseAuth.instance.currentUser!;
@@ -147,35 +146,6 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
                       ),
                       Text(
                         'Cont',
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.grey[700],
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                margin: const EdgeInsets.only(left: 40),
-                child: InkWell(
-                  onTap: () {
-                    setState(() {
-                      _selectedIndex = 3;
-                    });
-                  },
-                  child: Row(
-                    children: [
-                      Icon(Icons.access_time,
-                          size: 30, color: Colors.grey[800]),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Text(
-                        'Rebus',
                         style: TextStyle(
                             fontSize: 20,
                             color: Colors.grey[700],
