@@ -216,8 +216,8 @@ List quiz5 = [
   QuestionModel(
       "Nu trebuie să ajutăm financiar pe nimeni, trebuie să se descurce singuri ca și noi.",
       {
-        "Fals": false,
-        "Adevărat": true,
+        "Fals": true,
+        "Adevărat": false,
         "Depinde de situație": false,
       }),
   QuestionModel("Poți mulțumi constant pe toată lumea?", {
