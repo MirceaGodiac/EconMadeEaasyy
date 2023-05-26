@@ -19,10 +19,10 @@ class ResultPage extends StatelessWidget {
     result.score = ((result.score / quizzes[index].length) * 100).round();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF252c4a),
+        backgroundColor: Colors.white,
         title: const Text("Rezultat"),
       ),
-      backgroundColor: const Color(0xFF252c4a),
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -31,7 +31,7 @@ class ResultPage extends StatelessWidget {
             const Text(
               "Felicitari",
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black,
                 fontSize: 80.0,
                 fontWeight: FontWeight.bold,
               ),
@@ -39,7 +39,7 @@ class ResultPage extends StatelessWidget {
             const Text(
               "scorul tau este:",
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black,
                 fontSize: 24.0,
                 fontWeight: FontWeight.w400,
               ),
@@ -48,7 +48,7 @@ class ResultPage extends StatelessWidget {
             Text(
               result.score.toString(),
               style: const TextStyle(
-                color: Colors.orange,
+                color: Colors.blue,
                 fontSize: 100.0,
               ),
             ),
@@ -88,8 +88,8 @@ class ResultPage extends StatelessWidget {
                   ),
                 );
               },
-              color: Colors.orange,
-              textColor: Colors.white,
+              color: Colors.blue[200],
+              textColor: Colors.black,
               child: const Text("catre pagina principala"),
             )
           ],
