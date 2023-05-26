@@ -3,6 +3,7 @@ import 'package:econ_made_easy_files/Aplication_Screens/result_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import '../data/quizzes_list.dart';
+import 'package:confetti/confetti.dart';
 
 // ignore: must_be_immutable
 class QuizApp extends StatefulWidget {
@@ -35,6 +36,7 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  final confetticontroller = ConfettiController();
   final FlutterTts flutterTts = FlutterTts();
   Color mainColor = const Color.fromARGB(255, 16, 19, 32);
   Color secondColor = const Color(0xFF117eeb);
@@ -79,6 +81,10 @@ class _QuizPageState extends State<QuizPage> {
                 debugPrint('quiz index is: ${widget.quizID}');
                 return Row(
                   children: [
+                    ConfettiWidget(
+                      confettiController: confetticontroller,
+                      shouldLoop: false,
+                    ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -184,8 +190,7 @@ class _QuizPageState extends State<QuizPage> {
                                         const SizedBox(width: 20),
                                         InkWell(
                                           onTap: () {
-                                            speak(quizzes[widget.quizID]
-                                                    [index]
+                                            speak(quizzes[widget.quizID][index]
                                                 .answer!
                                                 .keys
                                                 .toList()[i]);
@@ -199,8 +204,7 @@ class _QuizPageState extends State<QuizPage> {
                                                     const BorderRadius.all(
                                                   Radius.circular(10),
                                                 ),
-                                                color:
-                                                    Colors.blueGrey.shade100,
+                                                color: Colors.blueGrey.shade100,
                                               ),
                                               child: Icon(
                                                 Icons.volume_up,
@@ -215,9 +219,9 @@ class _QuizPageState extends State<QuizPage> {
                                           width: 700,
                                           child: OutlinedButton(
                                               style: OutlinedButton.styleFrom(
-                                                padding: const EdgeInsets
-                                                        .symmetric(
-                                                    vertical: 20.0),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 20.0),
                                                 shape: const StadiumBorder(),
                                                 side: isPressed
                                                     ? quizzes[widget.quizID]
@@ -230,8 +234,7 @@ class _QuizPageState extends State<QuizPage> {
                                                             color: trueAnswer,
                                                             width: 6.0)
                                                         : BorderSide(
-                                                            color:
-                                                                wrongAnswer,
+                                                            color: wrongAnswer,
                                                             width: 0.0)
                                                     : BorderSide(
                                                         color: secondColor,
@@ -250,12 +253,14 @@ class _QuizPageState extends State<QuizPage> {
                                                         debugPrint(
                                                             i.toString());
                                                       });
-                                                      if (quizzes[widget
-                                                              .quizID][index]
+                                                      if (quizzes[widget.quizID]
+                                                              [index]
                                                           .answer!
                                                           .entries
                                                           .toList()[i]
                                                           .value) {
+                                                        confetticontroller
+                                                            .play();
                                                         score++;
                                                       }
                                                     },
