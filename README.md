@@ -14,7 +14,7 @@ The aplication is decorated with custom art/drawings of a friendly main characte
 Econ Made Easy features an account system for children to save their progress, and also offers the possibility
 for multiple children to work from the same device.
 
-Download the .apk file at: https://drive.google.com/drive/folders/1xREW9xZt_dQB5rFYGq2jLdXLNpiI7Yh0?usp=sharing
+Download the .apk file at: https://drive.google.com/file/d/1Y3i0hVUX1-BOESpkRkXNQyX6VqhGWGOv/view?usp=sharing
 
 
 
