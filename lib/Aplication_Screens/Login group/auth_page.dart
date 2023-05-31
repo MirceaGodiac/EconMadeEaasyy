@@ -1,5 +1,5 @@
-import 'package:econ_made_easy_files/Aplication_Screens/loading_screen.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/register_page.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/loading_screen.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:line_icons/line_icons.dart';

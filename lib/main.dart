@@ -11,7 +11,7 @@ Software to assist individuals with learning disorders to learn about economy
 // Main menu
 
 import 'package:econ_made_easy_files/Aplication_Screens/account_page.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/auth_page.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/auth_page.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/movie_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:line_icons/line_icons.dart';

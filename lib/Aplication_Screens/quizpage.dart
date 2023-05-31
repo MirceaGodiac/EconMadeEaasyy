@@ -1,5 +1,5 @@
 import 'package:econ_made_easy_files/models/question_model.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/result_page.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/result_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import '../data/quizzes_list.dart';

@@ -1,10 +1,10 @@
-import 'package:econ_made_easy_files/Aplication_Screens/welcome_screen.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/welcome_screen.dart';
 import 'package:econ_made_easy_files/Other%20stuff/movie_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import '../Other stuff/lessons_list.dart';
-import 'loading_screen.dart';
+import 'Login group/loading_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -118,19 +118,6 @@ class _HomePageState extends State<HomePage> {
                 child: Container(
                   color: Colors.blue,
                   child: Text("New login screen"),
-                ),
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return const WelcomePage();
-                    },
-                  ));
-                },
-              ),
-              InkWell(
-                child: Container(
-                  color: Colors.blue,
-                  child: Text("New login screen2"),
                 ),
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(

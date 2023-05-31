@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/auth_page.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/auth_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../Other stuff/loginButton.dart';
-import '../Other stuff/textfield.dart';
-import '../Other stuff/square_tile.dart';
+import '../../Other stuff/loginButton.dart';
+import '../../Other stuff/textfield.dart';
+import '../../Other stuff/square_tile.dart';
 
 class EconMadeEasyUser {
   EconMadeEasyUser(

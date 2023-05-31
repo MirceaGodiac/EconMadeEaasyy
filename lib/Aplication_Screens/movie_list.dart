@@ -2,7 +2,7 @@ import 'package:econ_made_easy_files/Other%20stuff/lessons_list.dart';
 import 'package:flutter/material.dart';
 
 import '../Other stuff/lessons_list_item.dart';
-import 'loading_screen.dart';
+import 'Login group/loading_screen.dart';
 
 class ChapterListItem extends StatefulWidget {
   final int index;

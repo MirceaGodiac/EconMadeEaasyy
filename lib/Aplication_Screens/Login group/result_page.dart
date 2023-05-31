@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/auth_page.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/loading_screen.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/auth_page.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/loading_screen.dart';
 import 'package:econ_made_easy_files/models/question_model.dart';
 import 'package:flutter/material.dart';
-import '../data/quizzes_list.dart';
-import '../main.dart';
+import '../../data/quizzes_list.dart';
+import '../../main.dart';
 
 // ignore: must_be_immutable
 class ResultPage extends StatelessWidget {
