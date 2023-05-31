@@ -126,7 +126,7 @@ class _WelcomePageState extends State<WelcomePage> {
           ),
           Container(
             alignment: Alignment.bottomRight,
-            child: Text("Econ Made Easy v1.1, 2023"),
+            child: Text("Econ Made Easy v1.0, 2023"),
           )
         ],
       ),

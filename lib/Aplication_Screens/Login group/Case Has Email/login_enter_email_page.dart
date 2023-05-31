@@ -79,15 +79,15 @@ class _LoginEnterEmailPageState extends State<LoginEnterEmailPage> {
           const SizedBox(
             height: 10,
           ),
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(
+              SizedBox(
                 width: 30,
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Row(
@@ -100,7 +100,7 @@ class _LoginEnterEmailPageState extends State<LoginEnterEmailPage> {
                 child: Container(
                   margin: const EdgeInsets.only(left: 20),
                   child: Text(
-                    '< Inapoi',
+                    ' Inapoi',
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w300,
