@@ -1,3 +1,4 @@
 {
-    "cmake.configureOnOpen": true
+    "cmake.configureOnOpen": true,
+    "cmake.sourceDirectory": "C:/Users/Nicolae/AndroidStudioProjects/econ_made_easy_files/linux"
 }

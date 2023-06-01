@@ -15,14 +15,11 @@ import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/auth_page.
 import 'package:econ_made_easy_files/Aplication_Screens/movie_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:flutter_tts/flutter_tts.dart';
 import 'package:flutter/material.dart';
 
 import 'Aplication_Screens/home_page.dart';
 
 import 'package:firebase_core/firebase_core.dart';
-import 'Aplication_Screens/rebus_page.dart';
 import 'firebase_options.dart';
 
 void main() async {

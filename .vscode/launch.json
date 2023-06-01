@@ -5,6 +5,9 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "args": [
+                "--web-port", "9100"
+              ],
             "name": "econ_made_easy_files",
             "request": "launch",
             "type": "dart",
