@@ -114,19 +114,6 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 60,
               ),
-              InkWell(
-                child: Container(
-                  color: Colors.blue,
-                  child: Text("New login screen"),
-                ),
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return const WelcomePage();
-                    },
-                  ));
-                },
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
