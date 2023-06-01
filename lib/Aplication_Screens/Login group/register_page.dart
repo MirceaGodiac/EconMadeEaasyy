@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../Other stuff/loginButton.dart';
 import '../../Other stuff/textfield.dart';
-import '../../Other stuff/square_tile.dart';
 
 class EconMadeEasyUser {
   EconMadeEasyUser(

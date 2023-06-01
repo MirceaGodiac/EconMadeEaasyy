@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../Other stuff/textfield.dart';
+import 'login_enter_password_page.dart';
 
 class LoginEnterEmailPage extends StatefulWidget {
   const LoginEnterEmailPage({super.key});
@@ -100,7 +101,7 @@ class _LoginEnterEmailPageState extends State<LoginEnterEmailPage> {
                 child: Container(
                   margin: const EdgeInsets.only(left: 20),
                   child: Text(
-                    ' Inapoi',
+                    '< Inapoi',
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w300,
@@ -142,14 +143,25 @@ class _LoginEnterEmailPageState extends State<LoginEnterEmailPage> {
                   ),
                 ],
               ),
-              Container(
-                margin: const EdgeInsets.only(right: 20),
-                child: Text(
-                  'Inainte >',
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.w300,
-                    color: Colors.blue,
+              InkWell(
+                onTap: () {
+                  if (!(emailController.text == "")) {
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return const LoginEnterPasswordPage();
+                      },
+                    ));
+                  }
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(right: 20),
+                  child: const Text(
+                    'Inainte >',
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w300,
+                      color: Colors.blue,
+                    ),
                   ),
                 ),
               ),
