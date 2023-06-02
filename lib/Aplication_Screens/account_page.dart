@@ -32,7 +32,7 @@ class _AccountPageState extends State<AccountPage> {
             const SizedBox(height: 20),
             Center(
               child: Text(
-                "Nume si prenume: ${LoadingScreen.userData.firstName} ${LoadingScreen.userData.lastName}", // extract user data from the global class LoadingScreen and display
+                "Nume: ${LoadingScreen.userData.firstName} ", // extract user data from the global class LoadingScreen and display
                 style: TextStyle(
                   fontSize: 35.0,
                   color: Colors.grey[800],
@@ -60,28 +60,6 @@ class _AccountPageState extends State<AccountPage> {
                           size: 30,
                         ),
                       ),
-                      Container(
-                        margin: const EdgeInsets.only(left: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'nume de platforma: ',
-                              style: TextStyle(
-                                  color: Colors.grey.shade800,
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Text(
-                        LoadingScreen.userData.userName,
-                        style: TextStyle(
-                            color: Colors.grey.shade700,
-                            fontSize: 30,
-                            fontWeight: FontWeight.w400),
-                      )
                     ],
                   ),
                 ),

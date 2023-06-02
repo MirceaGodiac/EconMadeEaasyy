@@ -187,7 +187,7 @@ class _MovieListState extends State<MovieList> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "${LoadingScreen.userData.firstName} ${LoadingScreen.userData.lastName}",
+                            "${LoadingScreen.userData.firstName}",
                             style: const TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.w600),
                           ),

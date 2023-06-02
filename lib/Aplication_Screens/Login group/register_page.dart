@@ -57,7 +57,6 @@ class _RegisterPageState extends State<RegisterPage> {
   // sign user up method
   void signUserUp() async {
     // try creating the user
-
     try {
       if (passwordController.text == confirmPasswordController.text) {
         // create user
@@ -80,16 +79,13 @@ class _RegisterPageState extends State<RegisterPage> {
         errorMessage(error.code);
       }
     }
-
     // pop the progress indicator
   }
 
   Future addUserDetails(String firstName, String lastName, String userName,
       String email, int credits) async {
     await FirebaseFirestore.instance.collection('Users').add({
-      'firstName': firstName,
-      'lastName': lastName,
-      'username': userName,
+      'name': firstName,
       'email': email,
       'credits': credits,
       'completedLessons': [

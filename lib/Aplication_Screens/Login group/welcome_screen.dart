@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'Case Does Not Have Email/register_enter_email_page.dart';
 import 'Case Has Email/login_enter_email_page.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -89,20 +90,29 @@ class _WelcomePageState extends State<WelcomePage> {
                             const SizedBox(
                               height: 10,
                             ),
-                            Container(
-                              height: 50,
-                              width: 300,
-                              decoration: const BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
-                                  color: Colors.blue),
-                              child: const Center(
-                                child: Text(
-                                  'Nu',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) {
+                                    return const RegisterEnterEmailPage();
+                                  },
+                                ));
+                              },
+                              child: Container(
+                                height: 50,
+                                width: 300,
+                                decoration: const BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20)),
+                                    color: Colors.blue),
+                                child: const Center(
+                                  child: Text(
+                                    'Nu',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -126,7 +136,7 @@ class _WelcomePageState extends State<WelcomePage> {
           ),
           Container(
             alignment: Alignment.bottomRight,
-            child: Text("Econ Made Easy v1.0, 2023"),
+            child: Text("Econ Made Easy v1.1, 2023"),
           )
         ],
       ),

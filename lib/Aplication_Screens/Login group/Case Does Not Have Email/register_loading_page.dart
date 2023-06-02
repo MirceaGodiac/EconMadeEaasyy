@@ -1,74 +1,35 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../../../Other stuff/textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../auth_page.dart';
 
-class LoginLoadingPage extends StatefulWidget {
+class RegisterLoadingPage extends StatefulWidget {
   String email;
+  String name;
   String password;
+  String confirmPassword;
 
-  LoginLoadingPage({super.key, required this.email, required this.password});
+  RegisterLoadingPage({
+    super.key,
+    required this.email,
+    required this.password,
+    required this.name,
+    required this.confirmPassword,
+  });
 
   @override
-  State<LoginLoadingPage> createState() => _LoginLoadingPageState();
+  State<RegisterLoadingPage> createState() => _RegisterLoadingPageState();
 }
 
-class _LoginLoadingPageState extends State<LoginLoadingPage> {
+class _RegisterLoadingPageState extends State<RegisterLoadingPage> {
   @override
   Widget build(BuildContext context) {
     // wrong email popup
-    void wrongEmailMessage() {
-      showDialog(
-          context: context,
-          builder: (context) {
-            return const AlertDialog(
-              backgroundColor: Color.fromARGB(255, 9, 181, 181),
-              title: Text("Email / Nume de utilizator gresit."),
-            );
-          });
-    }
 
-    void wrongPasswordMessage() {
-      showDialog(
-          context: context,
-          builder: (context) {
-            return const AlertDialog(
-              backgroundColor: Color.fromARGB(255, 9, 181, 181),
-              title: Text("Parola gresită."),
-            );
-          });
-    }
+    signUserUp();
 
-    void signUserIn() async {
-      // try sign user in
-      try {
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
-            email: widget.email, password: widget.password);
-
-        debugPrint("Trying to log in...");
-        AuthPage.loggedIn = true;
-        debugPrint(AuthPage.loggedIn.toString());
-      } on FirebaseAuthException catch (error) {
-        //Navigator.pop(context);
-
-        // WRONG EMAIL
-        if (error.code == 'user-not-found') {
-          // Show error to user
-          wrongEmailMessage();
-        } else
-
-        // WRONG PASSWORD
-        if (error.code == 'wrong-password') {
-          // Show error to user
-          wrongPasswordMessage();
-        }
-      }
-
-      // pop the progress indicator
-    }
-
-    signUserIn();
     return Scaffold(
       body: Container(
         height: double.infinity,
@@ -87,7 +48,7 @@ class _LoginLoadingPageState extends State<LoginLoadingPage> {
                       Container(
                         margin: const EdgeInsets.only(left: 40),
                         child: const Text(
-                          "Se intra in cont...",
+                          "Se crează un cont\ndoar pentru tine",
                           style: TextStyle(
                             fontSize: 90,
                             fontWeight: FontWeight.w600,
@@ -117,7 +78,7 @@ class _LoginLoadingPageState extends State<LoginLoadingPage> {
                   margin: const EdgeInsets.only(top: 50),
                   height: 600,
                   child: Image.asset(
-                    'lib/images/Bopa.png',
+                    'lib/images/register_image',
                     filterQuality: FilterQuality.medium,
                   ),
                 )
@@ -150,7 +111,7 @@ class _LoginLoadingPageState extends State<LoginLoadingPage> {
                     children: [
                       Container(
                         height: 30,
-                        width: 220,
+                        width: 160,
                         decoration: BoxDecoration(
                             color: Colors.blue,
                             borderRadius:
@@ -162,7 +123,7 @@ class _LoginLoadingPageState extends State<LoginLoadingPage> {
                       ),
                       Container(
                         height: 30,
-                        width: 220,
+                        width: 160,
                         decoration: BoxDecoration(
                             color: Colors.blue,
                             borderRadius:
@@ -174,7 +135,19 @@ class _LoginLoadingPageState extends State<LoginLoadingPage> {
                       ),
                       Container(
                         height: 30,
-                        width: 220,
+                        width: 160,
+                        decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(40)),
+                            border: Border.all(color: Colors.blue, width: 2.0)),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Container(
+                        height: 30,
+                        width: 160,
                         decoration: BoxDecoration(
                             color: Colors.blue,
                             borderRadius:
@@ -195,52 +168,72 @@ class _LoginLoadingPageState extends State<LoginLoadingPage> {
     );
   }
 
-  void signUserIn() async {
-    // try sign user in
+  void signUserUp() async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: widget.email, password: widget.password);
-      debugPrint("Trying to log in...");
-      AuthPage.loggedIn = true;
-      debugPrint(AuthPage.loggedIn.toString());
+      if (widget.confirmPassword == widget.confirmPassword) {
+        // create user
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: widget.email, password: widget.password);
+        AuthPage.loggedIn = true;
+
+        addUserDetails(widget.name, widget.email, 0);
+        // register details in database
+      } else {
+        passwordsDontMatchMessage();
+      }
     } on FirebaseAuthException catch (error) {
-      //Navigator.pop(context);
-
-      // WRONG EMAIL
-      if (error.code == 'user-not-found') {
-        // Show error to user
-        wrongEmailMessage();
-      } else
-
-      // WRONG PASSWORD
-      if (error.code == 'wrong-password') {
-        // Show error to user
-        wrongPasswordMessage();
+      if (error.code == 'invalid-email') {
+        errorMessage('Emailul introdus este invalid.');
+      } else if (error.code == 'weak-password') {
+        errorMessage('Parola este prea slaba');
+      } else {
+        errorMessage(error.code);
       }
     }
-
     // pop the progress indicator
   }
 
-  // wrong email popup
-  void wrongEmailMessage() {
+  Future addUserDetails(String firstName, String email, int credits) async {
+    await FirebaseFirestore.instance.collection('Users').add({
+      'name': firstName,
+      'email': email,
+      'credits': credits,
+      'completedLessons': [
+        {
+          '0': false,
+          '1': false,
+          '2': false,
+          '3': false,
+          '4': false,
+          '5': false,
+          '6': false,
+          '7': false,
+          '8': false,
+          '9': false,
+          '10': false
+        }
+      ]
+    });
+  }
+
+  void passwordsDontMatchMessage() {
     showDialog(
         context: context,
         builder: (context) {
           return const AlertDialog(
             backgroundColor: Color.fromARGB(255, 9, 181, 181),
-            title: Text("Email / Nume de utilizator gresit."),
+            title: Text("Parolele nu sunt la fel."),
           );
         });
   }
 
-  void wrongPasswordMessage() {
+  void errorMessage(String text) {
     showDialog(
         context: context,
         builder: (context) {
-          return const AlertDialog(
+          return AlertDialog(
             backgroundColor: Color.fromARGB(255, 9, 181, 181),
-            title: Text("Parola gresită."),
+            title: Text(text),
           );
         });
   }

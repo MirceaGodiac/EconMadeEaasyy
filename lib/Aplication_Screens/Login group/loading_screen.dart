@@ -10,25 +10,20 @@ class LoadingScreen extends StatefulWidget {
   static String documentID = '';
 
   // A global user object to easily extract data from other classes
-  static user userData = user(
-      firstName: '',
-      lastName: '',
-      userName: '',
-      email: '',
-      credits: 0,
-      completedLessons: [
-        {0: false},
-        {1: false},
-        {2: false},
-        {3: false},
-        {4: false},
-        {5: false},
-        {6: false},
-        {7: false},
-        {8: false},
-        {9: false},
-        {10: false}
-      ]);
+  static user userData =
+      user(firstName: '', email: '', credits: 0, completedLessons: [
+    {0: false},
+    {1: false},
+    {2: false},
+    {3: false},
+    {4: false},
+    {5: false},
+    {6: false},
+    {7: false},
+    {8: false},
+    {9: false},
+    {10: false}
+  ]);
 
   @override
   State<LoadingScreen> createState() => _LoadingScreenState();
@@ -90,8 +85,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
         debugPrint('Decoded and formatted data...');
         LoadingScreen.userData = user(
             firstName: data['firstName'],
-            lastName: data['lastName'],
-            userName: data['username'],
             email: data['email'],
             credits: data['credits'],
             completedLessons: data['completedLessons']);
@@ -112,6 +105,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   @override
   void initState() {
+    debugPrint("Initialized account accesing protocol");
     WidgetsBinding.instance.addPostFrameCallback((_) {
       debugPrint('Initialising user data extraction...');
       extractUserData();
@@ -123,11 +117,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[200],
-      body: Center(
+      body: const Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Icon(
               Icons.lock_open_outlined,
               size: 100.0,

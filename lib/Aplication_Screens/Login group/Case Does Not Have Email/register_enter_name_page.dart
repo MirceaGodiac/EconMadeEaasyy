@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../../Other stuff/textfield.dart';
+import 'register_enter_password_page.dart';
 
+// ignore: must_be_immutable
 class RegisterEnterNamePage extends StatefulWidget {
   String email;
 
@@ -12,12 +14,12 @@ class RegisterEnterNamePage extends StatefulWidget {
 }
 
 class _RegisterEnterNamePageState extends State<RegisterEnterNamePage> {
-  final emailController = TextEditingController();
+  final nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         height: double.infinity,
         child: ListView(
           scrollDirection: Axis.vertical,
@@ -47,7 +49,7 @@ class _RegisterEnterNamePageState extends State<RegisterEnterNamePage> {
                       Container(
                         margin: const EdgeInsets.only(left: 40),
                         child: const Text(
-                          'Hai sa facem cunoștință! Pe mine\nmă cheamă Bopa! Pe tine cum te cheamă?',
+                          'Hai sa facem cunoștință!\nPe minemă cheamă Bopa!\nPe tine cum te cheamă?',
                           style: TextStyle(
                             fontSize: 50,
                             fontWeight: FontWeight.w400,
@@ -62,8 +64,8 @@ class _RegisterEnterNamePageState extends State<RegisterEnterNamePage> {
                         width: 700,
                         height: 80,
                         child: InputTextField(
-                          controller: emailController,
-                          hintText: 'Email',
+                          controller: nameController,
+                          hintText: 'Nume',
                           obscureText: false,
                         ),
                       ),
@@ -148,7 +150,18 @@ class _RegisterEnterNamePageState extends State<RegisterEnterNamePage> {
                   ],
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    if (!(nameController.text == "")) {
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return RegisterEnterPasswordPage(
+                            email: widget.email,
+                            name: nameController.text,
+                          );
+                        },
+                      ));
+                    }
+                  },
                   child: Container(
                     margin: const EdgeInsets.only(right: 20),
                     child: const Text(
