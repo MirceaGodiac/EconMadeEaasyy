@@ -70,7 +70,7 @@ class _RegisterEnterPasswordPageState extends State<RegisterEnterPasswordPage> {
                         child: InputTextField(
                           controller: passwordController,
                           hintText: 'Parolă',
-                          obscureText: false,
+                          obscureText: true,
                         ),
                       ),
                       Container(
@@ -80,7 +80,7 @@ class _RegisterEnterPasswordPageState extends State<RegisterEnterPasswordPage> {
                         child: InputTextField(
                           controller: confirmPasswordController,
                           hintText: 'Confirmă Parola',
-                          obscureText: false,
+                          obscureText: true,
                         ),
                       ),
                     ],
