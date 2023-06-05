@@ -58,7 +58,7 @@ class ResultPage extends StatelessWidget {
                 print(LoadingScreen.userData.completedLessons);
                 FirebaseFirestore.instance
                     .collection('Users')
-                    .doc(LoadingScreen.documentID.toString())
+                    .doc(LoadingScreen.userSettings?.uid.toString())
                     .update({
                   'completedLessons': [
                     {

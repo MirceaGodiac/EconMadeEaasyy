@@ -4,10 +4,12 @@ import '../../../main.dart';
 import '../../../models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class LoadingScreen extends StatefulWidget {
-  const LoadingScreen({super.key});
+import 'Case Does Not Have Email/register_loading_page.dart';
 
-  static String documentID = '';
+class LoadingScreen extends StatefulWidget {
+  LoadingScreen({super.key});
+
+  static var userSettings = FirebaseAuth.instance.currentUser;
 
   // A global user object to easily extract data from other classes
   static user userData =
@@ -30,51 +32,12 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
-  final userSettings = FirebaseAuth.instance.currentUser!;
   final db = FirebaseFirestore.instance;
   bool isExtractionFinished = false;
 
-  // create a list of document ID's
-
-  List<String> docIDs = [];
-
-  // get doc ID's
-
-  Future getDocID() async {
-    await FirebaseFirestore.instance
-        .collection('Users')
-        .get()
-        // ignore: avoid_function_literals_in_foreach_calls
-        .then((snapshot) => snapshot.docs.forEach((document) {
-              //print(document.reference.id);
-              docIDs.add(document.reference.id);
-            }));
-  }
-
-  Future<String> exctractUserDocumentId() async {
-    String docID = '';
-    await getDocID();
-    for (int i = 0; i < docIDs.length; i++) {
-      await db.collection("Users").doc(docIDs[i]).get().then(
-        (DocumentSnapshot doc) {
-          final data = doc.data() as Map<String, dynamic>;
-          if (data['email'] == userSettings.email) {
-            debugPrint('Identified user document. Extracting data...');
-            debugPrint(docIDs[i]);
-            docID = docIDs[i];
-          }
-        },
-        onError: (e) => debugPrint("Error getting document: $e"),
-      );
-    }
-    LoadingScreen.documentID = docID;
-    return docID;
-    // Make a "Aw, Snap!", couldn't find your account screen
-  }
-
   // acces data ig
   Future<void> extractUserData() async {
-    String docID = await exctractUserDocumentId();
+    String? docID = RegisterLoadingPage.userSettings?.uid;
     debugPrint(docID);
     // ignore: avoid_print
     print(LoadingScreen.userData.completedLessons);

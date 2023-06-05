@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:econ_made_easy_files/models/user_model.dart';
 import 'package:flutter/material.dart';
 import '../../../Other stuff/textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -6,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../auth_page.dart';
 
 class RegisterLoadingPage extends StatefulWidget {
+  static var userSettings = FirebaseAuth.instance.currentUser;
   String email;
   String name;
   String password;
@@ -24,10 +26,9 @@ class RegisterLoadingPage extends StatefulWidget {
 }
 
 class _RegisterLoadingPageState extends State<RegisterLoadingPage> {
-  @override
   Widget build(BuildContext context) {
     // wrong email popup
-
+    debugPrint("started fr now");
     signUserUp();
 
     return Scaffold(
@@ -172,11 +173,39 @@ class _RegisterLoadingPageState extends State<RegisterLoadingPage> {
     try {
       if (widget.confirmPassword == widget.confirmPassword) {
         // create user
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-            email: widget.email, password: widget.password);
+        await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+                email: widget.email, password: widget.password)
+            .then((value) => {
+                  FirebaseFirestore.instance
+                      .collection('Users')
+                      .doc(RegisterLoadingPage.userSettings?.uid)
+                      .set({
+                    'name': widget.name,
+                    'email': widget.email,
+                    'credits': 0,
+                    'completedLessons': [
+                      {
+                        '0': false,
+                        '1': false,
+                        '2': false,
+                        '3': false,
+                        '4': false,
+                        '5': false,
+                        '6': false,
+                        '7': false,
+                        '8': false,
+                        '9': false,
+                        '10': false
+                      }
+                    ]
+                  })
+                });
+        debugPrint(
+            'Document id (inherited by user id) identified in frontal loading screen as: ${RegisterLoadingPage.userSettings?.uid}');
+        debugPrint("______________________________________________");
         AuthPage.loggedIn = true;
 
-        addUserDetails(widget.name, widget.email, 0);
         // register details in database
       } else {
         passwordsDontMatchMessage();
@@ -191,29 +220,6 @@ class _RegisterLoadingPageState extends State<RegisterLoadingPage> {
       }
     }
     // pop the progress indicator
-  }
-
-  Future addUserDetails(String firstName, String email, int credits) async {
-    await FirebaseFirestore.instance.collection('Users').add({
-      'name': firstName,
-      'email': email,
-      'credits': credits,
-      'completedLessons': [
-        {
-          '0': false,
-          '1': false,
-          '2': false,
-          '3': false,
-          '4': false,
-          '5': false,
-          '6': false,
-          '7': false,
-          '8': false,
-          '9': false,
-          '10': false
-        }
-      ]
-    });
   }
 
   void passwordsDontMatchMessage() {

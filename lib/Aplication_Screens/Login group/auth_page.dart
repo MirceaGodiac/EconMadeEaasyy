@@ -28,7 +28,7 @@ class _AuthPageState extends State<AuthPage> {
               debugPrint("logined");
 
               // boot loading screen
-              return const LoadingScreen();
+              return LoadingScreen();
             }
             // user is NOT nogged in
             else {
