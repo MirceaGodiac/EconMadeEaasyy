@@ -48,7 +48,7 @@ class _RegisterLoadingPageState extends State<RegisterLoadingPage> {
                       Container(
                         margin: const EdgeInsets.only(left: 40),
                         child: const Text(
-                          "Se crează un cont\ndoar pentru tine",
+                          "Se crează un cont\ndoar pentru tine!",
                           style: TextStyle(
                             fontSize: 90,
                             fontWeight: FontWeight.w600,

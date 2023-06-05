@@ -77,14 +77,14 @@ class _LoadingScreenState extends State<LoadingScreen> {
     String docID = await exctractUserDocumentId();
     debugPrint(docID);
     // ignore: avoid_print
-    print(LoadingScreen.userData.completedLessons[0]);
+    print(LoadingScreen.userData.completedLessons);
     await db.collection("Users").doc(docID).get().then(
       (DocumentSnapshot doc) {
         debugPrint('Identified document...');
         final data = doc.data() as Map<String, dynamic>;
         debugPrint('Decoded and formatted data...');
         LoadingScreen.userData = user(
-            firstName: data['firstName'],
+            firstName: data['name'],
             email: data['email'],
             credits: data['credits'],
             completedLessons: data['completedLessons']);
