@@ -1,3 +1,4 @@
+import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/bootup_screen.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/loading_screen.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/welcome_screen.dart';
 
@@ -34,7 +35,7 @@ class _AuthPageState extends State<AuthPage> {
             else {
               debugPrint("not logined");
 
-              return const WelcomePage();
+              return const BootupScreen();
             }
             // create a "Aw, Snap! something went wrong. please restart the app and try again" page here
           },
