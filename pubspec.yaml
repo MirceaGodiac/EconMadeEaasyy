@@ -50,6 +50,7 @@ dependencies:
   percent_indicator: ^4.2.3
   flutter_tts: ^3.6.3
   confetti: ^0.7.0
+  transformer_page_view: ^0.1.5
 
 dev_dependencies:
   flutter_test:
