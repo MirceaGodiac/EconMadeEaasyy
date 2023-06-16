@@ -51,14 +51,14 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       body: Row(
         children: [
           Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
-                height: 200,
+              Container(
+                width: 130,
                 child: ClipRRect(
                   child: Image.asset(
                     'lib/images/logo_transparent.png',
@@ -66,9 +66,7 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 50,
-              ),
+
               // buttons(better bottom navigation bar but it's on the side)
               Container(
                 margin: const EdgeInsets.only(left: 40),
@@ -78,23 +76,25 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
                       _selectedIndex = 0;
                     });
                   },
-                  child: Row(
+                  child: const Column(
                     children: [
-                      Icon(LineIcons.home, size: 30, color: Colors.grey[800]),
-                      const SizedBox(
-                        width: 20,
+                      Icon(LineIcons.home, size: 15, color: Colors.white),
+                      SizedBox(
+                        height: 2,
                       ),
                       Text(
                         'Acasă',
                         style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.grey[600],
-                            fontWeight: FontWeight.w400),
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w100),
                       ),
                     ],
                   ),
                 ),
               ),
+
+              // end of item 1 (Home)
               const SizedBox(
                 height: 30,
               ),
@@ -106,24 +106,121 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
                       _selectedIndex = 1;
                     });
                   },
-                  child: Row(
+                  child: const Column(
                     children: [
-                      Icon(Icons.movie_outlined,
-                          size: 30, color: Colors.grey[800]),
-                      const SizedBox(
-                        width: 20,
+                      Icon(
+                        Icons.menu_book_rounded,
+                        size: 20,
+                        color: Colors.white,
+                      ),
+                      SizedBox(
+                        height: 2,
                       ),
                       Text(
-                        'Lecții',
+                        'Exercitii',
                         style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.grey[700],
-                            fontWeight: FontWeight.w400),
+                          fontSize: 18,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w100,
+                        ),
                       ),
                     ],
                   ),
                 ),
               ),
+
+              const SizedBox(
+                height: 30,
+              ),
+
+              Container(
+                margin: const EdgeInsets.only(left: 40),
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      _selectedIndex = 0;
+                    });
+                  },
+                  child: const Column(
+                    children: [
+                      Icon(Icons.library_books_outlined,
+                          size: 20, color: Colors.white),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      Text(
+                        'Resurse',
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w100),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              const SizedBox(
+                height: 30,
+              ),
+
+              Container(
+                margin: const EdgeInsets.only(left: 40),
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      _selectedIndex = 0;
+                    });
+                  },
+                  child: const Column(
+                    children: [
+                      Icon(Icons.edit, size: 20, color: Colors.white),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      Text(
+                        'Simulare',
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w100),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              const SizedBox(
+                height: 30,
+              ),
+
+              Container(
+                margin: const EdgeInsets.only(left: 40),
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      _selectedIndex = 0;
+                    });
+                  },
+                  child: const Column(
+                    children: [
+                      Icon(Icons.schedule_rounded,
+                          size: 20, color: Colors.white),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      Text(
+                        'Orar',
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w100),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
               const SizedBox(
                 height: 30,
               ),
@@ -132,21 +229,51 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
                 child: InkWell(
                   onTap: () {
                     setState(() {
-                      _selectedIndex = 2;
+                      _selectedIndex = 0;
                     });
                   },
-                  child: Row(
+                  child: const Column(
                     children: [
-                      Icon(Icons.person, size: 30, color: Colors.grey[800]),
-                      const SizedBox(
-                        width: 20,
+                      Icon(Icons.store, size: 20, color: Colors.white),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      Text(
+                        'Magazin',
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w100),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              const SizedBox(
+                height: 30,
+              ),
+
+              Container(
+                margin: const EdgeInsets.only(left: 40),
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      _selectedIndex = 0;
+                    });
+                  },
+                  child: const Column(
+                    children: [
+                      Icon(Icons.person, size: 20, color: Colors.white),
+                      SizedBox(
+                        height: 2,
                       ),
                       Text(
                         'Cont',
                         style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.grey[700],
-                            fontWeight: FontWeight.w400),
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w100),
                       ),
                     ],
                   ),

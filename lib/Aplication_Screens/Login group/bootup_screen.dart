@@ -169,7 +169,7 @@ class _BootupScreenState extends State<BootupScreen>
       animationBehavior: AnimationBehavior.values.last,
     )..addListener(() {
         setState(() {
-          if (controller.value >= 0.99) {
+          if (controller.value > 0.99) {
             debugPrint('hello');
             if (pageIndex < 3) {
               pageIndex++;
@@ -198,14 +198,19 @@ class _BootupScreenState extends State<BootupScreen>
             fit: BoxFit.cover,
           ),
         ),
+        SizedBox.expand(
+          child: Container(
+            color: Colors.black87,
+          ),
+        ),
         Container(
           height: double.infinity,
-          margin: const EdgeInsets.only(top: 30, left: 280, right: 280),
+          margin:
+              const EdgeInsets.only(top: 30, left: 280, right: 280, bottom: 30),
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(60),
-              topRight: Radius.circular(60),
+            color: Colors.white60,
+            borderRadius: BorderRadius.all(
+              Radius.circular(60),
             ),
           ),
           child: Column(
