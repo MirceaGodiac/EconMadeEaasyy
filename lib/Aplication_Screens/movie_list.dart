@@ -20,14 +20,14 @@ class InfoScreen1 extends StatelessWidget {
           ),
         ),
         const Text(
-          'Ai nevoie de ajutor la mate pentru Evaluarea Nationala?',
+          'Sute de exercitii pentru EN',
           style: TextStyle(
             fontSize: 25,
             fontWeight: FontWeight.w400,
           ),
         ),
         const Text(
-          'Ai venit unde trebuie!',
+          'Complete cu rezolvari.',
           style: TextStyle(
             fontSize: 25,
             fontWeight: FontWeight.w400,
@@ -53,7 +53,7 @@ class InfoScreen2 extends StatelessWidget {
           ),
         ),
         const Text(
-          'Zeci de modele de teste si multe resurse de incredere',
+          'Mii de teste posibile',
           style: TextStyle(
             fontSize: 25,
             fontWeight: FontWeight.w400,
@@ -86,14 +86,14 @@ class InfoScreen3 extends StatelessWidget {
           ),
         ),
         const Text(
-          'Teste personalizate pentru orice exercitii de la EN',
+          'Zeci de resurse video / scrise',
           style: TextStyle(
             fontSize: 25,
             fontWeight: FontWeight.w400,
           ),
         ),
         const Text(
-          'Cu recompense pe masura.',
+          'Din surse de incredere.',
           style: TextStyle(
             fontSize: 25,
             fontWeight: FontWeight.w400,
@@ -187,23 +187,6 @@ class _MovieListState extends State<MovieList> with TickerProviderStateMixin {
           children: [
             const SizedBox(
               height: 20,
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'E N',
-                  style: TextStyle(
-                    fontSize: 82,
-                    fontWeight: FontWeight.w300,
-                    color: Colors.blue,
-                  ),
-                ),
-                Text(
-                  ' A B L E  ',
-                  style: TextStyle(fontSize: 80, fontWeight: FontWeight.w100),
-                ),
-              ],
             ),
             SizedBox(
               width: 800,
