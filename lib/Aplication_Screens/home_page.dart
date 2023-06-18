@@ -19,17 +19,17 @@ class _HomePageState extends State<HomePage> {
               width: 1100,
               margin: const EdgeInsets.only(top: 20, bottom: 20),
               decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(60),
-                    bottomLeft: Radius.circular(60)),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(60),
+                ),
                 color: Colors.white,
               ),
               child: SizedBox(
                 height: double.infinity,
                 child: ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(60),
-                      bottomLeft: Radius.circular(60)),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(60),
+                  ),
                   child: Image.asset(
                     'lib/images/logindoodle.jpg',
                     fit: BoxFit.cover,

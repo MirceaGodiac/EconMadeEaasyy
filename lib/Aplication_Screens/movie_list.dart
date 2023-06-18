@@ -19,18 +19,23 @@ class InfoScreen1 extends StatelessWidget {
             filterQuality: FilterQuality.medium,
           ),
         ),
+        const SizedBox(
+          height: 30,
+        ),
         const Text(
           'Sute de exercitii pentru EN',
           style: TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.w400,
+            fontSize: 30,
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
           ),
         ),
         const Text(
           'Complete cu rezolvari.',
           style: TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.w400,
+            fontSize: 30,
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
           ),
         )
       ],
@@ -52,18 +57,23 @@ class InfoScreen2 extends StatelessWidget {
             filterQuality: FilterQuality.medium,
           ),
         ),
+        const SizedBox(
+          height: 30,
+        ),
         const Text(
           'Mii de teste posibile',
           style: TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.w400,
+            fontSize: 30,
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
           ),
         ),
         const Text(
           'Pentru a te ajuta la examen.',
           style: TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.w400,
+            fontSize: 30,
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
           ),
         )
       ],
@@ -85,18 +95,23 @@ class InfoScreen3 extends StatelessWidget {
             filterQuality: FilterQuality.medium,
           ),
         ),
+        const SizedBox(
+          height: 30,
+        ),
         const Text(
           'Zeci de resurse video / scrise',
           style: TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.w400,
+            fontSize: 30,
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
           ),
         ),
         const Text(
           'Din surse de incredere.',
           style: TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.w400,
+            fontSize: 30,
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
           ),
         )
       ],
@@ -157,13 +172,19 @@ class _MovieListState extends State<MovieList> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Stack(alignment: Alignment.center, children: [
-      SizedBox(
+      Container(
+        margin: const EdgeInsets.only(top: 20, bottom: 20),
         width: 1100,
         height: double.infinity,
-        child: Image.asset(
-          'lib/images/logindoodle.jpg',
-          filterQuality: FilterQuality.medium,
-          fit: BoxFit.cover,
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(
+            Radius.circular(60),
+          ),
+          child: Image.asset(
+            'lib/images/logindoodle.jpg',
+            filterQuality: FilterQuality.medium,
+            fit: BoxFit.cover,
+          ),
         ),
       ),
       SizedBox(
@@ -174,9 +195,10 @@ class _MovieListState extends State<MovieList> with TickerProviderStateMixin {
         ),
       ),
       Container(
+        margin: const EdgeInsets.only(top: 20, bottom: 20),
         alignment: Alignment.center,
         decoration: const BoxDecoration(
-          color: Colors.white60,
+          color: Colors.white12,
           borderRadius: BorderRadius.all(
             Radius.circular(60),
           ),
@@ -200,20 +222,6 @@ class _MovieListState extends State<MovieList> with TickerProviderStateMixin {
                   InfoScreen3(),
                 ],
               ),
-            ),
-            Container(
-              width: 100,
-              margin: const EdgeInsets.symmetric(horizontal: 250),
-              child: LinearProgressIndicator(
-                backgroundColor: Colors.white,
-                color: Colors.blue.shade200,
-                minHeight: 20,
-                value: controller.value,
-                semanticsLabel: 'Linear progress indicator',
-              ),
-            ),
-            const SizedBox(
-              height: 30,
             ),
             InkWell(
               onTap: () {
@@ -242,6 +250,20 @@ class _MovieListState extends State<MovieList> with TickerProviderStateMixin {
             ),
             const SizedBox(
               height: 20,
+            ),
+            Container(
+              width: 600,
+              margin: const EdgeInsets.symmetric(horizontal: 250),
+              child: LinearProgressIndicator(
+                backgroundColor: Colors.white,
+                color: Colors.blue.shade200,
+                minHeight: 5,
+                value: controller.value,
+                semanticsLabel: 'Linear progress indicator',
+              ),
+            ),
+            const SizedBox(
+              height: 5,
             ),
           ],
         ),

@@ -13,6 +13,7 @@ class SelectExerciseTypeScreen extends StatefulWidget {
 class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
   double selectedCategoryIndex = 0;
   final scrollController = ScrollController();
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
