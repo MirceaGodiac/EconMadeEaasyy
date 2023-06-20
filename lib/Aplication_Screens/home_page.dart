@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import 'Login group/auth_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -77,13 +80,27 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(
                           height: 20,
                         ),
-                        Container(
-                          height: 110,
-                          width: 350,
-                          margin: const EdgeInsets.only(left: 25),
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                            color: Colors.black87,
+                        InkWell(
+                          onTap: () {
+                            FirebaseAuth.instance.signOut().then((res) {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const AuthPage()),
+                              );
+                            });
+                            AuthPage.loggedIn = false;
+                            debugPrint(AuthPage.loggedIn.toString());
+                          },
+                          child: Container(
+                            height: 110,
+                            width: 350,
+                            margin: const EdgeInsets.only(left: 25),
+                            decoration: const BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                              color: Colors.black87,
+                            ),
                           ),
                         ),
                         const SizedBox(

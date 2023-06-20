@@ -212,7 +212,7 @@ class _MovieListState extends State<MovieList> with TickerProviderStateMixin {
             ),
             SizedBox(
               width: 800,
-              height: 400,
+              height: 402,
               child: PageView(
                 controller: pageController,
                 physics: const NeverScrollableScrollPhysics(),
