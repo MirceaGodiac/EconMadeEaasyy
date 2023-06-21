@@ -4,7 +4,7 @@ ECON MADE EASY
 authors: Godiac Mircea (developer)
          Ana Farcas    (artist)
 
-Software to assist individuals with learning disorders to learn about economy
+Software to assist individuals to study for EN
 
 */
 

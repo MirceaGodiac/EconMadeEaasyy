@@ -1,3 +1,4 @@
+import 'package:econ_made_easy_files/Aplication_Screens/Exercitii%20Group/secondSelectExerciseTypeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
 import 'dart:ui';
@@ -136,119 +137,129 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                       ),
                     ),
                   ),
-                  SwipeDetector(
-                    behavior: null,
-                    onSwipeRight: (offset) {
-                      setState(() {
-                        selectedCategoryIndex--;
-                        jumpToPosition(selectedCategoryIndex);
-                      });
+                  InkWell(
+                    onTap: () {
+                      debugPrint('a');
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return const secondSelectExerciseTypeScreen();
+                        },
+                      ));
                     },
-                    onSwipeLeft: (offset) {
-                      setState(() {
-                        selectedCategoryIndex++;
-                        jumpToPosition(selectedCategoryIndex);
-                      });
-                    },
-                    child: Container(
-                      height: double.infinity,
-                      width: 1000,
-                      margin: const EdgeInsets.only(
-                          top: 20, bottom: 20, left: 60, right: 30),
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(40),
-                        ),
-                        color: Colors.white30,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            height: 265,
-                            child: Container(
-                              margin: const EdgeInsets.only(top: 20),
-                              child: Image.asset(
-                                "lib/images/finishedAppEasterEgg.jpg",
-                                filterQuality: FilterQuality.medium,
-                              ),
-                            ),
+                    child: SwipeDetector(
+                      behavior: null,
+                      onSwipeRight: (offset) {
+                        setState(() {
+                          selectedCategoryIndex--;
+                          jumpToPosition(selectedCategoryIndex);
+                        });
+                      },
+                      onSwipeLeft: (offset) {
+                        setState(() {
+                          selectedCategoryIndex++;
+                          jumpToPosition(selectedCategoryIndex);
+                        });
+                      },
+                      child: Container(
+                        height: double.infinity,
+                        width: 1000,
+                        margin: const EdgeInsets.only(
+                            top: 20, bottom: 20, left: 60, right: 30),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(40),
                           ),
-                          Container(
-                            width: double.infinity,
-                            height: 265,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(40),
+                          color: Colors.white30,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              height: 265,
+                              child: Container(
+                                margin: const EdgeInsets.only(top: 20),
+                                child: Image.asset(
+                                  "lib/images/finishedAppEasterEgg.jpg",
+                                  filterQuality: FilterQuality.medium,
+                                ),
                               ),
-                              color: Colors.amber.shade500,
                             ),
-                            margin: const EdgeInsets.only(
-                              left: 30,
-                              right: 30,
-                              bottom: 30,
-                              top: 60,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  margin: const EdgeInsets.only(top: 30),
-                                  child: const Text(
-                                    'Sectiunea I: Primul Subiect',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.w400),
+                            Container(
+                              width: double.infinity,
+                              height: 265,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(40),
+                                ),
+                                color: Colors.amber.shade500,
+                              ),
+                              margin: const EdgeInsets.only(
+                                left: 30,
+                                right: 30,
+                                bottom: 30,
+                                top: 60,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.only(top: 30),
+                                    child: const Text(
+                                      'Sectiunea I: Primul Subiect',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.w400),
+                                    ),
                                   ),
-                                ),
-                                Container(
-                                  margin: const EdgeInsets.only(top: 20),
-                                  child: const Text(
-                                    '154 exercitii',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w300),
-                                  ),
-                                ),
-                                Container(
-                                  margin: const EdgeInsets.only(top: 10),
-                                  child: const Text(
-                                    'Incepe cu exercitii simple pentru a-ti pune bazele',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.w300),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 60,
-                                ),
-                                Center(
-                                  child: Container(
-                                    width: 300,
-                                    height: 35,
-                                    decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(10)),
-                                        color: Colors.amber.shade300),
-                                    child: Center(
-                                      child: Text(
-                                        'Incepe',
-                                        style: TextStyle(
+                                  Container(
+                                    margin: const EdgeInsets.only(top: 20),
+                                    child: const Text(
+                                      '154 exercitii',
+                                      style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 20,
-                                          fontWeight: FontWeight.w400,
+                                          fontWeight: FontWeight.w300),
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.only(top: 10),
+                                    child: const Text(
+                                      'Incepe cu exercitii simple pentru a-ti pune bazele',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.w300),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 60,
+                                  ),
+                                  Center(
+                                    child: Container(
+                                      width: 300,
+                                      height: 35,
+                                      decoration: BoxDecoration(
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(10)),
+                                          color: Colors.amber.shade300),
+                                      child: Center(
+                                        child: Text(
+                                          'Incepe',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w400,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                )
-                              ],
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
