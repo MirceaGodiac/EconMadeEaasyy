@@ -10,6 +10,7 @@ Software to assist individuals to study for EN
 
 // Main menu
 
+import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/view_questions_page.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/account_page.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/auth_page.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/movie_list.dart';
@@ -43,6 +44,7 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
     const HomePage(),
     const MovieList(),
     const AccountPage(),
+    const ViewQuestionsPage(),
   ];
 
   final user = FirebaseAuth.instance.currentUser!;
@@ -159,7 +161,36 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
                       ),
                     ),
                   ),
+                  const SizedBox(
+                    height: 30,
+                  ),
 
+                  Container(
+                    margin: const EdgeInsets.only(left: 40),
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          _selectedIndex = 3;
+                        });
+                      },
+                      child: const Column(
+                        children: [
+                          Icon(Icons.info_outline_rounded,
+                              size: 20, color: Colors.white),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Text(
+                            'Ajutor Personal',
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w100),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   const SizedBox(
                     height: 30,
                   ),

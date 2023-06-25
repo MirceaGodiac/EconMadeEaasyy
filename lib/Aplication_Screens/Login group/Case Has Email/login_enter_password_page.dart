@@ -2,7 +2,7 @@ import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/Case%20Has
 import 'package:flutter/material.dart';
 import '../../../Other stuff/textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:flutter/widgets.dart';
 import '../auth_page.dart';
 
 class LoginEnterPasswordPage extends StatefulWidget {
@@ -16,7 +16,7 @@ class LoginEnterPasswordPage extends StatefulWidget {
 
 class _LoginEnterPasswordPageState extends State<LoginEnterPasswordPage> {
   final passwordController = TextEditingController();
-
+  bool hidePassword = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,15 +60,39 @@ class _LoginEnterPasswordPageState extends State<LoginEnterPasswordPage> {
                       const SizedBox(
                         height: 50,
                       ),
-                      Container(
-                        margin: const EdgeInsets.only(left: 30),
-                        width: 700,
-                        height: 80,
-                        child: InputTextField(
-                          controller: passwordController,
-                          hintText: 'Parolă',
-                          obscureText: true,
-                        ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(left: 30),
+                            width: 700,
+                            height: 80,
+                            child: InputTextField(
+                              controller: passwordController,
+                              hintText: 'Parolă',
+                              obscureText: hidePassword,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                hidePassword = !hidePassword;
+                              });
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.only(bottom: 18),
+                              child: Icon(
+                                Icons.remove_red_eye,
+                                color:
+                                    (hidePassword) ? Colors.black : Colors.red,
+                                size: 23,
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                     ],
                   ),

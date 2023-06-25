@@ -140,160 +140,86 @@ class BootupScreen extends StatefulWidget {
   State<BootupScreen> createState() => _BootupScreenState();
 }
 
-class _BootupScreenState extends State<BootupScreen>
-    with TickerProviderStateMixin {
-  static int pageIndex = 0;
-  var pages = const [
-    InfoScreen1(),
-    InfoScreen2(),
-    InfoScreen3(),
-    InfoScreen4(),
-  ];
-  late AnimationController controller;
-
-  final pageController = PageController(initialPage: 0);
+class _BootupScreenState extends State<BootupScreen> {
   @override
-  void dispose() {
-    pageController.dispose();
-    controller.dispose();
-
-    super.dispose();
-  }
-
-  void initState() {
-    controller = AnimationController(
-      /// [AnimationController]s can be created with `vsync: this` because of
-      /// [TickerProviderStateMixin].
-      vsync: this,
-      duration: const Duration(seconds: 5),
-      animationBehavior: AnimationBehavior.values.last,
-    )..addListener(() {
-        setState(() {
-          if (controller.value > 0.99) {
-            debugPrint('hello');
-            if (pageIndex < 3) {
-              pageIndex++;
-              pageController.jumpToPage(pageIndex);
-            } else {
-              pageIndex = 0;
-              pageController.jumpToPage(pageIndex);
-            }
-          }
-        });
-      });
-
-    controller.repeat(reverse: false);
-
-    super.initState();
-  }
-
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(children: [
         SizedBox(
           height: double.infinity,
           child: Image.asset(
-            'lib/images/logindoodle.jpg',
+            'lib/images/welcomeImage.jpeg',
             filterQuality: FilterQuality.medium,
             fit: BoxFit.cover,
           ),
         ),
-        SizedBox.expand(
-          child: Container(
-            color: Colors.black87,
-          ),
-        ),
         Container(
-          height: double.infinity,
-          margin:
-              const EdgeInsets.only(top: 30, left: 280, right: 280, bottom: 30),
-          decoration: BoxDecoration(
-            color: Colors.white60,
-            borderRadius: BorderRadius.all(
-              Radius.circular(60),
-            ),
-          ),
+          margin: const EdgeInsets.only(left: 50),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const Text(
+                'Te-ai pierdut invatand \npentru evaluarea nationala?',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 80),
+              ),
               const SizedBox(
-                height: 20,
+                height: 50,
               ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'E N',
-                    style: TextStyle(
-                      fontSize: 82,
-                      fontWeight: FontWeight.w300,
-                      color: Colors.blue,
-                    ),
-                  ),
-                  Text(
-                    ' A B L E  ',
-                    style: TextStyle(fontSize: 80, fontWeight: FontWeight.w100),
-                  ),
-                ],
+              const Text(
+                'Hai sa te ducem pe drumul potrivit.',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 40),
               ),
-              SizedBox(
-                height: 400,
-                child: PageView(
-                  controller: pageController,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: const [
-                    InfoScreen1(),
-                    InfoScreen2(),
-                    InfoScreen3(),
-                    InfoScreen4(),
-                  ],
-                ),
+              const SizedBox(
+                height: 50,
               ),
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 250),
-                child: LinearProgressIndicator(
-                  backgroundColor: Colors.white,
-                  color: Colors.blue.shade200,
-                  minHeight: 20,
-                  value: controller.value,
-                  semanticsLabel: 'Linear progress indicator',
+                width: 300,
+                height: 50,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                  color: Colors.blue.shade600,
                 ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return WelcomePage();
-                    },
-                  ));
-                },
-                child: Container(
-                  width: 400,
-                  height: 60,
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15)),
-                      color: Colors.blue),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return const WelcomePage();
+                      },
+                    ));
+                  },
                   child: const Center(
                     child: Text(
-                      'Hai sa incepem!',
+                      'Incepe',
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 25,
-                          fontWeight: FontWeight.w400),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 20),
                     ),
                   ),
                 ),
               ),
               const SizedBox(
-                height: 20,
+                height: 75,
               ),
+              const Text(
+                'Mii de exercitii pentru evaluarea nationala\nsi sute de resurse pentru a te ajuta.*',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w100,
+                    fontSize: 20),
+              )
             ],
           ),
-        ),
+        )
       ]),
     );
   }

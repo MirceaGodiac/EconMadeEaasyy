@@ -16,7 +16,7 @@ class _RegisterEnterEmailPageState extends State<RegisterEnterEmailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         height: double.infinity,
         child: ListView(
           scrollDirection: Axis.vertical,
