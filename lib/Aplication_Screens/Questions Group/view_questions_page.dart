@@ -1,3 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/ask_question.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/view_question_page.dart';
+import 'package:econ_made_easy_files/models/questionForumModel.dart';
 import 'package:flutter/material.dart';
 
 class ViewQuestionsPage extends StatefulWidget {
@@ -12,6 +16,8 @@ class questionModel extends StatefulWidget {
   String description;
   int reward;
   Color backgroundcolor;
+  int id;
+  String imageURL;
   questionModel({
     super.key,
     required this.title,
@@ -20,6 +26,8 @@ class questionModel extends StatefulWidget {
     required this.description,
     required this.reward,
     required this.backgroundcolor,
+    required this.id,
+    required this.imageURL,
   });
 
   @override
@@ -29,83 +37,146 @@ class questionModel extends StatefulWidget {
 class _questionModelState extends State<questionModel> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 200,
-      width: 450,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.black12, width: 5),
-        color: widget.backgroundcolor,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            margin: const EdgeInsets.only(left: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  widget.title,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 40,
-                      fontWeight: FontWeight.w200),
-                ),
-                Text(
-                  widget.path,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w200),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  widget.description,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w200),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'autor: ${widget.userName}',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w200),
-                ),
-              ],
+    return InkWell(
+      onTap: () {
+        print(widget.id);
+        Navigator.push(context, MaterialPageRoute(
+          builder: (context) {
+            return viewQuestionPage(
+              questionForumModel: QuestionForumModel(
+                  QuestionTitle: questionsData['questions'][widget.id]['title'],
+                  QuestionText: questionsData['questions'][widget.id]['text'],
+                  reward: questionsData['questions'][widget.id]['reward'],
+                  author: questionsData['questions'][widget.id]['author'],
+                  date: questionsData['questions'][widget.id]['time'],
+                  id: questionsData['questions'][widget.id]['id'],
+                  imageURL: questionsData['questions'][widget.id]['imageURL']),
+            );
+          },
+        ));
+      },
+      child: Container(
+        height: 200,
+        width: 450,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Colors.black12, width: 5),
+          color: widget.backgroundcolor,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(left: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 430,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          width: 300,
+                          child: new Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              new Text(
+                                widget.title,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 35,
+                                    fontWeight: FontWeight.w200),
+                                textAlign: TextAlign.left,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(top: 15, right: 15),
+                          child: Row(
+                            children: [
+                              Text(
+                                'x${widget.reward}  ',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15),
+                              ),
+                              SizedBox(
+                                height: 40,
+                                child: Image.asset('lib/images/flower.png'),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Text(
+                    widget.path,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w200),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    widget.description,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w200),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'autor: ${widget.userName}',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w200),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 15, right: 15),
-            child: Row(
-              children: [
-                Text(
-                  'x${widget.reward}  ',
-                  style: TextStyle(color: Colors.white, fontSize: 15),
-                ),
-                SizedBox(
-                  height: 40,
-                  child: Image.asset('lib/images/flower.png'),
-                )
-              ],
-            ),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }
 }
 
+var questionsData;
+int questionsLength = 0;
+void extractQuestions() async {
+  final db = FirebaseFirestore.instance;
+  await db
+      .collection('questions')
+      .doc('questions_list')
+      .get()
+      .then((DocumentSnapshot documentData) {
+    debugPrint('accesed questions data. yaaay!');
+    questionsData =
+        documentData.data() as Map<String, dynamic>; // Magic. Do not touch!!!
+    debugPrint('decoded questions data');
+    List questions = questionsData['questions'];
+    questionsLength = questions.length;
+  });
+}
+
 class _ViewQuestionsPageState extends State<ViewQuestionsPage> {
   @override
+  void initState() {
+    setState(() {
+      extractQuestions();
+    });
+
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return Stack(alignment: Alignment.center, children: [
       Container(
@@ -160,17 +231,27 @@ class _ViewQuestionsPageState extends State<ViewQuestionsPage> {
                       SizedBox(
                         height: 15,
                       ),
-                      Container(
-                        width: 200,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.blue,
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Pune o intrebare',
-                            style: TextStyle(color: Colors.white, fontSize: 20),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return askQuestionPage();
+                            },
+                          ));
+                        },
+                        child: Container(
+                          width: 200,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.blue,
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Pune o intrebare',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
                           ),
                         ),
                       )
@@ -178,19 +259,48 @@ class _ViewQuestionsPageState extends State<ViewQuestionsPage> {
                   ),
                   Row(
                     children: [
-                      Text(
-                        'Filtre',
-                        style: TextStyle(
+                      Row(
+                        children: [
+                          Text(
+                            'Filtre',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w100),
+                          ),
+                          Icon(
+                            Icons.filter_alt_sharp,
                             color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w100),
+                          ),
+                        ],
                       ),
-                      Icon(
-                        Icons.filter_alt_sharp,
-                        color: Colors.white,
-                      ),
+                      SizedBox(width: 10),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            extractQuestions();
+                          });
+                        },
+                        child: Container(
+                          height: 40,
+                          width: 100,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border:
+                                  Border.all(color: Colors.black12, width: 2),
+                              color: Colors.blue.shade200),
+                          child: const Center(
+                            child: Text(
+                              'Refresh',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
@@ -201,107 +311,51 @@ class _ViewQuestionsPageState extends State<ViewQuestionsPage> {
               child: ListView(
                 scrollDirection: Axis.vertical,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      questionModel(
-                        title: 'Va rog ajutor',
-                        path: 'Culegere EN mate 2022',
-                        userName: 'Danuts',
-                        description:
-                            'Pe o dreapta sunt 2 puncte oarecare, \nA si B. Demonstrati...',
-                        reward: 30,
-                        backgroundcolor: Colors.amber.shade200,
-                      ),
-                      questionModel(
-                        title: 'Vai de purecii mei',
-                        path: 'Model EN mate 2021',
-                        userName: 'RazvanIoardan2006',
-                        description:
-                            'Un cub are 2 drepte paralele pe el, \ndemonstrati teorema lui...',
-                        reward: 60,
-                        backgroundcolor: Colors.blue.shade200,
-                      ),
-                    ],
-                  ),
                   SizedBox(
                     height: 20,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      questionModel(
-                        title: 'Imi tuseste creieru',
-                        path: 'Subiect oficial EN mate 2020',
-                        userName: 'IonDeLaBalcon2',
-                        description:
-                            'Functia f(x) = ax + b are valoarea 0\nsi 4 la valorile 3, respectiv...',
-                        reward: 65,
-                        backgroundcolor: Colors.green.shade200,
-                      ),
-                      questionModel(
-                        title: 'Va rog ajutor',
-                        path: 'Culegere EN mate 2022',
-                        userName: 'MariusDarius34',
-                        description:
-                            'Pe o dreapta sunt 2 puncte oarecare, \nA si B. Demonstrati...',
-                        reward: 30,
-                        backgroundcolor: Colors.amber.shade200,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      questionModel(
-                        title: 'Send help',
-                        path: 'Culegere EN mate 2022',
-                        userName: 'Ambata kuuum',
-                        description:
-                            'Patrulaterul regulat ABCD are 2 laturi\nparalele, aflacalabokkatroka',
-                        reward: 15,
-                        backgroundcolor: Colors.red.shade200,
-                      ),
-                      questionModel(
-                        title: 'Va rog ajutor',
-                        path: 'Culegere EN mate 2022',
-                        userName: 'Danuts',
-                        description:
-                            'Pe o dreapta sunt 2 puncte oarecare, \nA si B. Demonstrati...',
-                        reward: 56,
-                        backgroundcolor: Colors.blue.shade200,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      questionModel(
-                        title: 'Va rog ajutor',
-                        path: 'Culegere EN mate 2022',
-                        userName: 'Danuts',
-                        description:
-                            'Pe o dreapta sunt 2 puncte oarecare, \nA si B. Demonstrati...',
-                        reward: 3,
-                        backgroundcolor: Colors.amber.shade200,
-                      ),
-                      questionModel(
-                        title: 'Va rog ajutor',
-                        path: 'Culegere EN mate 2022',
-                        userName: 'Danuts',
-                        description:
-                            'Pe o dreapta sunt 2 puncte oarecare, \nA si B. Demonstrati...',
-                        reward: 100,
-                        backgroundcolor: Colors.blue.shade200,
-                      ),
-                    ],
-                  ),
+                  for (int i = 0; i < questionsLength; i += 2)
+                    Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            questionModel(
+                              title: questionsData['questions'][i]['title'],
+                              path: 'Subiect oficial EN mate 2020',
+                              userName: questionsData['questions'][i]['author'],
+                              description: questionsData['questions'][i]
+                                  ['text'],
+                              reward: questionsData['questions'][i]['reward'],
+                              backgroundcolor: Colors.green.shade200,
+                              id: questionsData['questions'][i]['id'],
+                              imageURL: questionsData['questions'][i]
+                                  ['imageURL'],
+                            ),
+                            if (i + 1 < questionsLength ||
+                                questionsLength % 2 == 0)
+                              questionModel(
+                                title: questionsData['questions'][i + 1]
+                                    ['title'],
+                                path: 'Subiect oficial EN mate 2020',
+                                userName: questionsData['questions'][i + 1]
+                                    ['author'],
+                                description: questionsData['questions'][i + 1]
+                                    ['text'],
+                                reward: questionsData['questions'][i + 1]
+                                    ['reward'],
+                                backgroundcolor: Colors.green.shade200,
+                                id: questionsData['questions'][i + 1]['id'],
+                                imageURL: questionsData['questions'][i + 1]
+                                    ['imageURL'],
+                              ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                      ],
+                    ),
                 ],
               ),
             )

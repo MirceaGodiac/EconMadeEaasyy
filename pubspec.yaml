@@ -51,6 +51,8 @@ dependencies:
   flutter_tts: ^3.6.3
   confetti: ^0.7.0
   flutter_swipe_detector: ^2.0.0
+  image_picker: ^1.0.0
+  firebase_storage: ^11.2.4
 
 dev_dependencies:
   flutter_test:
