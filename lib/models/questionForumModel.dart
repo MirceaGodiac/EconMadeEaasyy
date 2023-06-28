@@ -8,6 +8,7 @@ class QuestionForumModel {
   var date;
   final int id;
   final String imageURL;
+  final String authorEmail;
   QuestionForumModel({
     required this.QuestionTitle,
     required this.QuestionText,
@@ -16,5 +17,6 @@ class QuestionForumModel {
     required this.date,
     required this.id,
     required this.imageURL,
+    required this.authorEmail,
   });
 }

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/ask_question.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/view_question_page.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/view_your_questions_page.dart';
 import 'package:econ_made_easy_files/models/questionForumModel.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,7 @@ class questionModel extends StatefulWidget {
   Color backgroundcolor;
   int id;
   String imageURL;
+  String authorEmail;
   questionModel({
     super.key,
     required this.title,
@@ -28,6 +30,7 @@ class questionModel extends StatefulWidget {
     required this.backgroundcolor,
     required this.id,
     required this.imageURL,
+    required this.authorEmail,
   });
 
   @override
@@ -50,7 +53,9 @@ class _questionModelState extends State<questionModel> {
                   author: questionsData['questions'][widget.id]['author'],
                   date: questionsData['questions'][widget.id]['time'],
                   id: questionsData['questions'][widget.id]['id'],
-                  imageURL: questionsData['questions'][widget.id]['imageURL']),
+                  imageURL: questionsData['questions'][widget.id]['imageURL'],
+                  authorEmail: questionsData['questions'][widget.id]
+                      ['authorEmail']),
             );
           },
         ));
@@ -123,7 +128,9 @@ class _questionModelState extends State<questionModel> {
                     height: 10,
                   ),
                   Text(
-                    widget.description,
+                    (widget.description.length > 50)
+                        ? widget.description.substring(0, 50)
+                        : widget.description,
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -298,6 +305,39 @@ class _ViewQuestionsPageState extends State<ViewQuestionsPage> {
                             ),
                           ),
                         ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return viewYourQuestionPage(
+                                questionsData: questionsData,
+                              );
+                            }));
+                          });
+                        },
+                        child: Container(
+                          height: 50,
+                          width: 150,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border:
+                                  Border.all(color: Colors.black12, width: 3),
+                              color: Colors.blue.shade200),
+                          child: const Center(
+                            child: Text(
+                              'Intrebarile tale',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                        ),
                       )
                     ],
                   ),
@@ -321,34 +361,37 @@ class _ViewQuestionsPageState extends State<ViewQuestionsPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             questionModel(
-                              title: questionsData['questions'][i]['title'],
-                              path: 'Subiect oficial EN mate 2020',
-                              userName: questionsData['questions'][i]['author'],
-                              description: questionsData['questions'][i]
-                                  ['text'],
-                              reward: questionsData['questions'][i]['reward'],
-                              backgroundcolor: Colors.green.shade200,
-                              id: questionsData['questions'][i]['id'],
-                              imageURL: questionsData['questions'][i]
-                                  ['imageURL'],
-                            ),
+                                title: questionsData['questions'][i]['title'],
+                                path: 'Subiect oficial EN mate 2020',
+                                userName: questionsData['questions'][i]
+                                    ['author'],
+                                description: questionsData['questions'][i]
+                                    ['text'],
+                                reward: questionsData['questions'][i]['reward'],
+                                backgroundcolor: Colors.green.shade200,
+                                id: questionsData['questions'][i]['id'],
+                                imageURL: questionsData['questions'][i]
+                                    ['imageURL'],
+                                authorEmail: questionsData['questions'][i]
+                                    ['authorEmail']),
                             if (i + 1 < questionsLength ||
                                 questionsLength % 2 == 0)
                               questionModel(
-                                title: questionsData['questions'][i + 1]
-                                    ['title'],
-                                path: 'Subiect oficial EN mate 2020',
-                                userName: questionsData['questions'][i + 1]
-                                    ['author'],
-                                description: questionsData['questions'][i + 1]
-                                    ['text'],
-                                reward: questionsData['questions'][i + 1]
-                                    ['reward'],
-                                backgroundcolor: Colors.green.shade200,
-                                id: questionsData['questions'][i + 1]['id'],
-                                imageURL: questionsData['questions'][i + 1]
-                                    ['imageURL'],
-                              ),
+                                  title: questionsData['questions'][i + 1]
+                                      ['title'],
+                                  path: 'Subiect oficial EN mate 2020',
+                                  userName: questionsData['questions'][i + 1]
+                                      ['author'],
+                                  description: questionsData['questions'][i + 1]
+                                      ['text'],
+                                  reward: questionsData['questions'][i + 1]
+                                      ['reward'],
+                                  backgroundcolor: Colors.green.shade200,
+                                  id: questionsData['questions'][i + 1]['id'],
+                                  imageURL: questionsData['questions'][i + 1]
+                                      ['imageURL'],
+                                  authorEmail: questionsData['questions'][i]
+                                      ['authorEmail']),
                           ],
                         ),
                         SizedBox(
