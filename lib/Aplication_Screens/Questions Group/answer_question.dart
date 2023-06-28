@@ -264,6 +264,7 @@ class _answerQuestionPageState extends State<answerQuestionPage> {
                                                               source:
                                                                   ImageSource
                                                                       .gallery);
+                                                  Navigator.pop(context);
                                                   print('${file?.path}');
 
                                                   if (file == null) return;
@@ -304,7 +305,6 @@ class _answerQuestionPageState extends State<answerQuestionPage> {
                                                   } catch (error) {
                                                     //Some error occurred
                                                   }
-                                                  Navigator.pop(context);
                                                 },
                                                 child: Container(
                                                   margin: const EdgeInsets.only(
@@ -341,6 +341,7 @@ class _answerQuestionPageState extends State<answerQuestionPage> {
                                                               source:
                                                                   ImageSource
                                                                       .camera);
+                                                  Navigator.pop(context);
                                                   print('${file?.path}');
 
                                                   if (file == null) return;
@@ -381,7 +382,6 @@ class _answerQuestionPageState extends State<answerQuestionPage> {
                                                   } catch (error) {
                                                     //Some error occurred
                                                   }
-                                                  Navigator.pop(context);
                                                 },
                                                 child: Container(
                                                   margin: const EdgeInsets.only(
