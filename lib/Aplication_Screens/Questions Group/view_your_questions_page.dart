@@ -2,13 +2,16 @@ import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/loading_sc
 import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/view_photo_page.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/view_questions_page.dart';
 import 'package:econ_made_easy_files/data/questions_list.dart';
+import 'package:econ_made_easy_files/main.dart';
 import 'package:econ_made_easy_files/models/questionForumModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 class viewYourQuestionPage extends StatefulWidget {
+  var queryData;
   var questionsData;
-  viewYourQuestionPage({super.key, required this.questionsData});
+  viewYourQuestionPage(
+      {super.key, required this.questionsData, required this.queryData});
 
   @override
   State<viewYourQuestionPage> createState() => _viewYourQuestionPageState();
@@ -18,22 +21,8 @@ class _viewYourQuestionPageState extends State<viewYourQuestionPage> {
   int selectedAnswer = -1;
   int correctAnswer = 2;
   bool selectedAction = true; // true -> type    false -> attach file
-  var myQuestions = {};
 
   Widget build(BuildContext context) {
-    int x = 0;
-    for (int i = 0; i < questionsLength; i++) {
-      debugPrint(LoadingScreen.userData.email +
-          questionsData['questions'][i]['authorEmail']);
-      if (LoadingScreen.userData.email ==
-          questionsData['questions'][i]['authorEmail']) {
-        setState(() {
-          myQuestions[x] = questionsData['questions'][i];
-        });
-        x++;
-      }
-    }
-    print(myQuestions);
     return Scaffold(
       body: Stack(
         children: [
@@ -60,7 +49,11 @@ class _viewYourQuestionPageState extends State<viewYourQuestionPage> {
                     ),
                     child: InkWell(
                       onTap: () {
-                        Navigator.pop(context);
+                        Navigator.pushReplacement(context, MaterialPageRoute(
+                          builder: (context) {
+                            return EconMadeEasy();
+                          },
+                        ));
                       },
                       child: Container(
                         child: const Row(
@@ -89,35 +82,44 @@ class _viewYourQuestionPageState extends State<viewYourQuestionPage> {
               ),
               Column(
                 children: [
-                  for (int i = 0; i < myQuestions.length; i += 2)
+                  for (int i = 0; i < widget.queryData.docs.length; i += 2)
                     Column(
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             questionModel(
-                                title: myQuestions[i]['title'],
-                                path: 'Subiect oficial EN mate 2020',
-                                userName: myQuestions[i]['author'],
-                                description: myQuestions[i]['text'],
-                                reward: myQuestions[i]['reward'],
-                                backgroundcolor: Colors.green.shade200,
-                                id: myQuestions[i]['id'],
-                                imageURL: myQuestions[i]['imageURL'],
-                                authorEmail: myQuestions[i]['authorEmail']),
-                            if (i + 1 < myQuestions.length ||
-                                myQuestions.length % 2 == 0)
+                              title: widget.questionsData[i]['title'],
+                              path: 'Subiect oficial EN mate 2020',
+                              userName: widget.questionsData[i]['author'],
+                              description: widget.questionsData[i]['text'],
+                              reward: widget.questionsData[i]['reward'],
+                              backgroundcolor: Colors.green.shade200,
+                              id: widget.questionsData[i]['id'],
+                              imageURL: widget.questionsData[i]['imageURL'],
+                              authorEmail: widget.questionsData[i]
+                                  ['authorEmail'],
+                              time: widget.questionsData[i]['time'],
+                              hidden: widget.questionsData[i]['isActive'],
+                            ),
+                            if (i + 1 < widget.queryData.docs.length ||
+                                widget.queryData.docs.length % 2 == 0)
                               questionModel(
-                                  title: myQuestions[i + 1]['title'],
-                                  path: 'Subiect oficial EN mate 2020',
-                                  userName: myQuestions[i + 1]['author'],
-                                  description: myQuestions[i + 1]['text'],
-                                  reward: myQuestions[i + 1]['reward'],
-                                  backgroundcolor: Colors.green.shade200,
-                                  id: myQuestions[i + 1]['id'],
-                                  imageURL: myQuestions[i + 1]['imageURL'],
-                                  authorEmail: myQuestions[i + 1]
-                                      ['authorEmail']),
+                                title: widget.questionsData[i + 1]['title'],
+                                path: 'Subiect oficial EN mate 2020',
+                                userName: widget.questionsData[i + 1]['author'],
+                                description: widget.questionsData[i + 1]
+                                    ['text'],
+                                reward: widget.questionsData[i + 1]['reward'],
+                                backgroundcolor: Colors.green.shade200,
+                                id: widget.questionsData[i + 1]['id'],
+                                imageURL: widget.questionsData[i + 1]
+                                    ['imageURL'],
+                                authorEmail: widget.questionsData[i + 1]
+                                    ['authorEmail'],
+                                time: widget.questionsData[i + 1]['time'],
+                                hidden: widget.questionsData[i + 1]['isActive'],
+                              ),
                           ],
                         ),
                         SizedBox(

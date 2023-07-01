@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/loading_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/view_questions_page.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -98,59 +98,34 @@ void submitQuestion(
     String _author,
     DateTime _date,
     String _imageURL,
-    String _authorEmail) async {
+    String _authorEmail,
+    bool _isActive) async {
+  int questionID = 0;
   debugPrint('initialized question submitting protocol');
   final db = FirebaseFirestore.instance;
-  var questionsData;
-  int questionsLength = 0;
-  await db
-      .collection('questions')
-      .doc('questions_list')
-      .get()
-      .then((DocumentSnapshot documentData) {
-    debugPrint('accesed questions data. yaaay!');
-    questionsData =
-        documentData.data() as Map<String, dynamic>; // Magic. Do not touch!!!
-    debugPrint('decoded questions data');
-    List questions = questionsData['questions'];
-    questionsLength = questions.length;
-  });
 
-  FirebaseFirestore.instance.collection('questions').doc('questions_list').set({
-    'questions': [
-      for (int i = 0; i < questionsLength; i++)
-        {
-          'title': questionsData['questions'][i]['title'],
-          'text': questionsData['questions'][i]['text'],
-          'reward': questionsData['questions'][i]['reward'],
-          'author': questionsData['questions'][i]['author'],
-          'time': questionsData['questions'][i]['time'],
-          'id': questionsData['questions'][i]['id'],
-          'imageURL': questionsData['questions'][i]['imageURL'],
-          'authorEmail': questionsData['questions'][i]['authorEmail'],
-        },
-      (questionsLength != 0)
-          ? {
-              'title': _questionTitle,
-              'text': _questionText,
-              'reward': _reward,
-              'author': _author,
-              'time': _date,
-              'id': questionsData['questions'][questionsLength - 1]['id'] + 1,
-              'imageURL': _imageURL,
-              'authorEmail': _authorEmail,
-            }
-          : {
-              'title': _questionTitle,
-              'text': _questionText,
-              'reward': _reward,
-              'author': _author,
-              'time': _date,
-              'id': 0,
-              'imageURL': _imageURL,
-              'authorEmail': _authorEmail,
-            }
-    ]
+  var queryReference = await db
+      .collection('questions')
+      .orderBy("id", descending: true)
+      .limit(1)
+      .get();
+
+  questionID =
+      (queryReference.docs.length != 0) ? queryReference.docs[0]['id'] : 0;
+
+  FirebaseFirestore.instance
+      .collection('questions')
+      .doc((questionID + 1).toString())
+      .set({
+    'title': _questionTitle,
+    'text': _questionText,
+    'reward': _reward,
+    'author': _author,
+    'time': _date,
+    'id': questionID + 1,
+    'imageURL': _imageURL,
+    'authorEmail': _authorEmail,
+    'isActive': _isActive,
   });
 }
 
@@ -168,6 +143,7 @@ class _askQuestionPageState extends State<askQuestionPage> {
   final titlecontroller = TextEditingController();
   bool selectedAction = true; // true -> type    false -> attach file
   String ImageURL = ''; // url of attacehd image
+  bool photoLoaded = true;
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
@@ -277,6 +253,9 @@ class _askQuestionPageState extends State<askQuestionPage> {
                                                               source:
                                                                   ImageSource
                                                                       .gallery);
+                                                  setState(() {
+                                                    photoLoaded = false;
+                                                  });
                                                   Navigator.pop(context);
                                                   print('${file?.path}');
 
@@ -318,6 +297,9 @@ class _askQuestionPageState extends State<askQuestionPage> {
                                                   } catch (error) {
                                                     //Some error occurred
                                                   }
+                                                  setState(() {
+                                                    photoLoaded = true;
+                                                  });
                                                 },
                                                 child: Container(
                                                   margin: const EdgeInsets.only(
@@ -354,6 +336,9 @@ class _askQuestionPageState extends State<askQuestionPage> {
                                                               source:
                                                                   ImageSource
                                                                       .camera);
+                                                  setState(() {
+                                                    photoLoaded = false;
+                                                  });
                                                   Navigator.pop(context);
                                                   print('${file?.path}');
 
@@ -395,6 +380,9 @@ class _askQuestionPageState extends State<askQuestionPage> {
                                                   } catch (error) {
                                                     //Some error occurred
                                                   }
+                                                  setState(() {
+                                                    photoLoaded = true;
+                                                  });
                                                 },
                                                 child: Container(
                                                   margin: const EdgeInsets.only(
@@ -567,103 +555,109 @@ class _askQuestionPageState extends State<askQuestionPage> {
                     ),
                   ),
                   InkWell(
-                    onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text(
-                                'Trimite intrebarea scrisa pana acum?',
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text(
+                                  'Trimite intrebarea scrisa pana acum?',
+                                ),
+                                content: Text(
+                                    'Va rugam sa va pastrati daddy issuesurile in afara intrebarilor.'),
+                                actions: [
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Container(
+                                      margin: const EdgeInsets.only(right: 25),
+                                      width: 150,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.blue.shade200,
+                                      ),
+                                      child: const Center(
+                                        child: Text(
+                                          'Mai incerc odata',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w100,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      submitQuestion(
+                                        titlecontroller.text,
+                                        textcontroller.text,
+                                        30,
+                                        LoadingScreen.userData.firstName,
+                                        DateTime.now(),
+                                        ImageURL,
+                                        LoadingScreen.userData.email,
+                                        true,
+                                      );
+                                      Navigator.pop(context);
+                                      titlecontroller.text = '';
+                                      textcontroller.text = '';
+                                      ImageURL = '';
+                                    },
+                                    child: Container(
+                                      margin: const EdgeInsets.only(right: 25),
+                                      width: 150,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.blue.shade200,
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          'Trimite!',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w100,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            });
+                      },
+                      child: (photoLoaded)
+                          ? Container(
+                              margin: const EdgeInsets.only(right: 25),
+                              width: 250,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.blue.shade200,
                               ),
-                              content: Text(
-                                  'Va rugam sa va pastrati daddy issuesurile in afara intrebarilor.'),
-                              actions: [
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Container(
-                                    margin: const EdgeInsets.only(right: 25),
-                                    width: 150,
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.blue.shade200,
-                                    ),
-                                    child: const Center(
-                                      child: Text(
-                                        'Mai incerc odata',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w100,
-                                        ),
-                                      ),
-                                    ),
+                              child: Center(
+                                child: Text(
+                                  'Trimite!',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w100,
                                   ),
                                 ),
-                                InkWell(
-                                  onTap: () {
-                                    submitQuestion(
-                                      titlecontroller.text,
-                                      textcontroller.text,
-                                      30,
-                                      LoadingScreen.userData.firstName,
-                                      DateTime.now(),
-                                      ImageURL,
-                                      LoadingScreen.userData.email,
-                                    );
-                                    Navigator.pop(context);
-                                    titlecontroller.text = '';
-                                    textcontroller.text = '';
-                                    ImageURL = '';
-                                  },
-                                  child: Container(
-                                    margin: const EdgeInsets.only(right: 25),
-                                    width: 150,
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.blue.shade200,
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        'Trimite!',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w100,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            );
-                          });
-                    },
-                    child: InkWell(
-                      child: Container(
-                        margin: const EdgeInsets.only(right: 25),
-                        width: 250,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.blue.shade200,
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Trimite!',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w100,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
+                              ),
+                            )
+                          : Text(
+                              'Se incarca imaginea...',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 30,
+                              ),
+                            ))
                 ],
               )
             ],

@@ -9,6 +9,7 @@ class QuestionForumModel {
   final int id;
   final String imageURL;
   final String authorEmail;
+  final bool hidden;
   QuestionForumModel({
     required this.QuestionTitle,
     required this.QuestionText,
@@ -18,5 +19,6 @@ class QuestionForumModel {
     required this.id,
     required this.imageURL,
     required this.authorEmail,
+    required this.hidden,
   });
 }

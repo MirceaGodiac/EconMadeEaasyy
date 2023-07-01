@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/loading_screen.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/ask_question.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/view_question_page.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/view_your_questions_page.dart';
@@ -20,6 +21,8 @@ class questionModel extends StatefulWidget {
   int id;
   String imageURL;
   String authorEmail;
+  bool hidden;
+  var time;
   questionModel({
     super.key,
     required this.title,
@@ -31,6 +34,8 @@ class questionModel extends StatefulWidget {
     required this.id,
     required this.imageURL,
     required this.authorEmail,
+    required this.time,
+    required this.hidden,
   });
 
   @override
@@ -47,15 +52,17 @@ class _questionModelState extends State<questionModel> {
           builder: (context) {
             return viewQuestionPage(
               questionForumModel: QuestionForumModel(
-                  QuestionTitle: questionsData['questions'][widget.id]['title'],
-                  QuestionText: questionsData['questions'][widget.id]['text'],
-                  reward: questionsData['questions'][widget.id]['reward'],
-                  author: questionsData['questions'][widget.id]['author'],
-                  date: questionsData['questions'][widget.id]['time'],
-                  id: questionsData['questions'][widget.id]['id'],
-                  imageURL: questionsData['questions'][widget.id]['imageURL'],
-                  authorEmail: questionsData['questions'][widget.id]
-                      ['authorEmail']),
+                QuestionTitle: widget.title,
+                QuestionText: widget.description,
+                reward: widget.reward,
+                author: widget.userName,
+                date: widget.time,
+                id: widget.id,
+                imageURL: widget.imageURL,
+                authorEmail: widget.authorEmail,
+                hidden: widget.hidden,
+              ),
+              hidden: widget.hidden,
             );
           },
         ));
@@ -156,34 +163,12 @@ class _questionModelState extends State<questionModel> {
   }
 }
 
-var questionsData;
 int questionsLength = 0;
-void extractQuestions() async {
-  final db = FirebaseFirestore.instance;
-  await db
-      .collection('questions')
-      .doc('questions_list')
-      .get()
-      .then((DocumentSnapshot documentData) {
-    debugPrint('accesed questions data. yaaay!');
-    questionsData =
-        documentData.data() as Map<String, dynamic>; // Magic. Do not touch!!!
-    debugPrint('decoded questions data');
-    List questions = questionsData['questions'];
-    questionsLength = questions.length;
-  });
-}
+int questionsLoaded = 0;
+var questionsData;
 
 class _ViewQuestionsPageState extends State<ViewQuestionsPage> {
   @override
-  void initState() {
-    setState(() {
-      extractQuestions();
-    });
-
-    super.initState();
-  }
-
   Widget build(BuildContext context) {
     return Stack(alignment: Alignment.center, children: [
       Container(
@@ -283,9 +268,27 @@ class _ViewQuestionsPageState extends State<ViewQuestionsPage> {
                       ),
                       SizedBox(width: 10),
                       InkWell(
-                        onTap: () {
+                        onTap: () async {
                           setState(() {
-                            extractQuestions();
+                            questionsLoaded = 1;
+                          });
+
+                          debugPrint(
+                              'initialized question submitting protocol');
+                          final db = FirebaseFirestore.instance;
+
+                          final queryReference = await db
+                              .collection('questions')
+                              .orderBy('id', descending: true)
+                              .where('isActive', isEqualTo: true)
+                              .limit(50)
+                              .get();
+
+                          questionsData = await queryReference.docs;
+                          questionsLength = await queryReference.docs.length;
+                          setState(() {
+                            questionsLoaded = 2;
+                            print(questionsLoaded);
                           });
                         },
                         child: Container(
@@ -310,15 +313,36 @@ class _ViewQuestionsPageState extends State<ViewQuestionsPage> {
                         width: 10,
                       ),
                       InkWell(
-                        onTap: () {
-                          setState(() {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return viewYourQuestionPage(
-                                questionsData: questionsData,
-                              );
-                            }));
-                          });
+                        onTap: () async {
+                          var personalQuestionsData;
+                          int personalQuestionsLength = 0;
+                          debugPrint(
+                              'initialized question submitting protocol');
+                          final db = FirebaseFirestore.instance;
+
+                          final personalQueryReference = await db
+                              .collection('questions')
+                              .orderBy('id', descending: true)
+                              .where('authorEmail',
+                                  isEqualTo: LoadingScreen.userData.email)
+                              .get();
+
+                          personalQuestionsData =
+                              await personalQueryReference.docs;
+                          debugPrint(
+                              'initialized question submitting protocol');
+
+                          personalQuestionsLength =
+                              await personalQueryReference.docs.length;
+                          print(personalQuestionsLength);
+
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (context) {
+                            return viewYourQuestionPage(
+                              queryData: personalQueryReference,
+                              questionsData: personalQuestionsData,
+                            );
+                          }));
                         },
                         child: Container(
                           height: 50,
@@ -347,61 +371,80 @@ class _ViewQuestionsPageState extends State<ViewQuestionsPage> {
             Container(
               margin: const EdgeInsets.only(bottom: 30),
               width: 950,
-              height: 570,
-              child: ListView(
-                scrollDirection: Axis.vertical,
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  for (int i = 0; i < questionsLength; i += 2)
-                    Column(
+              height: 560,
+              child: (questionsLoaded == 2)
+                  ? ListView(
+                      scrollDirection: Axis.vertical,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            questionModel(
-                                title: questionsData['questions'][i]['title'],
-                                path: 'Subiect oficial EN mate 2020',
-                                userName: questionsData['questions'][i]
-                                    ['author'],
-                                description: questionsData['questions'][i]
-                                    ['text'],
-                                reward: questionsData['questions'][i]['reward'],
-                                backgroundcolor: Colors.green.shade200,
-                                id: questionsData['questions'][i]['id'],
-                                imageURL: questionsData['questions'][i]
-                                    ['imageURL'],
-                                authorEmail: questionsData['questions'][i]
-                                    ['authorEmail']),
-                            if (i + 1 < questionsLength ||
-                                questionsLength % 2 == 0)
-                              questionModel(
-                                  title: questionsData['questions'][i + 1]
-                                      ['title'],
-                                  path: 'Subiect oficial EN mate 2020',
-                                  userName: questionsData['questions'][i + 1]
-                                      ['author'],
-                                  description: questionsData['questions'][i + 1]
-                                      ['text'],
-                                  reward: questionsData['questions'][i + 1]
-                                      ['reward'],
-                                  backgroundcolor: Colors.green.shade200,
-                                  id: questionsData['questions'][i + 1]['id'],
-                                  imageURL: questionsData['questions'][i + 1]
-                                      ['imageURL'],
-                                  authorEmail: questionsData['questions'][i]
-                                      ['authorEmail']),
-                          ],
-                        ),
                         SizedBox(
                           height: 20,
                         ),
+                        for (int i = 0; i < questionsLength; i += 2)
+                          Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  questionModel(
+                                    title: questionsData[i]['title'],
+                                    path: 'Subiect oficial EN mate 2020',
+                                    userName: questionsData[i]['author'],
+                                    description: questionsData[i]['text'],
+                                    reward: questionsData[i]['reward'],
+                                    backgroundcolor: Colors.green.shade200,
+                                    id: questionsData[i]['id'],
+                                    imageURL: questionsData[i]['imageURL'],
+                                    authorEmail: questionsData[i]
+                                        ['authorEmail'],
+                                    time: questionsData[i]['time'],
+                                    hidden: questionsData[i]['isActive'],
+                                  ),
+                                  if (i % 2 == 0 && i < questionsLength - 1)
+                                    questionModel(
+                                      title: questionsData[i + 1]['title'],
+                                      path: 'Subiect oficial EN mate 2020',
+                                      userName: questionsData[i + 1]['author'],
+                                      description: questionsData[i + 1]['text'],
+                                      reward: questionsData[i + 1]['reward'],
+                                      backgroundcolor: Colors.green.shade200,
+                                      id: questionsData[i + 1]['id'],
+                                      imageURL: questionsData[i + 1]
+                                          ['imageURL'],
+                                      authorEmail: questionsData[i + 1]
+                                          ['authorEmail'],
+                                      time: questionsData[i]['time'],
+                                      hidden: questionsData[i]['isActive'],
+                                    ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                            ],
+                          ),
                       ],
-                    ),
-                ],
-              ),
-            )
+                    )
+                  : (questionsLoaded == 1)
+                      ? const Center(
+                          child: Text(
+                            'se incarca intrebarile...',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30,
+                            ),
+                          ),
+                        )
+                      : const Center(
+                          child: Text(
+                            'Apasa refresh pentru a incarca intrebarile!',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30,
+                            ),
+                          ),
+                        ),
+            ),
           ],
         ),
       ),

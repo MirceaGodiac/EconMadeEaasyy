@@ -227,7 +227,9 @@ class _MovieListState extends State<MovieList> with TickerProviderStateMixin {
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
-                    return const SelectExerciseTypeScreen();
+                    return SelectExerciseTypeScreen(
+                      length: 0,
+                    );
                   },
                 ));
               },

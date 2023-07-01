@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/loading_screen.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/answer_question.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/view_photo_page.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/view_questions_page.dart';
@@ -9,11 +10,12 @@ class answerElement extends StatefulWidget {
   String authorID;
   String Text;
   String imageURL;
-  answerElement(
-      {super.key,
-      required this.Text,
-      required this.authorID,
-      required this.imageURL});
+  answerElement({
+    super.key,
+    required this.Text,
+    required this.authorID,
+    required this.imageURL,
+  });
 
   @override
   State<answerElement> createState() => _answerElementState();
@@ -82,7 +84,9 @@ class _answerElementState extends State<answerElement> {
 
 class viewQuestionPage extends StatefulWidget {
   final QuestionForumModel questionForumModel;
-  viewQuestionPage({super.key, required this.questionForumModel});
+  bool hidden;
+  viewQuestionPage(
+      {super.key, required this.questionForumModel, required this.hidden});
 
   @override
   State<viewQuestionPage> createState() => _viewQuestionPageState();
@@ -96,8 +100,8 @@ class _viewQuestionPageState extends State<viewQuestionPage> {
   bool selectedAction = true; // true -> see answers    false -> write answer
   bool isLoaded = false;
   var answersData;
-  int answersLength = 0;
-
+  int answersLength = 0; // for the ui only
+  bool answersExist = true; // for the ui as well
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -161,45 +165,167 @@ class _viewQuestionPageState extends State<viewQuestionPage> {
                         children: [
                           Row(
                             children: [
-                              Container(
-                                margin: const EdgeInsets.only(left: 50),
-                                child: Text(
-                                  'Intrebarea #${widget.questionForumModel.id + 1} de la ${widget.questionForumModel.author}',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w300),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              Container(
-                                width: 250,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.blue.shade300,
-                                ),
-                                child: Center(
-                                    child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                              if (widget.questionForumModel.authorEmail !=
+                                  LoadingScreen.userData.email)
+                                Row(
                                   children: [
-                                    Text(
-                                      'Recompensa:     x30',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
+                                    Container(
+                                      margin: const EdgeInsets.only(left: 50),
+                                      child: Text(
+                                        'Intrebarea #${widget.questionForumModel.id + 1} de la ${widget.questionForumModel.author}',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w300),
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: 30,
-                                      child:
-                                          Image.asset('lib/images/flower.png'),
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
+                                    Container(
+                                      width: 200,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.blue.shade300,
+                                      ),
+                                      child: Center(
+                                          child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Recompensa:     x30',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 30,
+                                            child: Image.asset(
+                                                'lib/images/flower.png'),
+                                          )
+                                        ],
+                                      )),
                                     )
                                   ],
-                                )),
-                              )
+                                )
+                              else
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 50,
+                                    ),
+                                    Container(
+                                      width: 240,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.blue.shade300,
+                                      ),
+                                      child: Center(
+                                          child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Aceasta intrebare iti apartine',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        ],
+                                      )),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    InkWell(
+                                      onTap: () async {
+                                        await FirebaseFirestore.instance
+                                            .collection('questions')
+                                            .doc(widget.questionForumModel.id
+                                                .toString())
+                                            .get()
+                                            .then((docReference) {
+                                          if (docReference.exists) {
+                                            setState(() {
+                                              widget.hidden =
+                                                  docReference['isActive'];
+                                            });
+                                            print('1');
+                                            print(widget.hidden);
+                                          } else {
+                                            showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AlertDialog(
+                                                    title: Text(
+                                                      'Intrebarea nu mai exista in baza noastra de date :/',
+                                                    ),
+                                                  );
+                                                });
+                                          }
+                                        });
+                                        if (widget.hidden) {
+                                          FirebaseFirestore.instance
+                                              .collection('questions')
+                                              .doc(widget.questionForumModel.id
+                                                  .toString())
+                                              .update({
+                                            'isActive': false,
+                                          });
+                                          setState(() {
+                                            widget.hidden = false;
+                                          });
+                                          print('2');
+                                          print(widget.hidden);
+                                        } else {
+                                          FirebaseFirestore.instance
+                                              .collection('questions')
+                                              .doc(widget.questionForumModel.id
+                                                  .toString())
+                                              .update({
+                                            'isActive': true,
+                                          });
+                                          setState(() {
+                                            widget.hidden = true;
+                                          });
+                                        }
+                                      },
+                                      child: Container(
+                                          width: 160,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            color: Colors.blue.shade300,
+                                          ),
+                                          child: (widget.hidden)
+                                              ? Center(
+                                                  child: Text(
+                                                    'Ascunde acest thread',
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 15,
+                                                    ),
+                                                  ),
+                                                )
+                                              : Center(
+                                                  child: Text(
+                                                    'Dezvaluie acest thread',
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 15,
+                                                    ),
+                                                  ),
+                                                )),
+                                    )
+                                  ],
+                                ),
                             ],
                           ),
                           Container(
@@ -341,6 +467,11 @@ class _viewQuestionPageState extends State<viewQuestionPage> {
                               setState(() {
                                 isLoaded = true;
                               });
+                            } else {
+                              setState(() {
+                                answersExist = false;
+                                isLoaded = true;
+                              });
                             }
                           });
                         },
@@ -409,8 +540,8 @@ class _viewQuestionPageState extends State<viewQuestionPage> {
               ),
               Container(
                 child: (!selectedAction)
-                    ? (isLoaded)
-                        ? (answersLength != 0)
+                    ? (answersExist)
+                        ? (isLoaded)
                             ? Column(
                                 children: [
                                   for (int i = 0; i < answersLength; i++)
@@ -442,7 +573,7 @@ class _viewQuestionPageState extends State<viewQuestionPage> {
                               )
                             : Center(
                                 child: Text(
-                                  'Nu ai intrebari deocamdata. reintra in pagina pentru a da refresh...',
+                                  'Loading...',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 40,
@@ -451,7 +582,7 @@ class _viewQuestionPageState extends State<viewQuestionPage> {
                               )
                         : Center(
                             child: Text(
-                              'Loading...',
+                              'Nu ai raspunsuri deocamdata. reintra in pagina pentru a da refresh...',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 40,

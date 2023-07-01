@@ -1,12 +1,13 @@
-import 'package:econ_made_easy_files/Aplication_Screens/Exercitii%20Group/secondSelectExerciseTypeScreenSubjectI.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Exercitii%20Group/secondSelectExerciseTypeScreenSubjectII.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Exercitii%20Group/secondSelectExerciseTypeScreenSubjectIII.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/Exercitii%20Group/secondSelectExerciseTypeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
 import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class SelectExerciseTypeScreen extends StatefulWidget {
-  const SelectExerciseTypeScreen({super.key});
+  int length = 0;
+  SelectExerciseTypeScreen({super.key, required this.length});
 
   @override
   State<SelectExerciseTypeScreen> createState() =>
@@ -16,13 +17,14 @@ class SelectExerciseTypeScreen extends StatefulWidget {
 class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
   double selectedCategoryIndex = 0;
   final scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SizedBox.expand(
         child: Container(
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(
               Radius.circular(40),
             ),
             color: Colors.white30,
@@ -43,13 +45,13 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
             shadowColor: Colors.black,
             shape: BoxShape.rectangle,
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(60))),
               height: double.infinity,
               width: 1090,
               child: ListView(
                 controller: scrollController,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 children: [
                   SwipeDetector(
@@ -88,7 +90,7 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                               height: 265,
                               child: Container(
                                   margin: const EdgeInsets.only(top: 20),
-                                  child: Icon(
+                                  child: const Icon(
                                     Icons.arrow_back_ios_new,
                                     size: 200,
                                   )),
@@ -97,7 +99,7 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                               width: double.infinity,
                               height: 265,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(
+                                borderRadius: const BorderRadius.all(
                                   Radius.circular(40),
                                 ),
                                 color: Colors.amber.shade500,
@@ -140,11 +142,30 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                     ),
                   ),
                   InkWell(
-                    onTap: () {
-                      debugPrint('a');
+                    onTap: () async {
+                      var materie;
+
+                      await FirebaseFirestore.instance
+                          .collection('quizes')
+                          .doc('Subiect I')
+                          .collection('materii')
+                          .get()
+                          .then((collectionData) {
+                        materie = collectionData;
+                        widget.length = collectionData.docs.length;
+                        print(materie.docs[0].id);
+                      });
+                      print('____');
+                      print(widget.length);
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
-                          return secondSelectExerciseTypeIScreen();
+                          return secondSelectExerciseTypeScreen(
+                            subject: 'Subiect I',
+                            length: widget.length,
+                            materie: materie,
+                            saveData: false,
+                            selectedLength: 0,
+                          );
                         },
                       ));
                     },
@@ -190,7 +211,7 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                               width: double.infinity,
                               height: 265,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(
+                                borderRadius: const BorderRadius.all(
                                   Radius.circular(40),
                                 ),
                                 color: Colors.amber.shade500,
@@ -234,7 +255,7 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                                           fontWeight: FontWeight.w300),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 60,
                                   ),
                                   Center(
@@ -245,7 +266,7 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                                           borderRadius: const BorderRadius.all(
                                               Radius.circular(10)),
                                           color: Colors.amber.shade300),
-                                      child: Center(
+                                      child: const Center(
                                         child: Text(
                                           'Incepe',
                                           style: TextStyle(
@@ -280,11 +301,37 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                       });
                     },
                     child: InkWell(
-                      onTap: () {
-                        debugPrint('a');
+                      onTap: () async {
+                        var materie;
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return const AlertDialog(
+                                title: Text(
+                                  'Se incarca...',
+                                ),
+                              );
+                            });
+                        await FirebaseFirestore.instance
+                            .collection('quizes')
+                            .doc('Subiect II')
+                            .collection('materii')
+                            .get()
+                            .then((collectionData) {
+                          materie = collectionData.docs;
+                          widget.length = collectionData.docs.length;
+                        });
+                        Navigator.pop(context);
+
                         Navigator.push(context, MaterialPageRoute(
                           builder: (context) {
-                            return const secondSelectExerciseTypeIIScreen();
+                            return secondSelectExerciseTypeScreen(
+                              subject: 'Subiect II',
+                              length: widget.length,
+                              materie: materie,
+                              saveData: false,
+                              selectedLength: 0,
+                            );
                           },
                         ));
                       },
@@ -293,8 +340,8 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                         width: 1000,
                         margin: const EdgeInsets.only(
                             top: 20, bottom: 20, left: 10, right: 20),
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(
                             Radius.circular(40),
                           ),
                           color: Colors.white30,
@@ -316,7 +363,7 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                               height: 265,
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
+                                  borderRadius: const BorderRadius.all(
                                     Radius.circular(40),
                                   ),
                                   color: Colors.orange.shade800),
@@ -355,7 +402,7 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                                           fontWeight: FontWeight.w300),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 60,
                                   ),
                                   Center(
@@ -366,7 +413,7 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                                           borderRadius: const BorderRadius.all(
                                               Radius.circular(10)),
                                           color: Colors.orange.shade600),
-                                      child: Center(
+                                      child: const Center(
                                         child: Text(
                                           'Incepe',
                                           style: TextStyle(
@@ -401,11 +448,26 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                       });
                     },
                     child: InkWell(
-                      onTap: () {
-                        debugPrint('a');
+                      onTap: () async {
+                        var materie;
+                        await FirebaseFirestore.instance
+                            .collection('quizes')
+                            .doc('Subiect III')
+                            .collection('materii')
+                            .get()
+                            .then((collectionData) {
+                          materie = collectionData;
+                          widget.length = collectionData.docs.length;
+                        });
                         Navigator.push(context, MaterialPageRoute(
                           builder: (context) {
-                            return const secondSelectExerciseTypeIIIScreen();
+                            return secondSelectExerciseTypeScreen(
+                              subject: 'Subiect III',
+                              length: widget.length,
+                              materie: materie,
+                              saveData: false,
+                              selectedLength: 0,
+                            );
                           },
                         ));
                       },
@@ -414,8 +476,8 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                         width: 1000,
                         margin: const EdgeInsets.only(
                             top: 20, bottom: 20, left: 10, right: 60),
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(
                             Radius.circular(40),
                           ),
                           color: Colors.white30,
@@ -437,7 +499,7 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                               width: double.infinity,
                               height: 260,
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
+                                  borderRadius: const BorderRadius.all(
                                     Radius.circular(40),
                                   ),
                                   color: Colors.red.shade900),
@@ -476,7 +538,7 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                                           fontWeight: FontWeight.w300),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 60,
                                   ),
                                   Center(
@@ -487,7 +549,7 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                                           borderRadius: const BorderRadius.all(
                                               Radius.circular(10)),
                                           color: Colors.red.shade700),
-                                      child: Center(
+                                      child: const Center(
                                         child: Text(
                                           'Incepe',
                                           style: TextStyle(
@@ -520,28 +582,35 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
     print(selectedIndex);
     if (selectedIndex == 1.0) {
       scrollController.animateTo(250,
-          duration: Duration(milliseconds: 600), curve: Curves.decelerate);
+          duration: const Duration(milliseconds: 600),
+          curve: Curves.decelerate);
     } else if (selectedIndex == 4.0) {
       await scrollController.animateTo((2160),
-          duration: Duration(milliseconds: 200), curve: Curves.decelerate);
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.decelerate);
       scrollController.animateTo(2120,
-          duration: Duration(milliseconds: 200), curve: Curves.decelerate);
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.decelerate);
       selectedCategoryIndex--;
     } else if (selectedIndex == -1.0) {
       await scrollController.animateTo(0,
-          duration: Duration(milliseconds: 200), curve: Curves.decelerate);
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.decelerate);
       scrollController.animateTo(50,
-          duration: Duration(milliseconds: 200), curve: Curves.decelerate);
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.decelerate);
       selectedCategoryIndex++;
     } else {
       double indent = 790;
       if (selectedIndex == 0) {
         debugPrint((selectedIndex * indent).toString());
         scrollController.animateTo(50,
-            duration: Duration(milliseconds: 300), curve: Curves.decelerate);
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.decelerate);
       } else {
         scrollController.animateTo(selectedIndex * indent - 250,
-            duration: Duration(milliseconds: 600), curve: Curves.decelerate);
+            duration: const Duration(milliseconds: 600),
+            curve: Curves.decelerate);
       }
     }
   }

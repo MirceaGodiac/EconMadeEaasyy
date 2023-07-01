@@ -183,7 +183,7 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
                           Text(
                             'Ajutor Personal',
                             style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 10,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w100),
                           ),
