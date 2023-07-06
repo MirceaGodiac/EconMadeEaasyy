@@ -1,5 +1,11 @@
+import 'dart:math';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/Exercitii%20Group/secondSelectExerciseTypeScreen.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/Exercitii%20Group/subiect_3_quiz.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/Exercitii%20Group/testModel.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/loading_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 
@@ -25,7 +31,6 @@ class _thirdSelectExerciseTypeScreenSubjectScreenIState
     extends State<thirdSelectExerciseTypeScreenSubjectScreenI> {
   @override
   Widget build(BuildContext context) {
-    print(selectedMaterials);
     return Scaffold(
       backgroundColor: const Color.fromRGBO(255, 210, 60, 1),
       body: Column(
@@ -85,6 +90,17 @@ class _thirdSelectExerciseTypeScreenSubjectScreenIState
               ),
               InkWell(
                 onTap: () async {
+                  // get nr of credits
+                  int nrOfCredits = 0;
+
+                  await FirebaseFirestore.instance
+                      .collection('Users')
+                      .doc(LoadingScreen.userSettings!.uid)
+                      .get()
+                      .then((value) {
+                    nrOfCredits = value['credits'];
+                  });
+
                   // extract some exercises ig
 
                   List<Map<int, List<int>>> exercises = [];
@@ -95,40 +111,66 @@ class _thirdSelectExerciseTypeScreenSubjectScreenIState
                       int possibleQuestions =
                           widget.materie.docs[i]['exercitii'].length;
 
-                      List<int> questions =
+                      List<int>? questions =
                           List<int>.filled(possibleQuestions, 0);
 
                       int x = 0;
 
                       for (int j = 0; j < possibleQuestions; j++) {
-                        print(j);
                         questions[j] = x;
                         x++;
                       }
-                      print(questions);
 
-                      questions.shuffle();
                       exercises.add({
-                        i: questions
+                        i: questions!
                             .take(numberOfSelectedMaterials[i])
                             .toList(),
                       });
-                      print(exercises);
+                      print('-> $exercises');
                     }
                   }
 
                   Navigator.pushReplacement(context, MaterialPageRoute(
                     builder: (context) {
-                      return testTypePage(
-                        levelColor: const Color.fromRGBO(255, 210, 60, 1),
-                        correctAnswer: widget
-                            .materie.docs[0]['exercitii'][0].values
-                            .toList()[0],
-                        imageURL: widget.materie.docs[0]['exercitii'][0].keys
-                            .toList()[0],
-                        materie: widget.materie,
-                        questions: exercises,
-                      );
+                      if (widget.subject == 'Subiect I') {
+                        return testTypePage(
+                          levelColor: const Color.fromRGBO(255, 210, 60, 1),
+                          correctAnswer: widget
+                              .materie.docs[0]['exercitii'][0].values
+                              .toList()[0],
+                          imageURL: widget.materie.docs[0]['exercitii'][0].keys
+                              .toList()[0],
+                          materie: widget.materie,
+                          questions: exercises,
+                          nrOfCredits: nrOfCredits,
+                          reward: 5,
+                        );
+                      } else if (widget.subject == 'Subiect II') {
+                        return testTypePage(
+                          levelColor: const Color.fromRGBO(255, 210, 60, 1),
+                          correctAnswer: widget
+                              .materie.docs[0]['exercitii'][0].values
+                              .toList()[0],
+                          imageURL: widget.materie.docs[0]['exercitii'][0].keys
+                              .toList()[0],
+                          materie: widget.materie,
+                          questions: exercises,
+                          nrOfCredits: nrOfCredits,
+                          reward: 10,
+                        );
+                      } else {
+                        return testType3Page(
+                          levelColor: const Color.fromRGBO(255, 210, 60, 1),
+                          correctAnswer: widget
+                              .materie.docs[0]['exercitii'][0].values
+                              .toList()[0],
+                          imageURL: widget.materie.docs[0]['exercitii'][0].keys
+                              .toList()[0],
+                          materie: widget.materie,
+                          questions: exercises,
+                          nrOfCredits: nrOfCredits,
+                        );
+                      }
                     },
                   ));
                 },

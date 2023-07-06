@@ -4,17 +4,27 @@ import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/answer
 import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/view_photo_page.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/view_questions_page.dart';
 import 'package:econ_made_easy_files/models/questionForumModel.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class answerElement extends StatefulWidget {
+  final QuestionForumModel questionForumModel;
   String authorID;
   String Text;
   String imageURL;
+  String authorUID;
+  int reward;
+  bool locked;
+
   answerElement({
     super.key,
     required this.Text,
     required this.authorID,
     required this.imageURL,
+    required this.questionForumModel,
+    required this.authorUID,
+    required this.reward,
+    required this.locked,
   });
 
   @override
@@ -38,15 +48,102 @@ class _answerElementState extends State<answerElement> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            margin: const EdgeInsets.only(top: 20, left: 20),
-            child: Text(
-              'Raspuns de la ${widget.authorID}',
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 20,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 20, left: 20),
+                child: Text(
+                  'Raspuns de la ${widget.authorID}',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
+                ),
               ),
-            ),
+              ((widget.questionForumModel.authorEmail ==
+                              LoadingScreen.userData.email &&
+                          widget.questionForumModel.hidden == true) &&
+                      widget.locked == false)
+                  ? InkWell(
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text(
+                                    'Trimite recompensa utilizatorului ${widget.authorID}?'),
+                                actions: [
+                                  Center(
+                                    child: InkWell(
+                                      onTap: () async {
+                                        Future<void> userRef = FirebaseFirestore
+                                            .instance
+                                            .collection("Users")
+                                            .doc(widget.authorUID)
+                                            .update({
+                                          "credits": FieldValue.increment(
+                                              widget.reward),
+                                        });
+                                        FirebaseFirestore.instance
+                                            .collection("questions")
+                                            .doc(widget.questionForumModel.id
+                                                .toString())
+                                            .update({
+                                          "locked": true,
+                                        });
+                                        setState(() {
+                                          widget.locked = true;
+                                        });
+                                      },
+                                      child: Container(
+                                        width: 200,
+                                        height: 50,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: Colors.blue.shade200,
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            'Trimite!',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              );
+                            });
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.only(
+                          right: 20,
+                          top: 10,
+                        ),
+                        width: 200,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.green.shade300,
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Trimite recompensa!',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  : SizedBox(),
+            ],
           ),
           const SizedBox(
             height: 30,
@@ -84,9 +181,16 @@ class _answerElementState extends State<answerElement> {
 
 class viewQuestionPage extends StatefulWidget {
   final QuestionForumModel questionForumModel;
+  bool isAnswered;
   bool hidden;
-  viewQuestionPage(
-      {super.key, required this.questionForumModel, required this.hidden});
+  bool locked;
+  viewQuestionPage({
+    super.key,
+    required this.questionForumModel,
+    required this.hidden,
+    required this.isAnswered,
+    required this.locked,
+  });
 
   @override
   State<viewQuestionPage> createState() => _viewQuestionPageState();
@@ -95,13 +199,18 @@ class viewQuestionPage extends StatefulWidget {
 class _viewQuestionPageState extends State<viewQuestionPage> {
   int selectedAnswer = -1;
   int correctAnswer = 2;
+
   final textcontroller = TextEditingController();
   final titlecontroller = TextEditingController();
+
   bool selectedAction = true; // true -> see answers    false -> write answer
   bool isLoaded = false;
+
   var answersData;
+
   int answersLength = 0; // for the ui only
   bool answersExist = true; // for the ui as well
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -214,7 +323,7 @@ class _viewQuestionPageState extends State<viewQuestionPage> {
                               else
                                 Row(
                                   children: [
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 50,
                                     ),
                                     Container(
@@ -224,7 +333,7 @@ class _viewQuestionPageState extends State<viewQuestionPage> {
                                         borderRadius: BorderRadius.circular(10),
                                         color: Colors.blue.shade300,
                                       ),
-                                      child: Center(
+                                      child: const Center(
                                           child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -254,6 +363,8 @@ class _viewQuestionPageState extends State<viewQuestionPage> {
                                             setState(() {
                                               widget.hidden =
                                                   docReference['isActive'];
+                                              widget.locked =
+                                                  docReference['locked'];
                                             });
                                             print('1');
                                             print(widget.hidden);
@@ -305,7 +416,7 @@ class _viewQuestionPageState extends State<viewQuestionPage> {
                                             color: Colors.blue.shade300,
                                           ),
                                           child: (widget.hidden)
-                                              ? Center(
+                                              ? const Center(
                                                   child: Text(
                                                     'Ascunde acest thread',
                                                     style: TextStyle(
@@ -314,7 +425,7 @@ class _viewQuestionPageState extends State<viewQuestionPage> {
                                                     ),
                                                   ),
                                                 )
-                                              : Center(
+                                              : const Center(
                                                   child: Text(
                                                     'Dezvaluie acest thread',
                                                     style: TextStyle(
@@ -451,6 +562,7 @@ class _viewQuestionPageState extends State<viewQuestionPage> {
                           final db = FirebaseFirestore.instance;
                           var questionsData;
                           int questionsLength = 1;
+                          bool _locked;
                           await db
                               .collection('answers')
                               .doc(widget.questionForumModel.id.toString())
@@ -473,6 +585,16 @@ class _viewQuestionPageState extends State<viewQuestionPage> {
                                 isLoaded = true;
                               });
                             }
+                            FirebaseFirestore.instance
+                                .collection('questions')
+                                .doc(widget.questionForumModel.id.toString())
+                                .get()
+                                .then((value) {
+                              setState(() {
+                                widget.locked = value["locked"];
+                              });
+                            });
+                            print(widget.locked);
                           });
                         },
                         child: Container(
@@ -561,6 +683,14 @@ class _viewQuestionPageState extends State<viewQuestionPage> {
                                               imageURL:
                                                   answersData['questionAnswers']
                                                       [i]['imageURL'],
+                                              questionForumModel:
+                                                  widget.questionForumModel,
+                                              authorUID:
+                                                  answersData['questionAnswers']
+                                                      [i]['authorUID'],
+                                              reward: widget
+                                                  .questionForumModel.reward,
+                                              locked: widget.locked,
                                             ),
                                           ],
                                         ),

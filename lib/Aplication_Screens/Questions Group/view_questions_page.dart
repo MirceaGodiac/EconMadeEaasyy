@@ -6,6 +6,8 @@ import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/view_y
 import 'package:econ_made_easy_files/models/questionForumModel.dart';
 import 'package:flutter/material.dart';
 
+import '../../main.dart';
+
 class ViewQuestionsPage extends StatefulWidget {
   const ViewQuestionsPage({super.key});
   State<ViewQuestionsPage> createState() => _ViewQuestionsPageState();
@@ -63,6 +65,8 @@ class _questionModelState extends State<questionModel> {
                 hidden: widget.hidden,
               ),
               hidden: widget.hidden,
+              isAnswered: false,
+              locked: false,
             );
           },
         ));
@@ -168,8 +172,10 @@ int questionsLoaded = 0;
 var questionsData;
 
 class _ViewQuestionsPageState extends State<ViewQuestionsPage> {
+  DateTime previous = DateTime.now();
   @override
   Widget build(BuildContext context) {
+    bool askPageLoaded = true;
     return Stack(alignment: Alignment.center, children: [
       Container(
         margin: const EdgeInsets.only(top: 20, bottom: 20),
@@ -224,10 +230,26 @@ class _ViewQuestionsPageState extends State<ViewQuestionsPage> {
                         height: 15,
                       ),
                       InkWell(
-                        onTap: () {
+                        onTap: () async {
+                          setState(() {
+                            askPageLoaded = true;
+                          });
+                          int credits = 0;
+                          await FirebaseFirestore.instance
+                              .collection('Users')
+                              .doc(LoadingScreen.userSettings?.uid)
+                              .get()
+                              .then((value) {
+                            credits = value['credits'];
+                          });
+                          setState(() {
+                            askPageLoaded = false;
+                          });
                           Navigator.push(context, MaterialPageRoute(
                             builder: (context) {
-                              return askQuestionPage();
+                              return askQuestionPage(
+                                credits: credits,
+                              );
                             },
                           ));
                         },
@@ -238,13 +260,21 @@ class _ViewQuestionsPageState extends State<ViewQuestionsPage> {
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.blue,
                           ),
-                          child: Center(
-                            child: Text(
-                              'Pune o intrebare',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
-                            ),
-                          ),
+                          child: (askPageLoaded)
+                              ? Center(
+                                  child: Text(
+                                    'Pune o intrebare',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                )
+                              : Center(
+                                  child: Text(
+                                    'Se incarca...',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                ),
                         ),
                       )
                     ],
@@ -272,24 +302,46 @@ class _ViewQuestionsPageState extends State<ViewQuestionsPage> {
                           setState(() {
                             questionsLoaded = 1;
                           });
-
                           debugPrint(
                               'initialized question submitting protocol');
                           final db = FirebaseFirestore.instance;
 
-                          final queryReference = await db
-                              .collection('questions')
-                              .orderBy('id', descending: true)
-                              .where('isActive', isEqualTo: true)
-                              .limit(50)
-                              .get();
+                          DateTime now = DateTime.now();
 
-                          questionsData = await queryReference.docs;
-                          questionsLength = await queryReference.docs.length;
-                          setState(() {
-                            questionsLoaded = 2;
-                            print(questionsLoaded);
-                          });
+                          Duration duration = now.difference(previous);
+
+                          if (duration.inSeconds > 10 || first) {
+                            first = false;
+
+                            final db = FirebaseFirestore.instance;
+                            final queryReference = await db
+                                .collection('questions')
+                                .orderBy('id', descending: true)
+                                .where('isActive', isEqualTo: true)
+                                .limit(50)
+                                .get();
+                            setState(() {
+                              questionsLoaded = 2;
+                            });
+                            questionsData = await queryReference.docs;
+                            questionsLength = await queryReference.docs.length;
+
+                            previous = DateTime.now();
+                          } else {
+                            setState(() {
+                              questionsLoaded = 2;
+                            });
+
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return const AlertDialog(
+                                  title: Text(
+                                      'Pentru a nu strica baza de date, poti da refresh odata la 10 secunde ;)'),
+                                );
+                              },
+                            );
+                          }
                         },
                         child: Container(
                           height: 40,

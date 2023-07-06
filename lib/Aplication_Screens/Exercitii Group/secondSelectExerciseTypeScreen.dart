@@ -30,10 +30,11 @@ class _materieListItemState extends State<materieListItem> {
     return InkWell(
       onTap: () {
         setState(() {
-          if (selectedMaterials[widget.elementIndex] == false)
+          if (selectedMaterials[widget.elementIndex] == false) {
             selectedMaterials[widget.elementIndex] = true;
-          else
+          } else {
             selectedMaterials[widget.elementIndex] = false;
+          }
         });
       },
       child: Container(
@@ -50,39 +51,25 @@ class _materieListItemState extends State<materieListItem> {
         child: Container(
           margin: const EdgeInsets.only(bottom: 40),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Stack(
-                children: [
-                  (selectedMaterials[widget.elementIndex] == true)
-                      ? Container(
-                          alignment: Alignment.topRight,
-                          child: Container(
-                            margin: const EdgeInsets.only(top: 10, right: 10),
-                            child: const Icon(
-                              Icons.check,
-                              color: Colors.white,
-                              size: 30,
-                            ),
-                          ),
-                        )
-                      : Container(),
-                  Container(
-                    margin: const EdgeInsets.only(top: 30),
-                    child: Center(
-                      child: SizedBox(
-                        height: 90,
-                        child: Image.asset(
-                          'lib/images/functiegradIIgraph.png',
+              (selectedMaterials[widget.elementIndex] == true)
+                  ? Container(
+                      alignment: Alignment.topRight,
+                      child: Container(
+                        margin: const EdgeInsets.only(top: 10, right: 10),
+                        child: const Icon(
+                          Icons.check,
+                          color: Colors.white,
+                          size: 30,
                         ),
                       ),
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  Text(
+                    )
+                  : Container(),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 10),
+                child: FittedBox(
+                  child: Text(
                     widget.title,
                     style: const TextStyle(
                       fontSize: 40,
@@ -90,17 +77,17 @@ class _materieListItemState extends State<materieListItem> {
                       color: Colors.white,
                     ),
                   ),
-                  Text(
-                    (widget.numberOfExercises != 0)
-                        ? '${widget.numberOfExercises} exercitii'
-                        : 'coming soon!',
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w100,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
+                ),
+              ),
+              Text(
+                (widget.numberOfExercises != 0)
+                    ? '${widget.numberOfExercises} exercitii'
+                    : 'coming soon!',
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w100,
+                  color: Colors.white,
+                ),
               ),
             ],
           ),
@@ -139,7 +126,7 @@ class _secondSelectExerciseTypeScreenState
     double screenWidth = screenSizeData.size.width;
     if (!widget.saveData) {
       selectedMaterials = List<bool>.filled(widget.length, false);
-      numberOfSelectedMaterials = List<int>.filled(widget.length, 2);
+      numberOfSelectedMaterials = List<int>.filled(widget.length, 0);
     }
     return Scaffold(
         backgroundColor: const Color.fromRGBO(255, 210, 60, 1),
@@ -159,12 +146,10 @@ class _secondSelectExerciseTypeScreenState
                           onTap: () {
                             Navigator.pop(context);
                           },
-                          child: Container(
-                            child: const Icon(
-                              Icons.arrow_back_ios_new,
-                              color: Colors.white,
-                              size: 30,
-                            ),
+                          child: const Icon(
+                            Icons.arrow_back_ios_new,
+                            color: Colors.white,
+                            size: 30,
                           ),
                         ),
                         Container(
@@ -194,7 +179,6 @@ class _secondSelectExerciseTypeScreenState
                           for (int i = 0; i < selectedMaterials.length; i++) {
                             if (selectedMaterials[i] == true) x++;
                           }
-
                           debugPrint("$x ____");
                           return thirdSelectExerciseTypeScreenSubjectScreenI(
                             subject: widget.subject,

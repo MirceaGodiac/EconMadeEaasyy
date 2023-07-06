@@ -127,6 +127,8 @@ void submitAnswer(
               'time': questionsData['questionAnswers'][i]['time'],
               'imageURL': questionsData['questionAnswers'][i]['imageURL'],
               'authorEmail': questionsData['questionAnswers'][i]['authorEmail'],
+              'isBest': questionsData['questionAnswers'][i]['isBest'],
+              'authorUID': questionsData['questionAnswers'][i]['authorUID'],
             },
           {
             'text': _answerText,
@@ -134,6 +136,8 @@ void submitAnswer(
             'time': _date,
             'imageURL': _imageURL,
             'authorEmail': _authorEmail,
+            'isBest': false,
+            'authorUID': LoadingScreen.userSettings?.uid,
           }
         ]
       });
@@ -146,10 +150,18 @@ void submitAnswer(
             'time': _date,
             'imageURL': _imageURL,
             'authorEmail': _authorEmail,
+            'isBest': false,
+            'authorUID': LoadingScreen.userSettings?.uid,
           }
         ]
       });
     }
+    await db.collection('questions').doc(questionID.toString()).update({
+      'nrOfQuestions': FieldValue.increment(1),
+    });
+    db.collection('Users').doc(LoadingScreen.userSettings?.uid).update({
+      'answersCount': FieldValue.increment(1),
+    });
   });
 }
 
@@ -505,31 +517,6 @@ class _answerQuestionPageState extends State<answerQuestionPage> {
                             const SizedBox(
                               width: 50,
                             ),
-                            Container(
-                              width: 250,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.blue.shade300,
-                              ),
-                              child: Center(
-                                  child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Recompensa:     x30',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 30,
-                                    child: Image.asset('lib/images/flower.png'),
-                                  )
-                                ],
-                              )),
-                            )
                           ],
                         ),
                       )

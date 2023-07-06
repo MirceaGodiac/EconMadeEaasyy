@@ -11,8 +11,10 @@ Software to assist individuals to study for EN
 // Main menu
 
 import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/view_questions_page.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/account_page.dart';
+import 'package:econ_made_easy_files/api/firebase_api.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/auth_page.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/Resources%20group/resources_page.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/movie_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:line_icons/line_icons.dart';
@@ -22,8 +24,18 @@ import 'Aplication_Screens/home_page.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'api/firebase_api.dart';
 
-void main() async {
+bool first = true;
+final _firebaseMessaging = FirebaseMessaging.instance;
+
+Future<void> initNotifications() async {
+  await _firebaseMessaging.requestPermission();
+  final fCMToken = await _firebaseMessaging.getToken();
+  print('Token: $fCMToken');
+}
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
@@ -43,7 +55,7 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
   List<Widget> pages = [
     const HomePage(),
     const MovieList(),
-    const AccountPage(),
+    const ResourcesList(),
     const ViewQuestionsPage(),
   ];
 
@@ -51,6 +63,9 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
 
   @override
   Widget build(BuildContext context) {
+    var screenSizeData = MediaQuery.of(context);
+    double screenWidth = screenSizeData.size.width;
+    double screenHeight = screenSizeData.size.height;
     return MaterialApp(
         theme: ThemeData(fontFamily: 'Coolvetica'),
         home: Scaffold(
@@ -61,7 +76,7 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    width: 130,
+                    width: screenWidth * 1 / 10,
                     child: ClipRRect(
                       child: Image.asset(
                         'lib/images/logo_transparent.png',
@@ -140,7 +155,7 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
                     child: InkWell(
                       onTap: () {
                         setState(() {
-                          _selectedIndex = 0;
+                          _selectedIndex = 2;
                         });
                       },
                       child: const Column(
@@ -312,8 +327,8 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
                   ),
                 ],
               ),
-              const SizedBox(
-                width: 50,
+              SizedBox(
+                width: screenWidth * (1 / 40),
               ),
               pages[_selectedIndex]
             ],

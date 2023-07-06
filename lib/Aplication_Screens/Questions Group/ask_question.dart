@@ -92,14 +92,15 @@ class questionInputTextField extends StatelessWidget {
 }
 
 void submitQuestion(
-    String _questionTitle,
-    String _questionText,
-    int _reward,
-    String _author,
-    DateTime _date,
-    String _imageURL,
-    String _authorEmail,
-    bool _isActive) async {
+  String _questionTitle,
+  String _questionText,
+  int _reward,
+  String _author,
+  DateTime _date,
+  String _imageURL,
+  String _authorEmail,
+  bool _isActive,
+) async {
   int questionID = 0;
   debugPrint('initialized question submitting protocol');
   final db = FirebaseFirestore.instance;
@@ -126,17 +127,24 @@ void submitQuestion(
     'imageURL': _imageURL,
     'authorEmail': _authorEmail,
     'isActive': _isActive,
+    'locked': false,
+    'nrOfQuestions': 0,
+  });
+  db.collection('Users').doc(LoadingScreen.userSettings?.uid).update({
+    'questionsCount': FieldValue.increment(1),
   });
 }
 
 class askQuestionPage extends StatefulWidget {
-  askQuestionPage({super.key});
+  int credits;
+  askQuestionPage({super.key, required this.credits});
 
   @override
   State<askQuestionPage> createState() => _askQuestionPageState();
 }
 
 class _askQuestionPageState extends State<askQuestionPage> {
+  double _currentSliderValue = 0;
   int selectedAnswer = -1;
   int correctAnswer = 2;
   final textcontroller = TextEditingController();
@@ -144,7 +152,11 @@ class _askQuestionPageState extends State<askQuestionPage> {
   bool selectedAction = true; // true -> type    false -> attach file
   String ImageURL = ''; // url of attacehd image
   bool photoLoaded = true;
+  bool creditsLoaded = false;
   Widget build(BuildContext context) {
+    var screenSizeData = MediaQuery.of(context);
+    double screenWidth = screenSizeData.size.width;
+    double screenHeight = screenSizeData.size.height;
     return Scaffold(
       body: Stack(
         children: [
@@ -518,7 +530,7 @@ class _askQuestionPageState extends State<askQuestionPage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Recompensa:     x30',
+                                    'Recompensa:     x${_currentSliderValue.toInt()}',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
@@ -533,13 +545,28 @@ class _askQuestionPageState extends State<askQuestionPage> {
                             )
                           ],
                         ),
-                      )
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                            right: screenWidth / 2, left: screenWidth / 10),
+                        child: Slider(
+                          value: _currentSliderValue,
+                          max: widget.credits.toDouble(),
+                          divisions: LoadingScreen.userData.credits,
+                          label: _currentSliderValue.round().toString(),
+                          onChanged: (double value) {
+                            setState(() {
+                              _currentSliderValue = value;
+                            });
+                          },
+                        ),
+                      ),
                     ],
                   ),
                 ],
               ),
               SizedBox(
-                height: 100,
+                height: 50,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -564,7 +591,7 @@ class _askQuestionPageState extends State<askQuestionPage> {
                                   'Trimite intrebarea scrisa pana acum?',
                                 ),
                                 content: Text(
-                                    'Va rugam sa va pastrati daddy issuesurile in afara intrebarilor.'),
+                                    'Va rugam sa va pastrati dmesajele respectoase'),
                                 actions: [
                                   InkWell(
                                     onTap: () {
@@ -595,13 +622,24 @@ class _askQuestionPageState extends State<askQuestionPage> {
                                       submitQuestion(
                                         titlecontroller.text,
                                         textcontroller.text,
-                                        30,
+                                        _currentSliderValue.toInt(),
                                         LoadingScreen.userData.firstName,
                                         DateTime.now(),
                                         ImageURL,
                                         LoadingScreen.userData.email,
                                         true,
-                                      );
+                                      ); // submit the question
+                                      Future<void> userRef = FirebaseFirestore
+                                          .instance
+                                          .collection("Users")
+                                          .doc(LoadingScreen.userSettings?.uid)
+                                          .update({
+                                        "credits": FieldValue.increment(
+                                          (-1) * _currentSliderValue.toInt(),
+                                        )
+                                      }); // update the balance
+                                      // lock the thread
+
                                       Navigator.pop(context);
                                       titlecontroller.text = '';
                                       textcontroller.text = '';

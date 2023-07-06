@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:econ_made_easy_files/Aplication_Screens/Exercitii%20Group/SelectExerciseTypeScreen.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/Resources%20group/search_resource_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
 
@@ -13,7 +14,7 @@ class InfoScreen1 extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          height: 300,
+          height: 240,
           child: Image.asset(
             'lib/images/Illustration34_1.png',
             filterQuality: FilterQuality.medium,
@@ -23,7 +24,7 @@ class InfoScreen1 extends StatelessWidget {
           height: 30,
         ),
         const Text(
-          'Sute de exercitii pentru EN',
+          'Resurse scrise si video pentru EN',
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w500,
@@ -31,7 +32,7 @@ class InfoScreen1 extends StatelessWidget {
           ),
         ),
         const Text(
-          'Complete cu rezolvari.',
+          'Create de specialist',
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w500,
@@ -51,7 +52,7 @@ class InfoScreen2 extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          height: 300,
+          height: 240,
           child: Image.asset(
             'lib/images/Illustration37.png',
             filterQuality: FilterQuality.medium,
@@ -61,7 +62,7 @@ class InfoScreen2 extends StatelessWidget {
           height: 30,
         ),
         const Text(
-          'Mii de teste posibile',
+          'Sute de modele de test in format PDF',
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w500,
@@ -89,7 +90,7 @@ class InfoScreen3 extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          height: 300,
+          height: 240,
           child: Image.asset(
             'lib/images/Duplicat_2.png',
             filterQuality: FilterQuality.medium,
@@ -99,7 +100,7 @@ class InfoScreen3 extends StatelessWidget {
           height: 30,
         ),
         const Text(
-          'Alege-ti singur ce doresti sa inveti',
+          'Alege singur ce doresti sa inveti',
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w500,
@@ -119,14 +120,15 @@ class InfoScreen3 extends StatelessWidget {
   }
 }
 
-class MovieList extends StatefulWidget {
-  const MovieList({super.key});
+class ResourcesList extends StatefulWidget {
+  const ResourcesList({super.key});
 
   @override
-  State<MovieList> createState() => _MovieListState();
+  State<ResourcesList> createState() => _ResourcesListState();
 }
 
-class _MovieListState extends State<MovieList> with TickerProviderStateMixin {
+class _ResourcesListState extends State<ResourcesList>
+    with TickerProviderStateMixin {
   static int pageIndex = 0;
   var pages = const [
     InfoScreen1(),
@@ -208,11 +210,21 @@ class _MovieListState extends State<MovieList> with TickerProviderStateMixin {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const SizedBox(
-              height: 20,
+              height: 10,
+            ),
+            Text(
+              'Resurse de invatat pentru EN',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 40,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
             ),
             SizedBox(
-              width: 800,
               height: 402,
+              width: 600,
               child: PageView(
                 controller: pageController,
                 physics: const NeverScrollableScrollPhysics(),
@@ -227,9 +239,7 @@ class _MovieListState extends State<MovieList> with TickerProviderStateMixin {
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
-                    return SelectExerciseTypeScreen(
-                      length: 0,
-                    );
+                    return searchMaterials();
                   },
                 ));
               },
@@ -249,9 +259,6 @@ class _MovieListState extends State<MovieList> with TickerProviderStateMixin {
                   ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 20,
             ),
             Container(
               width: 600,
