@@ -337,7 +337,7 @@ class _ViewQuestionsPageState extends State<ViewQuestionsPage> {
                               builder: (context) {
                                 return const AlertDialog(
                                   title: Text(
-                                      'Pentru a nu strica baza de date, poti da refresh odata la 10 secunde ;)'),
+                                      'Poti da refresh odata la 10 secunde'),
                                 );
                               },
                             );

@@ -99,18 +99,18 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               SizedBox(
-                                height: 265,
+                                height: screenHeight * (5.32 / 10),
                                 child: Container(
                                   margin: const EdgeInsets.only(top: 20),
                                   child: Image.asset(
-                                    "lib/images/divisibleImage.png",
+                                    'lib/images/subiectI.png',
                                     filterQuality: FilterQuality.medium,
                                   ),
                                 ),
                               ),
                               Container(
                                 width: double.infinity,
-                                height: 265,
+                                height: screenHeight * (3 / 10),
                                 decoration: BoxDecoration(
                                   borderRadius: const BorderRadius.all(
                                     Radius.circular(40),
@@ -124,26 +124,17 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                                   top: 60,
                                 ),
                                 child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Container(
-                                      margin: const EdgeInsets.only(top: 30),
                                       child: const Text(
                                         'Sectiunea I: Primul Subiect',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 30,
                                             fontWeight: FontWeight.w400),
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: const EdgeInsets.only(top: 20),
-                                      child: const Text(
-                                        '154 exercitii',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w300),
                                       ),
                                     ),
                                     Container(
@@ -155,9 +146,6 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                                             fontSize: 25,
                                             fontWeight: FontWeight.w300),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      height: 60,
                                     ),
                                     Center(
                                       child: Container(
@@ -229,7 +217,7 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               SizedBox(
-                                height: 265,
+                                height: screenHeight * (5.32 / 10),
                                 child: Container(
                                   margin: const EdgeInsets.only(top: 20),
                                   child: Image.asset(
@@ -239,7 +227,7 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                                 ),
                               ),
                               Container(
-                                height: 265,
+                                height: screenHeight * (3 / 10),
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                     borderRadius: const BorderRadius.all(
@@ -247,12 +235,13 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                                     ),
                                     color: Colors.green.shade400),
                                 margin: const EdgeInsets.only(
-                                    left: 30, right: 30, bottom: 30, top: 60),
+                                    left: 30, right: 30, bottom: 30),
                                 child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Container(
-                                      margin: const EdgeInsets.only(top: 30),
                                       child: const Text(
                                         'Sectiunea II: Al Doilea Subiect',
                                         style: TextStyle(
@@ -262,17 +251,6 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                                       ),
                                     ),
                                     Container(
-                                      margin: const EdgeInsets.only(top: 20),
-                                      child: const Text(
-                                        '120 exercitii',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w300),
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: const EdgeInsets.only(top: 10),
                                       child: const Text(
                                         'Continua cu niste exercitii putin mai complicate',
                                         style: TextStyle(
@@ -280,9 +258,6 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                                             fontSize: 25,
                                             fontWeight: FontWeight.w300),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      height: 60,
                                     ),
                                     Center(
                                       child: Container(
@@ -353,7 +328,7 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               SizedBox(
-                                height: 265,
+                                height: screenHeight * (5.32 / 10),
                                 child: Container(
                                   margin: const EdgeInsets.only(top: 20),
                                   child: Image.asset(
@@ -364,7 +339,7 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                               ),
                               Container(
                                 width: double.infinity,
-                                height: 260,
+                                height: screenHeight * (3 / 10),
                                 decoration: BoxDecoration(
                                     borderRadius: const BorderRadius.all(
                                       Radius.circular(40),
@@ -373,6 +348,8 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                                 margin: const EdgeInsets.only(
                                     left: 30, right: 30, bottom: 30, top: 60),
                                 child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Container(
@@ -386,17 +363,6 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                                       ),
                                     ),
                                     Container(
-                                      margin: const EdgeInsets.only(top: 20),
-                                      child: const Text(
-                                        '181 exercitii',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w300),
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: const EdgeInsets.only(top: 10),
                                       child: const Text(
                                         'Aprofundeaza cu subiectul III',
                                         style: TextStyle(
@@ -404,9 +370,6 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                                             fontSize: 25,
                                             fontWeight: FontWeight.w300),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      height: 60,
                                     ),
                                     Center(
                                       child: Container(

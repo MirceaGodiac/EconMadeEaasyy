@@ -32,7 +32,7 @@ class _thirdSelectExerciseTypeScreenSubjectScreenIState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(255, 210, 60, 1),
+      backgroundColor: Colors.green.shade300,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -203,9 +203,9 @@ class _thirdSelectExerciseTypeScreenSubjectScreenIState
                 margin: const EdgeInsets.only(
                   left: 40,
                 ),
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(60)),
-                  color: Colors.amber,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(Radius.circular(60)),
+                  color: Colors.green.shade400,
                 ),
                 width: 650,
                 height: 600,
@@ -228,7 +228,7 @@ class _thirdSelectExerciseTypeScreenSubjectScreenIState
                                       borderRadius: const BorderRadius.all(
                                         Radius.circular(40),
                                       ),
-                                      color: Colors.amber.shade600,
+                                      color: Colors.green.shade600,
                                       border: Border.all(
                                           color: Colors.black12, width: 5)),
                                   child: Column(

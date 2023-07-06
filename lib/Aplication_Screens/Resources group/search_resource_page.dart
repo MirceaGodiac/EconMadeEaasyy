@@ -54,7 +54,7 @@ class resurseListItem extends StatelessWidget {
                   ))
               : SizedBox(),
           (nrOfDocs != 0)
-              ? Text('${nrOfVideos} filmulete',
+              ? Text('${nrOfDocs} PDF-uri',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
@@ -134,7 +134,7 @@ class _searchMaterialsState extends State<searchMaterials> {
           child: ListView(
             scrollDirection: Axis.vertical,
             children: [
-              for (int i = 0; i < materials.length; i += 2)
+              for (int i = 0; i < materials.length; i += 3)
                 Column(
                   children: [
                     Row(
@@ -154,7 +154,7 @@ class _searchMaterialsState extends State<searchMaterials> {
                             nrOfDocs: materials[i + 1].PDFs.length,
                             nrOfVideos: materials[i + 1].videos.length,
                             title: materials[i + 1].title,
-                            index: i,
+                            index: i + 1,
                           ),
                         if (i < materials.length - 2)
                           resurseListItem(
@@ -162,7 +162,7 @@ class _searchMaterialsState extends State<searchMaterials> {
                             nrOfDocs: materials[i + 2].PDFs.length,
                             nrOfVideos: materials[i + 2].videos.length,
                             title: materials[i + 2].title,
-                            index: i,
+                            index: i + 2,
                           ),
                       ],
                     ),

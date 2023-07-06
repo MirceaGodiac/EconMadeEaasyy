@@ -1,5 +1,7 @@
+import 'package:econ_made_easy_files/Aplication_Screens/Exercitii%20Group/secondSelectExerciseTypeScreen.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/Resources%20group/pdf_viewer_page.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/Resources%20group/resourcesData.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/Resources%20group/search_resource_page.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:http/http.dart' as http;
@@ -41,6 +43,7 @@ class ViewMaterialPage extends StatefulWidget {
 class _ViewMaterialPageState extends State<ViewMaterialPage> {
   int videoIndex = 0;
   bool fullScreen = false;
+  bool showedMaterials = false; // false -> video, true -> pdf
   late YoutubePlayerController controller;
   @override
   void initState() {
@@ -57,7 +60,7 @@ class _ViewMaterialPageState extends State<ViewMaterialPage> {
     double screenWidth = screenSizeData.size.width;
     double screenHeight = screenSizeData.size.height;
     return Scaffold(
-      backgroundColor: Colors.amber.shade300,
+      backgroundColor: Colors.green.shade300,
       body: ListView(
         scrollDirection: Axis.vertical,
         children: [
@@ -71,10 +74,10 @@ class _ViewMaterialPageState extends State<ViewMaterialPage> {
                     Navigator.pop(context);
                   },
                   child: const Text(
-                    '< Inapoi',
+                    '<  Inapoi',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 50,
+                      fontSize: 40,
                     ),
                   ),
                 ),
@@ -82,113 +85,193 @@ class _ViewMaterialPageState extends State<ViewMaterialPage> {
             ),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              (videoIndex != 0)
-                  ? InkWell(
-                      onTap: () {
-                        setState(() {
-                          videoIndex--;
-                          controller.load(YoutubePlayer.convertUrlToId(
-                              materials[widget.index].videos[videoIndex])!);
-                        });
-                        print(videoIndex);
-                      },
-                      child: const Text(
-                        '<   ',
-                        style: TextStyle(
+              Row(
+                children: [
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        if (showedMaterials) showedMaterials = false;
+                      });
+                    },
+                    child: Container(
+                      width: 75,
+                      height: 75,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: Colors.green.shade500,
+                        border: (!showedMaterials)
+                            ? Border.all(
+                                color: Colors.green.shade700,
+                                width: 4,
+                              )
+                            : Border.all(
+                                color: Colors.green.shade500, width: 4),
+                      ),
+                      child: Center(
+                        child: Icon(
+                          Icons.video_collection_sharp,
                           color: Colors.white,
-                          fontSize: 40,
+                          size: 30,
                         ),
                       ),
-                    )
-                  : const Text('   '),
-              Text(
-                materials[widget.index].title,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 40,
-                  fontWeight: FontWeight.w600,
-                ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        if (!showedMaterials) showedMaterials = true;
+                      });
+                    },
+                    child: Container(
+                      width: 75,
+                      height: 75,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: Colors.green.shade500,
+                        border: (showedMaterials)
+                            ? Border.all(
+                                color: Colors.green.shade700,
+                                width: 4,
+                              )
+                            : Border.all(
+                                color: Colors.green.shade500, width: 4),
+                      ),
+                      child: Center(
+                        child: Icon(
+                          Icons.picture_as_pdf,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
-              (videoIndex != materials[widget.index].videos.length - 1)
-                  ? InkWell(
-                      onTap: () {
-                        setState(() {
-                          videoIndex++;
-                          controller.load(YoutubePlayer.convertUrlToId(
-                              materials[widget.index].videos[videoIndex])!);
-                        });
-                        print(videoIndex);
-                      },
-                      child: const Text(
-                        '   >',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 40,
-                        ),
-                      ),
-                    )
-                  : const Text('   '),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  (videoIndex != 0)
+                      ? InkWell(
+                          onTap: () {
+                            setState(() {
+                              videoIndex--;
+                              controller.load(YoutubePlayer.convertUrlToId(
+                                  materials[widget.index].videos[videoIndex])!);
+                            });
+                            print(videoIndex);
+                          },
+                          child: const Text(
+                            '<   ',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 40,
+                            ),
+                          ),
+                        )
+                      : const Text('   '),
+                  Text(
+                    materials[widget.index].title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 40,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  (videoIndex != materials[widget.index].videos.length - 1)
+                      ? InkWell(
+                          onTap: () {
+                            setState(() {
+                              videoIndex++;
+                              controller.load(YoutubePlayer.convertUrlToId(
+                                  materials[widget.index].videos[videoIndex])!);
+                            });
+                            print(videoIndex);
+                          },
+                          child: const Text(
+                            '   >',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 40,
+                            ),
+                          ),
+                        )
+                      : const Text('   '),
+                ],
+              ),
+              SizedBox(
+                width: 170,
+              )
             ],
           ),
           SizedBox(
             height: screenHeight * (1 / 10),
           ),
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 10),
-            width: screenWidth,
-            height: screenWidth * (9 / 16) * (3 / 4),
-            alignment: Alignment.center,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                ClipRRect(
-                  child: YoutubePlayer(controller: controller),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ],
-            ),
-          ),
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              width: screenWidth,
+              height: screenWidth * (9 / 16) * (3 / 4),
+              alignment: Alignment.center,
+              child: (!showedMaterials)
+                  ? ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        ClipRRect(
+                          child: YoutubePlayer(controller: controller),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ],
+                    )
+                  : ListView(
+                      scrollDirection: Axis.vertical,
+                      children: [
+                        for (int i = 0;
+                            i < materials[widget.index].PDFs.length;
+                            i++)
+                          InkWell(
+                            onTap: () async {
+                              final file = await PDFapi.loadNetwork(
+                                  materials[widget.index].PDFs[i]);
+                              openPDF(context, file);
+                            },
+                            child: Container(
+                              margin: EdgeInsets.only(
+                                  left: 50,
+                                  right: (screenWidth / 2),
+                                  top: 10,
+                                  bottom: 10),
+                              height: screenHeight / 10,
+                              decoration: BoxDecoration(
+                                color: Colors.green.shade500,
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: Row(
+                                children: [
+                                  const Icon(
+                                    Icons.attach_file_rounded,
+                                    color: Colors.white,
+                                  ),
+                                  Text(
+                                    'Vezi PDF numarul ${i + 1}',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 30),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                      ],
+                    )),
           const SizedBox(
             height: 50,
           ),
-          Column(
-            children: [
-              for (int i = 0; i < materials[widget.index].PDFs.length; i++)
-                InkWell(
-                  onTap: () async {
-                    final file = await PDFapi.loadNetwork(
-                        materials[widget.index].PDFs[i]);
-                    openPDF(context, file);
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(
-                        left: 50,
-                        right: (screenWidth / 2),
-                        top: 10,
-                        bottom: 10),
-                    height: screenHeight / 10,
-                    decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.attach_file_rounded,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          'Vezi PDF numarul ${i + 1}',
-                          style: TextStyle(color: Colors.white, fontSize: 30),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-            ],
-          )
         ],
       ),
     );

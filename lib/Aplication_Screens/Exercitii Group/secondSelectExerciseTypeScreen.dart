@@ -42,11 +42,11 @@ class _materieListItemState extends State<materieListItem> {
         width: widget.screenWidth * (30 / 100),
         decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(30)),
-            color: Colors.amber,
+            color: Colors.green.shade400,
             border: Border.all(
                 color: (selectedMaterials[widget.elementIndex] == true)
-                    ? Colors.amber.shade800
-                    : Colors.amber,
+                    ? Colors.green.shade700
+                    : Colors.green.shade400,
                 width: 5)),
         child: Container(
           margin: const EdgeInsets.only(bottom: 40),
@@ -129,7 +129,7 @@ class _secondSelectExerciseTypeScreenState
       numberOfSelectedMaterials = List<int>.filled(widget.length, 0);
     }
     return Scaffold(
-        backgroundColor: const Color.fromRGBO(255, 210, 60, 1),
+        backgroundColor: Colors.green.shade300,
         body: ListView(
           scrollDirection: Axis.vertical,
           children: [
