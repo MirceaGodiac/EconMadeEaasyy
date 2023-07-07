@@ -133,3 +133,30 @@ https://www.youtube.com/watch?v=Dh-cTQJgM-Q&list=PLlvRDpXh1Se4Ceivpg8KrGvzb8BL9B
 https://www.youtube.com/watch?v=GQyWIur03aw&pp=ygUdaGV5Zmx1dHRlci5jb20geW91dHViZSBwbGF5ZXI%3D
 
 https://www.youtube.com/watch?v=uizZbJWziEg&t=121s&pp=ygUZaGV5Zmx1dHRlci5jb20gcGRmIHZpZXdlcg%3D%3D
+
+
+Packageuri folosite: 
+
+cupertino_icons: ^1.0.2
+webview_flutter: ^4.0.2
+path_provider: ^2.0.12
+sqflite: ^2.2.4+1
+shared_preferences: ^2.0.17
+google_nav_bar: ^5.0.6
+line_icons: ^2.0.1
+firebase: ^9.0.3
+firebase_core: ^2.14.0
+firebase_auth: ^4.2.9
+cloud_firestore: ^4.4.3
+percent_indicator: ^4.2.3
+flutter_tts: ^3.6.3
+confetti: ^0.7.0
+flutter_swipe_detector: ^2.0.0
+image_picker: ^1.0.0
+firebase_storage: ^11.2.4
+youtube_player_flutter: ^8.1.2
+flutter_pdfview: ^1.3.1
+file_picker: ^5.3.2
+intl: ^0.18.1
+firebase_messaging: ^14.6.4
+countup: ^0.1.4
