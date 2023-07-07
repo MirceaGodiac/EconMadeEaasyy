@@ -120,59 +120,70 @@ class _thirdSelectExerciseTypeScreenSubjectScreenIState
                         questions[j] = x;
                         x++;
                       }
-
                       exercises.add({
                         i: questions!
                             .take(numberOfSelectedMaterials[i])
                             .toList(),
                       });
-                      print('-> $exercises');
+                      for (int j = 0; j < exercises.length; j++) {
+                        exercises[j].values.first.shuffle();
+                      }
                     }
                   }
-
-                  Navigator.pushReplacement(context, MaterialPageRoute(
-                    builder: (context) {
-                      if (widget.subject == 'Subiect I') {
-                        return testTypePage(
-                          levelColor: const Color.fromRGBO(255, 210, 60, 1),
-                          correctAnswer: widget
-                              .materie.docs[0]['exercitii'][0].values
-                              .toList()[0],
-                          imageURL: widget.materie.docs[0]['exercitii'][0].keys
-                              .toList()[0],
-                          materie: widget.materie,
-                          questions: exercises,
-                          nrOfCredits: nrOfCredits,
-                          reward: 5,
-                        );
-                      } else if (widget.subject == 'Subiect II') {
-                        return testTypePage(
-                          levelColor: const Color.fromRGBO(255, 210, 60, 1),
-                          correctAnswer: widget
-                              .materie.docs[0]['exercitii'][0].values
-                              .toList()[0],
-                          imageURL: widget.materie.docs[0]['exercitii'][0].keys
-                              .toList()[0],
-                          materie: widget.materie,
-                          questions: exercises,
-                          nrOfCredits: nrOfCredits,
-                          reward: 10,
-                        );
-                      } else {
-                        return testType3Page(
-                          levelColor: const Color.fromRGBO(255, 210, 60, 1),
-                          correctAnswer: widget
-                              .materie.docs[0]['exercitii'][0].values
-                              .toList()[0],
-                          imageURL: widget.materie.docs[0]['exercitii'][0].keys
-                              .toList()[0],
-                          materie: widget.materie,
-                          questions: exercises,
-                          nrOfCredits: nrOfCredits,
-                        );
-                      }
-                    },
-                  ));
+                  bool isEmpty = true;
+                  for (int i = 0; i < numberOfSelectedMaterials.length; i++) {
+                    if (numberOfSelectedMaterials[i] != 0) isEmpty = false;
+                  }
+                  if (!isEmpty) {
+                    Navigator.pushReplacement(context, MaterialPageRoute(
+                      builder: (context) {
+                        if (widget.subject == 'Subiect I') {
+                          return testTypePage(
+                            levelColor: const Color.fromRGBO(255, 210, 60, 1),
+                            correctAnswer: widget
+                                .materie.docs[0]['exercitii'][0].values
+                                .toList()[0],
+                            imageURL: widget
+                                .materie.docs[0]['exercitii'][0].keys
+                                .toList()[0],
+                            materie: widget.materie,
+                            questions: exercises,
+                            nrOfCredits: nrOfCredits,
+                            reward: 5,
+                            subject: widget.subject,
+                          );
+                        } else if (widget.subject == 'Subiect II') {
+                          return testTypePage(
+                            levelColor: const Color.fromRGBO(255, 210, 60, 1),
+                            correctAnswer: widget
+                                .materie.docs[0]['exercitii'][0].values
+                                .toList()[0],
+                            imageURL: widget
+                                .materie.docs[0]['exercitii'][0].keys
+                                .toList()[0],
+                            materie: widget.materie,
+                            questions: exercises,
+                            nrOfCredits: nrOfCredits,
+                            reward: 10,
+                            subject: widget.subject,
+                          );
+                        } else {
+                          return testType3Page(
+                            levelColor: const Color.fromRGBO(255, 210, 60, 1),
+                            correctAnswer: widget
+                                .materie.docs[0]['exercitii'][0].values
+                                .toList()[0],
+                            imageURL: widget
+                                .materie.docs[0]['exercitii'][0].keys
+                                .toList()[0],
+                            materie: widget.materie,
+                            questions: exercises,
+                            nrOfCredits: nrOfCredits,
+                          );
+                        }
+                      },
+                    ));
+                  }
                 },
                 child: Container(
                   margin: const EdgeInsets.only(top: 40, right: 40),

@@ -131,6 +131,7 @@ class _testType3PageState extends State<testType3Page> {
                       onPageChanged: (value) {
                         setState(() {
                           selectedAnswer = -1;
+                          _currentSliderValue = 0;
                         });
                       },
                       itemCount: numberOfExercises,
@@ -334,10 +335,17 @@ class _testType3PageState extends State<testType3Page> {
                                               .materie
                                               .docs[docIDs[returnChapterNr(
                                                       questionsHash, index)]]
-                                                  ['exercitii'][
-                                                  returnChapterElementNr(
-                                                      questionsHash, index)]
-                                              .keys
+                                                  ['exercitii'][widget
+                                                            .questions[
+                                                                returnChapterNr(
+                                                                    questionsHash,
+                                                                    index)]
+                                                            .values
+                                                            .first
+                                                            .toList()[
+                                                        returnChapterElementNr(
+                                                            questionsHash, index)]]
+                                                .keys
                                               .first
                                               .toString()),
                                         )
@@ -348,10 +356,17 @@ class _testType3PageState extends State<testType3Page> {
                                                   .materie
                                                   .docs[docIDs[returnChapterNr(
                                                           questionsHash,
-                                                          index)]]['exercitii'][
-                                                      returnChapterElementNr(
-                                                          questionsHash, index)]
-                                                  .values
+                                                          index)]]['exercitii'][widget
+                                                            .questions[
+                                                                returnChapterNr(
+                                                                    questionsHash,
+                                                                    index)]
+                                                            .values
+                                                            .first
+                                                            .toList()[
+                                                        returnChapterElementNr(
+                                                            questionsHash, index)]]
+                                                .values
                                                   .first
                                                   .toString()),
                                             )

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:countup/countup.dart';
 
 class testTypePage extends StatefulWidget {
+  String subject;
   String imageURL;
   String correctAnswer;
   Color levelColor;
@@ -24,6 +25,7 @@ class testTypePage extends StatefulWidget {
     required this.questions,
     required this.nrOfCredits,
     required this.reward,
+    required this.subject,
   });
 
   @override
@@ -299,20 +301,22 @@ class _testTypePageState extends State<testTypePage> {
                                                     'a',
                                                     'b',
                                                     'c',
-                                                    'd'
+                                                    'd',
                                                   ];
                                                   if (answers[selectedAnswer]
                                                           .toString() ==
                                                       widget
                                                           .materie
-                                                          .docs[
-                                                              docIDs[returnChapterNr(
+                                                          .docs[docIDs[
+                                                              returnChapterNr(
                                                                   questionsHash,
-                                                                  index)]]
-                                                              ['exercitii'][
-                                                              returnChapterElementNr(
+                                                                  index)]]['exercitii'][widget
+                                                              .questions[returnChapterNr(
                                                                   questionsHash,
                                                                   index)]
+                                                              .values
+                                                              .first
+                                                              .toList()[returnChapterElementNr(questionsHash, index)]]
                                                           .values
                                                           .first
                                                           .toString()) {
@@ -377,11 +381,17 @@ class _testTypePageState extends State<testTypePage> {
                                             width: 900,
                                             child: Image.network(widget
                                                 .materie
-                                                .docs[docIDs[returnChapterNr(
-                                                        questionsHash, index)]]
-                                                    ['exercitii'][
-                                                    returnChapterElementNr(
-                                                        questionsHash, index)]
+                                                .docs[docIDs[returnChapterNr(questionsHash, index)]]
+                                                    ['exercitii'][widget
+                                                            .questions[
+                                                                returnChapterNr(
+                                                                    questionsHash,
+                                                                    index)]
+                                                            .values
+                                                            .first
+                                                            .toList()[
+                                                        returnChapterElementNr(
+                                                            questionsHash, index)]]
                                                 .keys
                                                 .first
                                                 .toString()),
@@ -569,6 +579,21 @@ class _testTypePageState extends State<testTypePage> {
                                   )
                                 : (isCorrect)
                                     ? Column(children: [
+                                        (widget.subject == 'Subiect I')
+                                            ? SizedBox(
+                                                height: screenHeight * (1 / 3),
+                                                child: Image.asset(
+                                                  'lib/images/rasunscorect1.png',
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              )
+                                            : SizedBox(
+                                                height: screenHeight * (1 / 3),
+                                                child: Image.asset(
+                                                  'lib/images/raspunscorect2.png',
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
                                         Text(
                                           'Raspuns Corect, +${widget.reward}',
                                           style: TextStyle(
@@ -595,12 +620,16 @@ class _testTypePageState extends State<testTypePage> {
                                             color: Colors.white,
                                           ),
                                         ),
-                                        SizedBox(
-                                          height: screenHeight * (1 / 4),
-                                        )
                                       ])
                                     : Column(
                                         children: [
+                                          SizedBox(
+                                            height: screenHeight * (1 / 3),
+                                            child: Image.asset(
+                                              'lib/images/raspunsgresit.png',
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
                                           Text(
                                             'Raspuns gresit',
                                             style: TextStyle(
@@ -609,7 +638,7 @@ class _testTypePageState extends State<testTypePage> {
                                             ),
                                           ),
                                           Text(
-                                            'varianta corecta era: ${widget.materie.docs[docIDs[returnChapterNr(questionsHash, index)]]['exercitii'][returnChapterElementNr(questionsHash, index)].values.first.toString()}',
+                                            'varianta corecta era: ${widget.materie.docs[docIDs[returnChapterNr(questionsHash, index)]]['exercitii'][widget.questions[returnChapterNr(questionsHash, index)].values.first.toList()[returnChapterElementNr(questionsHash, index)]].values.first.toString()}',
                                             style: TextStyle(
                                               fontSize: 80,
                                               color: Colors.white,

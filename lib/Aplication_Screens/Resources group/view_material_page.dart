@@ -44,18 +44,25 @@ class _ViewMaterialPageState extends State<ViewMaterialPage> {
   int videoIndex = 0;
   bool fullScreen = false;
   bool showedMaterials = false; // false -> video, true -> pdf
+
   late YoutubePlayerController controller;
+
   @override
   void initState() {
     super.initState();
-    controller = YoutubePlayerController(
-      initialVideoId:
-          YoutubePlayer.convertUrlToId(materials[widget.index].videos[0])!,
-    );
+    if (materials[widget.index].videos.length != 0) {
+      controller = YoutubePlayerController(
+        initialVideoId:
+            YoutubePlayer.convertUrlToId(materials[widget.index].videos[0])!,
+      );
+    } else {
+      controller = YoutubePlayerController(initialVideoId: '');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    String _title = controller.metadata.title;
     var screenSizeData = MediaQuery.of(context);
     double screenWidth = screenSizeData.size.width;
     double screenHeight = screenSizeData.size.height;
@@ -87,125 +94,139 @@ class _ViewMaterialPageState extends State<ViewMaterialPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        if (showedMaterials) showedMaterials = false;
-                      });
-                    },
-                    child: Container(
-                      width: 75,
-                      height: 75,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        color: Colors.green.shade500,
-                        border: (!showedMaterials)
-                            ? Border.all(
-                                color: Colors.green.shade700,
-                                width: 4,
-                              )
-                            : Border.all(
-                                color: Colors.green.shade500, width: 4),
-                      ),
-                      child: Center(
-                        child: Icon(
-                          Icons.video_collection_sharp,
-                          color: Colors.white,
-                          size: 30,
+              (materials[widget.index].videos.length != 0)
+                  ? Row(
+                      children: [
+                        const SizedBox(
+                          width: 10,
                         ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        if (!showedMaterials) showedMaterials = true;
-                      });
-                    },
-                    child: Container(
-                      width: 75,
-                      height: 75,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        color: Colors.green.shade500,
-                        border: (showedMaterials)
-                            ? Border.all(
-                                color: Colors.green.shade700,
-                                width: 4,
-                              )
-                            : Border.all(
-                                color: Colors.green.shade500, width: 4),
-                      ),
-                      child: Center(
-                        child: Icon(
-                          Icons.picture_as_pdf,
-                          color: Colors.white,
-                          size: 30,
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  (videoIndex != 0)
-                      ? InkWell(
+                        InkWell(
                           onTap: () {
                             setState(() {
-                              videoIndex--;
-                              controller.load(YoutubePlayer.convertUrlToId(
-                                  materials[widget.index].videos[videoIndex])!);
+                              if (showedMaterials) showedMaterials = false;
                             });
-                            print(videoIndex);
                           },
-                          child: const Text(
-                            '<   ',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 40,
+                          child: Container(
+                            width: 75,
+                            height: 75,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.green.shade500,
+                              border: (!showedMaterials)
+                                  ? Border.all(
+                                      color: Colors.green.shade700,
+                                      width: 4,
+                                    )
+                                  : Border.all(
+                                      color: Colors.green.shade500, width: 4),
+                            ),
+                            child: Center(
+                              child: Icon(
+                                Icons.video_collection_sharp,
+                                color: Colors.white,
+                                size: 30,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              if (!showedMaterials) showedMaterials = true;
+                            });
+                          },
+                          child: Container(
+                            width: 75,
+                            height: 75,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.green.shade500,
+                              border: (showedMaterials)
+                                  ? Border.all(
+                                      color: Colors.green.shade700,
+                                      width: 4,
+                                    )
+                                  : Border.all(
+                                      color: Colors.green.shade500, width: 4),
+                            ),
+                            child: Center(
+                              child: Icon(
+                                Icons.picture_as_pdf,
+                                color: Colors.white,
+                                size: 30,
+                              ),
                             ),
                           ),
                         )
-                      : const Text('   '),
-                  Text(
-                    materials[widget.index].title,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 40,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  (videoIndex != materials[widget.index].videos.length - 1)
-                      ? InkWell(
-                          onTap: () {
-                            setState(() {
-                              videoIndex++;
-                              controller.load(YoutubePlayer.convertUrlToId(
-                                  materials[widget.index].videos[videoIndex])!);
-                            });
-                            print(videoIndex);
-                          },
-                          child: const Text(
-                            '   >',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 40,
-                            ),
+                      ],
+                    )
+                  : SizedBox(),
+              (materials[widget.index].videos.length != 0)
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        (videoIndex != 0)
+                            ? InkWell(
+                                onTap: () async {
+                                  setState(() {
+                                    videoIndex--;
+                                  });
+                                  controller.load(YoutubePlayer.convertUrlToId(
+                                      materials[widget.index]
+                                          .videos[videoIndex])!);
+                                  await Future.delayed(Duration(seconds: 1));
+                                  _title = controller.metadata.title;
+                                  setState(() {});
+                                  print(videoIndex);
+                                },
+                                child: const Text(
+                                  '<   ',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 40,
+                                  ),
+                                ),
+                              )
+                            : const Text('   '),
+                        Text(
+                          _title,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontWeight: FontWeight.w600,
                           ),
-                        )
-                      : const Text('   '),
-                ],
-              ),
+                        ),
+                        (videoIndex !=
+                                materials[widget.index].videos.length - 1)
+                            ? InkWell(
+                                onTap: () async {
+                                  setState(() {
+                                    videoIndex++;
+                                  });
+                                  controller.load(YoutubePlayer.convertUrlToId(
+                                      materials[widget.index]
+                                          .videos[videoIndex])!);
+                                  await Future.delayed(Duration(seconds: 1));
+                                  setState(() {
+                                    _title = controller.metadata.title;
+                                  });
+                                  print(videoIndex);
+                                },
+                                child: const Text(
+                                  '   >',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 40,
+                                  ),
+                                ),
+                              )
+                            : const Text('   '),
+                      ],
+                    )
+                  : SizedBox(),
               SizedBox(
                 width: 170,
               )
@@ -219,7 +240,8 @@ class _ViewMaterialPageState extends State<ViewMaterialPage> {
               width: screenWidth,
               height: screenWidth * (9 / 16) * (3 / 4),
               alignment: Alignment.center,
-              child: (!showedMaterials)
+              child: (!showedMaterials &&
+                      materials[widget.index].videos.length != 0)
                   ? ListView(
                       scrollDirection: Axis.horizontal,
                       children: [

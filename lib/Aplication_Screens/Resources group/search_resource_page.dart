@@ -31,7 +31,7 @@ class resurseListItem extends StatelessWidget {
         height: screenWidth * (2 / 7) * (1 / 2),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: Colors.amber.shade400),
+            color: Colors.green.shade400),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -88,7 +88,7 @@ class _searchMaterialsState extends State<searchMaterials> {
     double screenWidth = screenSizeData.size.width;
     double screenHeight = screenSizeData.size.height;
     return Scaffold(
-      backgroundColor: Colors.amber.shade300,
+      backgroundColor: Colors.green.shade300,
       body: Column(children: [
         SizedBox(
           height: screenHeight / 6,

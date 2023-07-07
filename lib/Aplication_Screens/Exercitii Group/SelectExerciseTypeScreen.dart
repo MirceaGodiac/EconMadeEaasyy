@@ -29,7 +29,7 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
         child: Stack(
           children: [
             AnimatedPhysicalModel(
-                duration: const Duration(milliseconds: 600),
+                duration: const Duration(milliseconds: 400),
                 color: ((selectedCategoryIndex == 0) ||
                         (selectedCategoryIndex == -1) ||
                         (selectedCategoryIndex == 0))
@@ -221,7 +221,7 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                                 child: Container(
                                   margin: const EdgeInsets.only(top: 20),
                                   child: Image.asset(
-                                    "lib/images/finishedAppEasterEgg.jpg",
+                                    "lib/images/subiectII.png",
                                     filterQuality: FilterQuality.medium,
                                   ),
                                 ),
@@ -332,7 +332,7 @@ class _SelectExerciseTypeScreenState extends State<SelectExerciseTypeScreen> {
                                 child: Container(
                                   margin: const EdgeInsets.only(top: 20),
                                   child: Image.asset(
-                                    "lib/images/finishedAppEasterEgg.jpg",
+                                    "lib/images/subiectIII.png",
                                     filterQuality: FilterQuality.medium,
                                   ),
                                 ),

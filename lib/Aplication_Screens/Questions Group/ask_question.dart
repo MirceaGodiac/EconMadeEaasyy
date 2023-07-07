@@ -591,7 +591,7 @@ class _askQuestionPageState extends State<askQuestionPage> {
                                   'Trimite intrebarea scrisa pana acum?',
                                 ),
                                 content: Text(
-                                    'Va rugam sa va pastrati dmesajele respectoase'),
+                                    'Va rugam sa va pastrati mesajele respectoase'),
                                 actions: [
                                   InkWell(
                                     onTap: () {

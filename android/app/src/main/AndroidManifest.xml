@@ -7,10 +7,10 @@
 <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
 <uses-permission android:name="android.permission.MANAGE_NOTIFICATIONS"/>
    <application
-        android:label="Econ Made Easy"
+        android:label="EN Made Easy"
         android:name="${applicationName}"
         android:usesCleartextTraffic="true"
-        android:icon="@mipmap/launcher_icon">
+        android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
             android:exported="true"

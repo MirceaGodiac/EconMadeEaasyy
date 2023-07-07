@@ -11,7 +11,7 @@ Software to assist individuals to study for EN
 // Main menu
 
 import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/view_questions_page.dart';
-import 'package:econ_made_easy_files/api/firebase_api.dart';
+import 'package:econ_made_easy_files/Aplication_Screens/manuals%20group/manuals_list.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/auth_page.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/Resources%20group/resources_page.dart';
@@ -24,7 +24,6 @@ import 'Aplication_Screens/home_page.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'api/firebase_api.dart';
 
 bool first = true;
 final _firebaseMessaging = FirebaseMessaging.instance;
@@ -57,6 +56,7 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
     const MovieList(),
     const ResourcesList(),
     const ViewQuestionsPage(),
+    const manualsList(),
   ];
 
   final user = FirebaseAuth.instance.currentUser!;
@@ -65,7 +65,6 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
   Widget build(BuildContext context) {
     var screenSizeData = MediaQuery.of(context);
     double screenWidth = screenSizeData.size.width;
-    double screenHeight = screenSizeData.size.height;
     return MaterialApp(
         theme: ThemeData(fontFamily: 'Coolvetica'),
         home: Scaffold(
@@ -76,6 +75,7 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
+                    margin: const EdgeInsets.only(left: 50, top: 20),
                     width: screenWidth * 1 / 10,
                     child: ClipRRect(
                       child: Image.asset(
@@ -126,7 +126,7 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
                       child: const Column(
                         children: [
                           Icon(
-                            Icons.menu_book_rounded,
+                            Icons.edit,
                             size: 20,
                             color: Colors.white,
                           ),
@@ -198,7 +198,7 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
                           Text(
                             'Ajutor Personal',
                             style: TextStyle(
-                                fontSize: 10,
+                                fontSize: 15,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w100),
                           ),
@@ -215,7 +215,7 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
                     child: InkWell(
                       onTap: () {
                         setState(() {
-                          _selectedIndex = 0;
+                          _selectedIndex = 4;
                         });
                       },
                       child: const Column(
@@ -225,7 +225,7 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
                             height: 2,
                           ),
                           Text(
-                            'Simulare',
+                            'Modele de EN',
                             style: TextStyle(
                                 fontSize: 18,
                                 color: Colors.white,
@@ -243,79 +243,24 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
                   Container(
                     margin: const EdgeInsets.only(left: 40),
                     child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          _selectedIndex = 0;
+                      onTap: () async {
+                        FirebaseAuth.instance.signOut().then((res) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const AuthPage()),
+                          );
                         });
+                        AuthPage.loggedIn = false;
                       },
                       child: const Column(
                         children: [
-                          Icon(Icons.schedule_rounded,
-                              size: 20, color: Colors.white),
+                          Icon(Icons.logout, size: 25, color: Colors.white),
                           SizedBox(
                             height: 2,
                           ),
                           Text(
-                            'Orar',
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w100),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(left: 40),
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          _selectedIndex = 0;
-                        });
-                      },
-                      child: const Column(
-                        children: [
-                          Icon(Icons.store, size: 20, color: Colors.white),
-                          SizedBox(
-                            height: 2,
-                          ),
-                          Text(
-                            'Magazin',
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w100),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(
-                    height: 30,
-                  ),
-
-                  Container(
-                    margin: const EdgeInsets.only(left: 40),
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          _selectedIndex = 0;
-                        });
-                      },
-                      child: const Column(
-                        children: [
-                          Icon(Icons.person, size: 20, color: Colors.white),
-                          SizedBox(
-                            height: 2,
-                          ),
-                          Text(
-                            'Cont',
+                            'Iesire din cont',
                             style: TextStyle(
                                 fontSize: 18,
                                 color: Colors.white,

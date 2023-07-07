@@ -34,6 +34,13 @@ class _redeem_creditsState extends State<redeem_credits> {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    SizedBox(
+                      height: screenHeight * (1 / 2),
+                      child: Image.asset(
+                        'lib/images/finishQuiz.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                     Text(
                       'Feliciari! Ai terminat quizul!',
                       style: TextStyle(

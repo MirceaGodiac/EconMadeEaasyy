@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Container(
               height: double.infinity,
-              width: screenWidth * (9 / 10 - 1 / 40),
+              width: screenWidth * (9 / 10 - 1 / 40) - 50,
               margin: const EdgeInsets.only(top: 20, bottom: 20),
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
               ),
               child: SizedBox(
                 height: double.infinity,
-                width: screenWidth * (9 / 10 - 1 / 40),
+                width: screenWidth * (9 / 10 - 1 / 40) - 50,
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(
                     Radius.circular(60),
@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Container(
               height: double.infinity,
-              width: screenWidth * (9 / 10 - 1 / 40),
+              width: screenWidth * (9 / 10 - 1 / 40) - 50,
               margin: const EdgeInsets.only(top: 20, bottom: 20),
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -219,13 +219,15 @@ class _HomePageState extends State<HomePage> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          const Icon(
-                                            Icons.currency_exchange_outlined,
-                                            color: Colors.white,
-                                            size: 30,
+                                          SizedBox(
+                                            height: 50,
+                                            child: Image.asset(
+                                              'lib/images/flower.png',
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                           Text(
-                                            '  ${_snapshotData['credits'].toString()} credits',
+                                            '  ${_snapshotData['credits'].toString()} flori',
                                             style: const TextStyle(
                                               color: Colors.white,
                                               fontSize: 30,
