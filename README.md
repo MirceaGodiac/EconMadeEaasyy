@@ -1,4 +1,6 @@
-Link Instalare: https://firebasestorage.googleapis.com/v0/b/econmadeeasy-b68df.appspot.com/o/build%2Fapp-release.apk?alt=media&token=c64ceeeb-8754-464c-8218-205312284c83
+Link Instalare: https://firebasestorage.googleapis.com/v0/b/made-easy-a99a4.appspot.com/o/builds%2Fapp-release.apk?alt=media&token=cc88b457-64b0-4fcc-977e-1ee412d53ab5
+
+
 Resurse EN made easy
 
 https://www.didactic.ro/materiale-didactice/fisa-de-lucru-descompuneri-in-factori
