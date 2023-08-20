@@ -22,7 +22,6 @@ class _manualsListState extends State<manualsList>
   @override
   void dispose() {
     pageController.dispose();
-    controller.dispose();
 
     super.dispose();
   }

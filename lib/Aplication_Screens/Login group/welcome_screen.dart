@@ -79,9 +79,9 @@ class _WelcomePageState extends State<WelcomePage> {
                                 ),
                               ),
                               Text(
-                                "A B L E ?",
+                                " M A D E  E A S Y ?",
                                 style: TextStyle(
-                                  fontSize: 60,
+                                  fontSize: 50,
                                   fontWeight: FontWeight.w300,
                                 ),
                               ),

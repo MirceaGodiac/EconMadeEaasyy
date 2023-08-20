@@ -1,5 +1,6 @@
 import 'package:econ_made_easy_files/Aplication_Screens/Resources%20group/resourcesData.dart';
 import 'package:econ_made_easy_files/Aplication_Screens/Resources%20group/view_material_page.dart';
+import 'package:econ_made_easy_files/Other%20stuff/textfield.dart';
 import 'package:flutter/material.dart';
 
 class resurseListItem extends StatelessWidget {
@@ -82,6 +83,8 @@ class searchMaterials extends StatefulWidget {
 
 class _searchMaterialsState extends State<searchMaterials> {
   final textcontroller = TextEditingController();
+  String searchKey = "";
+  var _materials = materials;
   @override
   Widget build(BuildContext context) {
     var screenSizeData = MediaQuery.of(context);
@@ -123,9 +126,44 @@ class _searchMaterialsState extends State<searchMaterials> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              margin: const EdgeInsets.only(left: 10),
-              width: screenWidth * (2 / 3),
-            ),
+                margin: const EdgeInsets.only(left: 10),
+                width: screenWidth * (2 / 3),
+                height: screenHeight / 15,
+                child: InputTextField(
+                  controller: textcontroller,
+                  hintText: 'Search...',
+                  obscureText: false,
+                )),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  _materials.clear();
+                  searchKey = textcontroller.text;
+                  int x = 0;
+                  for (int i = 0; i < materials.length; i++) {
+                    if (materials[i]
+                        .title
+                        .toLowerCase()
+                        .contains(searchKey.toLowerCase())) {
+                      _materials[x] = materials[i];
+                      x++;
+                    }
+                  }
+                });
+              },
+              child: Container(
+                width: screenHeight / 15,
+                height: screenHeight / 15,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(screenHeight / 15),
+                  color: Colors.green.shade400,
+                ),
+                child: Icon(
+                  Icons.search,
+                  color: Colors.white,
+                ),
+              ),
+            )
           ],
         ),
         SizedBox(
@@ -134,34 +172,34 @@ class _searchMaterialsState extends State<searchMaterials> {
           child: ListView(
             scrollDirection: Axis.vertical,
             children: [
-              for (int i = 0; i < materials.length; i += 3)
+              for (int i = 0; i < _materials.length; i += 3)
                 Column(
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        if (i < materials.length)
+                        if (i < _materials.length)
                           resurseListItem(
                             screenWidth: screenWidth,
-                            nrOfDocs: materials[i].PDFs.length,
-                            nrOfVideos: materials[i].videos.length,
-                            title: materials[i].title,
+                            nrOfDocs: _materials[i].PDFs.length,
+                            nrOfVideos: _materials[i].videos.length,
+                            title: _materials[i].title,
                             index: i,
                           ),
-                        if (i < materials.length - 1)
+                        if (i < _materials.length - 1)
                           resurseListItem(
                             screenWidth: screenWidth,
-                            nrOfDocs: materials[i + 1].PDFs.length,
-                            nrOfVideos: materials[i + 1].videos.length,
-                            title: materials[i + 1].title,
+                            nrOfDocs: _materials[i + 1].PDFs.length,
+                            nrOfVideos: _materials[i + 1].videos.length,
+                            title: _materials[i + 1].title,
                             index: i + 1,
                           ),
-                        if (i < materials.length - 2)
+                        if (i < _materials.length - 2)
                           resurseListItem(
                             screenWidth: screenWidth,
-                            nrOfDocs: materials[i + 2].PDFs.length,
-                            nrOfVideos: materials[i + 2].videos.length,
-                            title: materials[i + 2].title,
+                            nrOfDocs: _materials[i + 2].PDFs.length,
+                            nrOfVideos: _materials[i + 2].videos.length,
+                            title: _materials[i + 2].title,
                             index: i + 2,
                           ),
                       ],

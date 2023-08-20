@@ -225,7 +225,7 @@ class _EconMadeEasyState extends State<EconMadeEasy> {
                             height: 2,
                           ),
                           Text(
-                            'Modele de EN',
+                            'Manuale',
                             style: TextStyle(
                                 fontSize: 18,
                                 color: Colors.white,

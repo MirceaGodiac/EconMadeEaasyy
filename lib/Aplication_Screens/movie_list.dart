@@ -20,10 +20,10 @@ class InfoScreen1 extends StatelessWidget {
           ),
         ),
         const SizedBox(
-          height: 30,
+          height: 22,
         ),
         const Text(
-          'Sute de exercitii pentru EN',
+          'Sute de exerciții pentru EN',
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w500,
@@ -31,7 +31,7 @@ class InfoScreen1 extends StatelessWidget {
           ),
         ),
         const Text(
-          'Complete cu rezolvari.',
+          'Complete cu rezolvări.',
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w500,
@@ -53,15 +53,15 @@ class InfoScreen2 extends StatelessWidget {
         SizedBox(
           height: 300,
           child: Image.asset(
-            'lib/images/Illustration37.png',
+            'lib/images/eatramen.png',
             filterQuality: FilterQuality.medium,
           ),
         ),
         const SizedBox(
-          height: 30,
+          height: 22,
         ),
         const Text(
-          'Mii de teste posibile',
+          'Mii de teste si modele posibile',
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w500,
@@ -96,10 +96,10 @@ class InfoScreen3 extends StatelessWidget {
           ),
         ),
         const SizedBox(
-          height: 30,
+          height: 22,
         ),
         const Text(
-          'Alege-ti singur ce doresti sa inveti',
+          'Alege-ți singur ce dorești să înveți',
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w500,
@@ -107,7 +107,7 @@ class InfoScreen3 extends StatelessWidget {
           ),
         ),
         const Text(
-          'Pentru a invata mai eficient',
+          'Pentru a învăța mai eficient',
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w500,
@@ -241,7 +241,7 @@ class _MovieListState extends State<MovieList> with TickerProviderStateMixin {
                     color: Colors.blue),
                 child: const Center(
                   child: Text(
-                    'Hai sa incepem!',
+                    'Hai să începem!',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 25,

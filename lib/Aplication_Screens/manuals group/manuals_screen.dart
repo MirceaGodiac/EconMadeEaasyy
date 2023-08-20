@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:econ_made_easy_files/Aplication_Screens/manuals%20group/materials_data.dart';
 import 'package:flutter/material.dart';
 
+import '../../main.dart';
 import '../Resources group/pdf_viewer_page.dart';
 import '../Resources group/view_material_page.dart';
 
@@ -33,20 +34,19 @@ class _manualScreenElementState extends State<manualScreenElement> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        if (!loadedManual && !oneButtonLoading) {
-          oneButtonLoading = true;
-          setState(() {
-            loadedManual = true;
-          });
-
-          final file = await PDFapi.loadNetwork(
-              manuals[widget.classIndex][widget.manualIndex].URL);
-          openPDF(context, file);
-
-          setState(() {
-            loadedManual = false;
-          });
-        }
+        oneButtonLoading = true;
+        print('loading...');
+        setState(() {
+          loadedManual = true;
+        });
+        print(manuals[widget.classIndex][widget.manualIndex].URL);
+        final file = await PDFapi.loadNetwork(
+            manuals[widget.classIndex][widget.manualIndex].URL);
+        openPDF(context, file);
+        print('loading...');
+        setState(() {
+          loadedManual = false;
+        });
         oneButtonLoading = false;
       },
       child: Container(
@@ -109,7 +109,11 @@ class _ManualsScreenState extends State<ManualsScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.pushReplacement(context, MaterialPageRoute(
+                        builder: (context) {
+                          return EconMadeEasy();
+                        },
+                      ));
                     },
                     child: const SizedBox(
                       child: Text(
@@ -173,14 +177,14 @@ class _ManualsScreenState extends State<ManualsScreen> {
                                     width: screenWidth / 4,
                                     manualTitle: manuals[i][j + 1].Title,
                                     classIndex: i,
-                                    manualIndex: j,
+                                    manualIndex: j + 1,
                                   ),
                                 if (j < manuals[i].length - 2)
                                   manualScreenElement(
                                     width: screenWidth / 4,
                                     manualTitle: manuals[i][j + 2].Title,
                                     classIndex: i,
-                                    manualIndex: j,
+                                    manualIndex: j + 2,
                                   ),
                               ],
                             ),
@@ -205,4 +209,4 @@ class _ManualsScreenState extends State<ManualsScreen> {
 }
 
 void openPDF(BuildContext context, File file) => Navigator.of(context)
-    .push(MaterialPageRoute(builder: (context) => PDFViewerPage(file: file)));
+    .push(MaterialPageRoute(builder: (context) => PDFViewerPage(file: file!)));

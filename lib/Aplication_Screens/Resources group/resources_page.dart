@@ -24,7 +24,7 @@ class InfoScreen1 extends StatelessWidget {
           height: 30,
         ),
         const Text(
-          'Resurse scrise si video pentru EN',
+          'Resurse scrise și video pentru EN',
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w500,
@@ -32,7 +32,7 @@ class InfoScreen1 extends StatelessWidget {
           ),
         ),
         const Text(
-          'Create de specialist',
+          'Create de specialiști',
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w500,
@@ -62,7 +62,7 @@ class InfoScreen2 extends StatelessWidget {
           height: 30,
         ),
         const Text(
-          'Sute de modele de test in format PDF',
+          'Sute de modele de test în format PDF',
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w500,
@@ -100,7 +100,7 @@ class InfoScreen3 extends StatelessWidget {
           height: 30,
         ),
         const Text(
-          'Alege singur ce doresti sa inveti',
+          'Alege singur ce dorești să înveți',
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w500,
@@ -108,7 +108,7 @@ class InfoScreen3 extends StatelessWidget {
           ),
         ),
         const Text(
-          'Pentru a invata mai eficient',
+          'Pentru a învăța mai eficient',
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w500,
@@ -213,7 +213,7 @@ class _ResourcesListState extends State<ResourcesList>
               height: 10,
             ),
             Text(
-              'Resurse de invatat pentru EN',
+              'Resurse de învățat pentru EN',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 40,

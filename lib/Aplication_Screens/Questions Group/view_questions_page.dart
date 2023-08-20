@@ -220,7 +220,7 @@ class _ViewQuestionsPageState extends State<ViewQuestionsPage> {
                         height: 15,
                       ),
                       const Text(
-                        'Cele mai noi intrebari:',
+                        'Cele mai noi întrebări:',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 40,
@@ -281,21 +281,6 @@ class _ViewQuestionsPageState extends State<ViewQuestionsPage> {
                   ),
                   Row(
                     children: [
-                      Row(
-                        children: [
-                          Text(
-                            'Filtre',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w100),
-                          ),
-                          Icon(
-                            Icons.filter_alt_sharp,
-                            color: Colors.white,
-                          ),
-                        ],
-                      ),
                       SizedBox(width: 10),
                       InkWell(
                         onTap: () async {
@@ -337,7 +322,7 @@ class _ViewQuestionsPageState extends State<ViewQuestionsPage> {
                               builder: (context) {
                                 return const AlertDialog(
                                   title: Text(
-                                      'Poti da refresh odata la 10 secunde'),
+                                      'Poți da refresh odată la 10 secunde'),
                                 );
                               },
                             );
@@ -489,7 +474,7 @@ class _ViewQuestionsPageState extends State<ViewQuestionsPage> {
                         )
                       : const Center(
                           child: Text(
-                            'Apasa refresh pentru a incarca intrebarile!',
+                            'Apasă refresh pentru a încărca întrebările!',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 30,
