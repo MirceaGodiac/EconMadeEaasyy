@@ -1,4 +1,4 @@
-Link Instalare: https://firebasestorage.googleapis.com/v0/b/made-easy-a99a4.appspot.com/o/builds%2Fapp-release.apk?alt=media&token=cc88b457-64b0-4fcc-977e-1ee412d53ab5
+Link Instalare: https://firebasestorage.googleapis.com/v0/b/made-easy-a99a4.appspot.com/o/builds%2Fapp-release.apk?alt=media&token=448255d9-2f1e-46d9-932f-da9ce699c614
 
 
 Resurse EN made easy

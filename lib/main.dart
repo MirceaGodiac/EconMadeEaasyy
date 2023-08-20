@@ -24,6 +24,7 @@ import 'Aplication_Screens/home_page.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:firedart/firedart.dart' as fireDart;
 
 bool first = true;
 final _firebaseMessaging = FirebaseMessaging.instance;
@@ -34,7 +35,11 @@ Future<void> initNotifications() async {
   print('Token: $fCMToken');
 }
 
+const ApiKey = 'AIzaSyAKGVyVQ_yENRFfMsHXZ8BFaXodSLJFAv0';
+const projectID = 'made-easy-a99a4';
+
 Future<void> main() async {
+  fireDart.Firestore.initialize(projectID);
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
