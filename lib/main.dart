@@ -35,7 +35,7 @@ Future<void> initNotifications() async {
   print('Token: $fCMToken');
 }
 
-const ApiKey = 'AIzaSyAKGVyVQ_yENRFfMsHXZ8BFaXodSLJFAv0';
+
 const projectID = 'made-easy-a99a4';
 
 Future<void> main() async {

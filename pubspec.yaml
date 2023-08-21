@@ -59,6 +59,7 @@ dependencies:
   intl: ^0.18.1
   firebase_messaging: ^14.6.4
   countup: ^0.1.4
+  firedart: ^0.9.7
 
 dev_dependencies:
   flutter_test:
