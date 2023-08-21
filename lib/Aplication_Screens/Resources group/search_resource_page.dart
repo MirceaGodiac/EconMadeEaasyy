@@ -1,6 +1,6 @@
-import 'package:econ_made_easy_files/Aplication_Screens/Resources%20group/resourcesData.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Resources%20group/view_material_page.dart';
-import 'package:econ_made_easy_files/Other%20stuff/textfield.dart';
+import './resourcesData.dart';
+import './view_material_page.dart';
+import '../../Other%20stuff/textfield.dart';
 import 'package:flutter/material.dart';
 
 class resurseListItem extends StatelessWidget {

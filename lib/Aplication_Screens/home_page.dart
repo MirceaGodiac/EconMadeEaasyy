@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 
 import '../models/home_screen_answer_model.dart';
-import 'Login group/auth_page.dart';
-import 'Login group/loading_screen.dart';
+
+import './Login group/loading_screen.dart';
 import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {

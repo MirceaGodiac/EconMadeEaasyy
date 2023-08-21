@@ -1,13 +1,11 @@
-import 'package:econ_made_easy_files/Aplication_Screens/Exercitii%20Group/secondSelectExerciseTypeScreen.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Resources%20group/pdf_viewer_page.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Resources%20group/resourcesData.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Resources%20group/search_resource_page.dart';
+import './pdf_viewer_page.dart';
+import './resourcesData.dart';
+
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
-import 'package:file_picker/file_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';

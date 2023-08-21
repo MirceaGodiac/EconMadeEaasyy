@@ -1,9 +1,7 @@
-import 'dart:io';
 import 'dart:ui';
 
-import 'package:econ_made_easy_files/Aplication_Screens/Exercitii%20Group/SelectExerciseTypeScreen.dart';
+import '../Aplication_Screens/Exercitii%20Group/SelectExerciseTypeScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
 
 class InfoScreen1 extends StatelessWidget {
   const InfoScreen1({super.key});
