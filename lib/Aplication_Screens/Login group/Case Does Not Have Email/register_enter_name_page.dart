@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../Other stuff/textfield.dart';
-import 'register_enter_password_page.dart';
+import './register_enter_password_page.dart';
 
 // ignore: must_be_immutable
 class RegisterEnterNamePage extends StatefulWidget {

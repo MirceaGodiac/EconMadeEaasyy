@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/loading_screen.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/ask_question.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/view_question_page.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/view_your_questions_page.dart';
-import 'package:econ_made_easy_files/models/questionForumModel.dart';
+import '../Login%20group/loading_screen.dart';
+import './ask_question.dart';
+import './view_question_page.dart';
+import './view_your_questions_page.dart';
+import '../../models/questionForumModel.dart';
 import 'package:flutter/material.dart';
 
 import '../../main.dart';

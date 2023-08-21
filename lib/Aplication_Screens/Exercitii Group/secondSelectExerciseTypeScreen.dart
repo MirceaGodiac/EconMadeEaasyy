@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Exercitii%20Group/SelectExerciseTypeScreen.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Exercitii%20Group/thirdSelectExerciseTypeScreenSubject.dart';
+import './SelectExerciseTypeScreen.dart';
+import './thirdSelectExerciseTypeScreenSubject.dart';
 import 'package:flutter/material.dart';
 
 List<bool> selectedMaterials = [];

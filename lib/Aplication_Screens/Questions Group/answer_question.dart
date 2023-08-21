@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/loading_screen.dart';
-import 'package:econ_made_easy_files/models/questionForumModel.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import '../Login group/loading_screen.dart';
+import '../../models/questionForumModel.dart';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';

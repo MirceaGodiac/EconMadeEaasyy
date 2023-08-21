@@ -10,12 +10,12 @@ Software to assist individuals to study for EN
 
 // Main menu
 
-import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/view_questions_page.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/manuals%20group/manuals_list.dart';
+import './Aplication_Screens/Questions%20Group/view_questions_page.dart';
+import './Aplication_Screens/manuals%20group/manuals_list.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/auth_page.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Resources%20group/resources_page.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/movie_list.dart';
+import './Aplication_Screens/Login%20group/auth_page.dart';
+import './Aplication_Screens/Resources%20group/resources_page.dart';
+import './Aplication_Screens/movie_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +34,6 @@ Future<void> initNotifications() async {
   final fCMToken = await _firebaseMessaging.getToken();
   print('Token: $fCMToken');
 }
-
 
 const projectID = 'made-easy-a99a4';
 

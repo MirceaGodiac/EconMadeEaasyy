@@ -1,4 +1,4 @@
-import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/welcome_screen.dart';
+import '../../Aplication_Screens/Login%20group/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
 class InfoScreen1 extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:econ_made_easy_files/Aplication_Screens/manuals%20group/materials_data.dart';
+import '../manuals group/materials_data.dart';
 import 'package:flutter/material.dart';
 
 import '../../main.dart';

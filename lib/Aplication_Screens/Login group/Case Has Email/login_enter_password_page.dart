@@ -1,4 +1,4 @@
-import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/Case%20Has%20Email/login_loading_page.dart';
+import './login_loading_page.dart';
 import 'package:flutter/material.dart';
 import '../../../Other stuff/textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';

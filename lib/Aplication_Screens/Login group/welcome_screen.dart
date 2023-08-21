@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'Case Does Not Have Email/register_enter_email_page.dart';
-import 'Case Has Email/login_enter_email_page.dart';
+import './Case Does Not Have Email/register_enter_email_page.dart';
+import './Case Has Email/login_enter_email_page.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});

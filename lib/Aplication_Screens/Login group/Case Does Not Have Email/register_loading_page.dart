@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:econ_made_easy_files/models/user_model.dart';
+import '../../../models/user_model.dart';
 import 'package:flutter/material.dart';
 import '../../../Other stuff/textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';

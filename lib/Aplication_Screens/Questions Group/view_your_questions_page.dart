@@ -1,10 +1,7 @@
-import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/loading_screen.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/view_photo_page.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/view_questions_page.dart';
-import 'package:econ_made_easy_files/main.dart';
-import 'package:econ_made_easy_files/models/questionForumModel.dart';
+import './view_questions_page.dart';
+import '../../main.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class viewYourQuestionPage extends StatefulWidget {
   var queryData;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../Other stuff/textfield.dart';
-import 'register_enter_name_page.dart';
+import './register_enter_name_page.dart';
 
 class RegisterEnterEmailPage extends StatefulWidget {
   const RegisterEnterEmailPage({super.key});

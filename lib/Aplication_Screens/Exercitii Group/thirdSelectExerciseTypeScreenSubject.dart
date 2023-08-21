@@ -1,10 +1,10 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Exercitii%20Group/secondSelectExerciseTypeScreen.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Exercitii%20Group/subiect_3_quiz.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Exercitii%20Group/testModel.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/loading_screen.dart';
+import './secondSelectExerciseTypeScreen.dart';
+import './subiect_3_quiz.dart';
+import './testModel.dart';
+import '../Login Group/loading_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';

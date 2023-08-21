@@ -1,10 +1,7 @@
-import 'dart:io';
 import 'dart:ui';
 
-import 'package:econ_made_easy_files/Aplication_Screens/Exercitii%20Group/SelectExerciseTypeScreen.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/manuals%20group/manuals_screen.dart';
+import '../manuals group/manuals_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
 
 class manualsList extends StatefulWidget {
   const manualsList({super.key});

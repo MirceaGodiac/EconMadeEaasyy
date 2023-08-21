@@ -1,5 +1,5 @@
-import 'package:econ_made_easy_files/Aplication_Screens/Exercitii%20Group/redeem_credits.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Exercitii%20Group/secondSelectExerciseTypeScreen.dart';
+import './redeem_credits.dart';
+import './secondSelectExerciseTypeScreen.dart';
 import 'package:flutter/material.dart';
 
 class testType3Page extends StatefulWidget {
@@ -333,19 +333,18 @@ class _testType3PageState extends State<testType3Page> {
                                           width: 900,
                                           child: Image.network(widget
                                               .materie
-                                              .docs[docIDs[returnChapterNr(
-                                                      questionsHash, index)]]
+                                              .docs[docIDs[returnChapterNr(questionsHash, index)]]
                                                   ['exercitii'][widget
-                                                            .questions[
-                                                                returnChapterNr(
-                                                                    questionsHash,
-                                                                    index)]
-                                                            .values
-                                                            .first
-                                                            .toList()[
-                                                        returnChapterElementNr(
-                                                            questionsHash, index)]]
-                                                .keys
+                                                          .questions[
+                                                              returnChapterNr(
+                                                                  questionsHash,
+                                                                  index)]
+                                                          .values
+                                                          .first
+                                                          .toList()[
+                                                      returnChapterElementNr(
+                                                          questionsHash, index)]]
+                                              .keys
                                               .first
                                               .toString()),
                                         )
@@ -354,19 +353,18 @@ class _testType3PageState extends State<testType3Page> {
                                               width: 900,
                                               child: Image.network(widget
                                                   .materie
-                                                  .docs[docIDs[returnChapterNr(
-                                                          questionsHash,
-                                                          index)]]['exercitii'][widget
-                                                            .questions[
-                                                                returnChapterNr(
-                                                                    questionsHash,
-                                                                    index)]
-                                                            .values
-                                                            .first
-                                                            .toList()[
-                                                        returnChapterElementNr(
-                                                            questionsHash, index)]]
-                                                .values
+                                                  .docs[docIDs[returnChapterNr(questionsHash, index)]]
+                                                      ['exercitii'][widget
+                                                              .questions[
+                                                                  returnChapterNr(
+                                                                      questionsHash,
+                                                                      index)]
+                                                              .values
+                                                              .first
+                                                              .toList()[
+                                                          returnChapterElementNr(
+                                                              questionsHash, index)]]
+                                                  .values
                                                   .first
                                                   .toString()),
                                             )

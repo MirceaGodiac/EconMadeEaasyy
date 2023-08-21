@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../Other stuff/textfield.dart';
-import 'login_enter_password_page.dart';
+import './login_enter_password_page.dart';
 
 class LoginEnterEmailPage extends StatefulWidget {
   const LoginEnterEmailPage({super.key});

@@ -4,7 +4,7 @@ import '../../../main.dart';
 import '../../../models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'Case Does Not Have Email/register_loading_page.dart';
+import './Case Does Not Have Email/register_loading_page.dart';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
@@ -12,8 +12,7 @@ class LoadingScreen extends StatefulWidget {
   static var userSettings = FirebaseAuth.instance.currentUser;
 
   // A global user object to easily extract data from other classes
-  static user userData =
-      user(firstName: '', email: '', credits: 0);
+  static user userData = user(firstName: '', email: '', credits: 0);
 
   @override
   State<LoadingScreen> createState() => _LoadingScreenState();
@@ -34,10 +33,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
         final data = doc.data() as Map<String, dynamic>;
         debugPrint('Decoded and formatted data...');
         LoadingScreen.userData = user(
-            firstName: data['name'],
-            email: data['email'],
-            credits: data['credits'],
-            );
+          firstName: data['name'],
+          email: data['email'],
+          credits: data['credits'],
+        );
         isExtractionFinished = true;
       },
       onError: (e) => debugPrint("Error getting document: $e"),

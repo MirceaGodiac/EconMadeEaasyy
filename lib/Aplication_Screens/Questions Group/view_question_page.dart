@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Login%20group/loading_screen.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/answer_question.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/view_photo_page.dart';
-import 'package:econ_made_easy_files/Aplication_Screens/Questions%20Group/view_questions_page.dart';
-import 'package:econ_made_easy_files/models/questionForumModel.dart';
-import 'package:firebase_core/firebase_core.dart';
+import '../Login%20group/loading_screen.dart';
+import './answer_question.dart';
+import './view_photo_page.dart';
+
+import '../../models/questionForumModel.dart';
+
 import 'package:flutter/material.dart';
 
 class answerElement extends StatefulWidget {
